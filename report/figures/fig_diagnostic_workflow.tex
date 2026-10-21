@@ -1,0 +1,29 @@
+% Figure 5: diagnostic reasoning workflow of the complete system.
+\begin{tikzpicture}[x=1cm, y=1cm]
+  \node[data=6cm] (obs) at (4.5,0) {Readings of one case};
+  \node[reason=6cm] (noise) at (4.5,-1.3) {Estimate noise from redundant sensors\\ \footnotesize $\sigma_T$ from middle inlets, $\kappa_P$ from rack power balances};
+  \node[reason=6cm] (grade) at (4.5,-2.75) {Grade every symptom\\ \footnotesize present, absent, uncertain or unknown};
+
+  \node[reason=3.6cm] (ded) at (0.3,-4.6) {Deductive rules\\ \footnotesize prove faults, record proof trees};
+  \node[reason=3.6cm] (abd) at (4.5,-4.6) {Abduction\\ \footnotesize minimal consistent covers of present symptoms};
+  \node[reason=3.6cm] (cbd) at (8.7,-4.6) {Consistency\\ \footnotesize violated relations give conflict sets};
+
+  \node[reason=3.6cm] (rank) at (4.5,-6.4) {Rank covers by confidence\\ \footnotesize bonus if rules also prove a fault};
+  \node[decision=2.4cm] (dec) at (4.5,-9.0) {next cover hits every conflict and respects fault models?};
+  \node[reason=3.6cm] (mhs) at (10.3,-9.0) {Minimal hitting sets with fault models};
+  \node[out=3.6cm] (yes) at (4.5,-11.3) {Diagnosis: that cover};
+  \node[out=3.6cm] (no) at (10.3,-11.3) {Diagnosis: closest minimal consistent set};
+
+  \draw[flow] (obs) -- (noise);
+  \draw[flow] (noise) -- (grade);
+  \draw[flow] (grade.south) -- ++(0,-0.4) -| (ded.north);
+  \draw[flow] (grade) -- (abd);
+  \draw[flow] (grade.south) -- ++(0,-0.4) -| (cbd.north);
+  \draw[flow] (abd) -- (rank);
+  \draw[uses] (ded.south) |- node[tag, pos=0.75, above] {bonus} (rank.west);
+  \draw[flow] (rank) -- (dec);
+  \draw[flow] (dec) -- node[tag, right] {yes} (yes);
+  \draw[flow] (dec) -- node[tag, above, pos=0.45] {none left} (mhs);
+  \draw[flow] (cbd.south) -- node[tag, right] {conflict sets} (cbd.south |- mhs.north);
+  \draw[flow] (mhs) -- (no);
+\end{tikzpicture}

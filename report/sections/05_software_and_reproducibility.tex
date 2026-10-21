@@ -1,0 +1,214 @@
+\chapter{Expert-System Software Development, Documentation and Reproducibility}
+\label{ch:software_and_reproducibility}
+
+Source code alone does not show how a system was built or whether its results can be trusted. This chapter documents the development lifecycle (Section~\ref{sec:process}), the implementation environment (Section~\ref{sec:environment}), the software structure and its design decisions (Section~\ref{sec:structure}), the main problems found and fixed during debugging (Section~\ref{sec:debugging}), how the software was verified and validated (Section~\ref{sec:vandv}), and exactly how to run it and reproduce every result (Sections~\ref{sec:execution} and~\ref{sec:reproducibility}).
+
+% ---------------------------------------------------------------------------
+\section{Development Process}
+\label{sec:process}
+
+Development followed the lifecycle that the project framework prescribes:
+\begin{center}
+  Requirements $\rightarrow$ Knowledge acquisition $\rightarrow$ Predicate design $\rightarrow$ Rule design $\rightarrow$\\
+  Implementation $\rightarrow$ Debugging $\rightarrow$ Testing $\rightarrow$ Validation.
+\end{center}
+In practice the later stages fed back into the earlier ones. Table~\ref{tab:lifecycle} summarises what each stage produced. The design documents in the \texttt{docs/} folder record each stage as it was carried out, and much of Chapters~\ref{ch:theory_and_kr} to~\ref{ch:dataset_and_evaluation} is drawn from them.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Development lifecycle and its products.}
+  \label{tab:lifecycle}
+  \begin{tabular}{L{3.0cm}L{6.4cm}L{4.6cm}}
+    \toprule
+    Stage & Work done & Product \\
+    \midrule
+    Requirements & System boundary, fault universe, observation vector, test categories & \texttt{docs/01} to \texttt{docs/03} \\
+    Knowledge acquisition & Standards, literature and engineering assumptions, each with provenance & \texttt{docs/04}, \texttt{kb/sources.pl} \\
+    Predicate design & Representation of facts, observations, thresholds and calculations & \texttt{kb/components.pl}, \texttt{kb/calculations.pl} \\
+    Rule design & Deductive rules, causal signatures, redundancy relations and fault models & \texttt{kb/rules.pl}, \texttt{kb/causal.pl}, \texttt{kb/arr.pl} \\
+    Implementation & Meta-interpreter, abductive and consistency-based engines, explanation facility & \texttt{engine/} \\
+    Testing & Physics simulator, calibration and held-out splits, sensitivity sweeps & \texttt{simulator/}, \texttt{tests/} \\
+    Validation & Generalisation to the held-out split; explanation inspection; sensitivity analysis & Chapter~\ref{ch:dataset_and_evaluation} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The system grew incrementally. A first prototype covered three faults and normal operation, end to end from readings to explanation and maintenance plan. The simulator was built next, so that every later rule could be tested against physically consistent data before it was accepted. Rules for the remaining faults followed. The abductive and consistency-based modules were added last, once the deductive layer was stable, and were evaluated against it.
+
+% ---------------------------------------------------------------------------
+\section{Implementation Environment}
+\label{sec:environment}
+
+Table~\ref{tab:environment} lists the software used. The expert system needs only SWI-Prolog. Python, with its standard library alone, generates the synthetic data and formats results. LaTeX is needed only to build this report.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Implementation environment.}
+  \label{tab:environment}
+  \begin{tabular}{L{3.6cm}L{4.0cm}L{6.4cm}}
+    \toprule
+    Component & Version & Role \\
+    \midrule
+    Operating system & Windows 11 Pro, build 26200 & Development and testing \\
+    SWI-Prolog & 10.0.2, 64-bit & All diagnostic reasoning; no extra packages \\
+    Python & 3.13.1, standard library only & Simulator, sensitivity driver, reproduction check \\
+    MiKTeX & 25.12, pdfTeX 4.23 & Building the report \\
+    Biber & 2.21 & Bibliography processing \\
+    Strawberry Perl & 5.42.3 & Needed by the MiKTeX tool chain \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The Prolog code uses only standard built-ins and the SWI-Prolog libraries that load automatically, such as \texttt{lists}, \texttt{apply}, \texttt{yall} and \texttt{solution\_sequences}. It should run unchanged on Linux and macOS, although it has been tested only on Windows.
+
+% ---------------------------------------------------------------------------
+\section{Software Structure}
+\label{sec:structure}
+
+The source modules are listed in Table~\ref{tab:modules} and their main predicates in Table~\ref{tab:predicates}. The framework asks how several design questions were answered. Each is summarised below, with a pointer to the fuller treatment.
+
+\paragraph{Why each major predicate exists.} Each predicate implements one component of the architecture in Figure~\ref{fig:architecture}. Calculation predicates implement single equations and carry their equation tags. \texttt{prove/2} exists so that rules can be stored as data and still yield proof trees. \texttt{case\_symptoms/2} exists so that the abductive and consistency-based modules see identical, cached evidence. \texttt{diagnose\_mode/3} exists so that the four configurations can be compared on the same data.
+
+\paragraph{How facts are represented.} Structure, ratings, thresholds and sources are ground facts. Each test case is a separate set of \texttt{obs/4} facts, so the same knowledge base diagnoses every case unchanged (Section~\ref{sec:kb-design}).
+
+\paragraph{How rules were constructed.} Every rule began as a row of the fault taxonomy or a physical relation from Section~\ref{sec:maths}. It was written as a Horn clause over named thresholds, given an identifier and a source, and accepted only after it had been run against the calibration split (Section~\ref{sec:predicates}).
+
+\paragraph{How conflicts are handled.} Conflicting conclusions are resolved at four levels:
+\begin{itemize}
+  \item When several rules prove the same fault, it is reported once, with the first proof.
+  \item Rules that could fire on a confounder are guarded by negation as failure. The recirculation rule r22, for example, is blocked if the top inlet sensor can be shown to be suspect.
+  \item Competing hypotheses are resolved by abduction, through parsimony and confidence ranking (Section~\ref{sec:abductive}).
+  \item Explanations that contradict a redundancy relation or a fault model are rejected by the consistency check (Section~\ref{sec:cbd}).
+\end{itemize}
+When two diagnoses call for maintenance plans that depend on each other, the plan interactions order the work (Section~\ref{sec:planner}).
+
+\paragraph{How explanations are generated.} The explanation facility reads the proof trees of the deductive rules and the evidence records of the abductive and consistency-based modules. It never reconstructs reasoning after the fact (Section~\ref{sec:explanation}).
+
+\paragraph{How maintenance actions are encoded.} Each fault class has one \texttt{maintenance/5} fact, with priority, ordered actions, rationale and source, instantiated for the diagnosed entity (Section~\ref{sec:planner}).
+
+\paragraph{Generated documentation.} Four kinds of documentation are generated from the code and data rather than written by hand, so they cannot drift from the implementation: the rule, threshold and provenance tables (\texttt{tests/export\_latex.pl}), the evaluation tables (\texttt{tests/metrics\_latex.pl}), the sensitivity tables and figures (\texttt{tests/sensitivity.py}), and the explanation listing, which is unedited program output.
+
+% ---------------------------------------------------------------------------
+\section{Debugging}
+\label{sec:debugging}
+
+The most instructive problems found during development fall into three groups.
+
+\subsection{Knowledge errors found by the simulator}
+
+Because the simulator injects faults into the physics rather than the readings, it revealed errors in the knowledge itself that hand-made test cases had not. The three most significant are described in Section~\ref{sec:acquisition}: a wrong signature for chilled-water loss, a power design that made overload rules fire on healthy racks, and a stratification rule broken by server fan control. Three further problems were found the same way:
+
+\begin{itemize}
+  \item \textbf{Partial fan failures were missed.} A slipping belt that leaves the fan drawing 55\% of its expected power passed the 0.5 threshold for a failed fan, so the fan-failure hypothesis was rejected and the hot row went unexplained. Healthy fans stay within 5\% of the prediction, so a second threshold at 0.85 was added for a partial failure (rules r38, r48 and r49).
+  \item \textbf{A real airflow loss was blamed on a sensor.} A partial fan failure warms the inlets relative to the supply air, which looked like a biased supply-air sensor. The sensor-fault rule now accepts the hypothesis only if assuming it closes the coil energy balance (Equation~\eqref{eq:e41b}).
+  \item \textbf{Noise was estimated from too few sensors.} At first the noise of every feature was scaled from the spread of six temperature readings. That estimate is itself noisy, and it understated the noise of the power meters. The electrical noise is now estimated separately, from the redundancy of the rack power balances.
+\end{itemize}
+
+\subsection{Robustness problems found by the sensitivity analysis}
+
+The threshold sweep perturbed the sensor noise floor, which is stored in kelvin, by $-1$ and $-2$\,K. That made the floor negative, so the estimated noise could be zero or negative. Every symptom then became clearly present, and the abductive and consistency-based searches grew without bound. Two fixes followed. The sweep now scales the noise floor instead of shifting it, and the evidence grading clamps the noise to a small positive value, so that no input can make the reasoning diverge.
+
+\subsection{Implementation problems}
+
+\begin{itemize}
+  \item \textbf{Library name clashes.} SWI-Prolog autoloads library predicates on first use. Names such as \texttt{run\_tests/0} and \texttt{explain/1} would have clashed with library predicates, so the project's own predicates are called \texttt{run\_suite/0} and \texttt{why/1}.
+  \item \textbf{Facts split across files.} The test cases are spread over several data files. Without \texttt{multifile} declarations, loading the second file would have silently replaced the facts of the first.
+  \item \textbf{Generated LaTeX.} In \texttt{format/2}, a tilde introduces a directive, so the non-breaking space \texttt{\textasciitilde} in a generated caption must be written as a doubled tilde. The first version of the evaluation exporter failed on this.
+  \item \textbf{Reproducibility of the data.} The reproduction check of Section~\ref{sec:reproducibility} found that a later change to the simulator had swapped the order of two random draws for a sensor bias. The simulator still ran, but it no longer regenerated the published datasets. The original order was restored, so the datasets now regenerate exactly from their seeds, and the sensitivity sweeps were rerun with the corrected code.
+\end{itemize}
+
+% ---------------------------------------------------------------------------
+\section{Verification and Validation}
+\label{sec:vandv}
+
+\paragraph{Verification} checks that the software does what its design says. It was carried out at four levels:
+\begin{itemize}
+  \item four hand-written smoke cases with known answers, rerun after every change;
+  \item the calibration split, against which every new rule was run before it was accepted;
+  \item a static check of every figure file, followed by visual inspection of every compiled figure and table;
+  \item the reproduction check of Section~\ref{sec:reproducibility}, which regenerates the datasets and recomputes every reported count.
+\end{itemize}
+
+\paragraph{Validation} checks that the design solves the right problem. It is discussed in Section~\ref{sec:validation}: equations were checked against hand calculations, rules against simulated physics, generalisation against the held-out split, and explanations against the requirements of the framework. Its main limitation is that the knowledge base and the simulator share one engineering model, so validation on measured data remains necessary.
+
+% ---------------------------------------------------------------------------
+\section{Execution Instructions}
+\label{sec:execution}
+
+All commands are run from the project folder, \texttt{dc-expert-system}.
+
+\paragraph{Load the system and ask questions.}\mbox{}
+\begin{lstlisting}[language={}]
+swipl main.pl
+?- run_suite.                      % deductive test suite, all splits
+?- run_suite(single_fault).        % one category, listing each failure
+?- why(h188).                      % full explanation of one case
+?- why_deductive(f01).             % deductive proof only
+?- diagnose_mode(full, h188, D).   % modes: deductive, ded_abd, ded_cbd, full
+\end{lstlisting}
+In Visual Studio Code with the Prolog Runner extension, opening \texttt{run.pl} and pressing Run executes the test suite and explains the four smoke cases.
+
+\paragraph{Regenerate the datasets.} This step is optional, because the datasets are included.
+\begin{lstlisting}[language={}]
+python simulator/dc_sim.py
+python simulator/dc_sim.py --seed 777 --prefix h --split holdout --out data/holdout_cases.pl --csv data/holdout_cases.csv --truth data/holdout_truth.json
+\end{lstlisting}
+
+\paragraph{Regenerate the results and the report tables.}\mbox{}
+\begin{lstlisting}[language={}]
+swipl -g "evaluation_all('docs/08_evaluation_results.md', 'report/tables')" -t halt main.pl tests/metrics.pl tests/metrics_latex.pl
+swipl -g "export_latex_tables('report/tables')" -t halt main.pl tests/export_latex.pl
+python tests/sensitivity.py                 # full sensitivity analysis, about 12 minutes
+python tests/sensitivity.py --tables-only   # tables only, from the saved results
+\end{lstlisting}
+
+\paragraph{Build the report.} From the \texttt{report} folder:
+\begin{lstlisting}[language={}]
+pdflatex main.tex
+biber main
+pdflatex main.tex
+pdflatex main.tex
+\end{lstlisting}
+
+% ---------------------------------------------------------------------------
+\section{Reproducibility}
+\label{sec:reproducibility}
+
+The framework requires that another researcher can reproduce the system. Five elements make that possible:
+
+\begin{itemize}
+  \item \textbf{Software.} The versions are listed in Table~\ref{tab:environment}. No library outside SWI-Prolog and the Python standard library is required.
+  \item \textbf{Data.} The datasets, with their data dictionary (Table~\ref{tab:variables}), units, ranges, generation procedure (Section~\ref{sec:dataset}) and assumptions (Table~\ref{tab:sim-assumptions}), are included. They can also be regenerated from their seeds.
+  \item \textbf{Execution.} Exact commands are given in Section~\ref{sec:execution}.
+  \item \textbf{Expected output.} Table~\ref{tab:expected} gives the expected results.
+  \item \textbf{Source code.} The complete Prolog source of the expert system, the simulator and the test code is included.
+\end{itemize}
+
+\paragraph{One-command reproduction check.} The script \texttt{tests/reproduce.py} checks reproducibility automatically. It regenerates both datasets from their seeds into a temporary folder and checks that they are identical to the included files, using recorded SHA-256 checksums. It then runs all four reasoning modes on every split and compares the exact-match counts with Table~\ref{tab:expected}. With \texttt{--tables} it also regenerates every generated table in the report.
+\begin{lstlisting}[language={}]
+python tests/reproduce.py            # 14 checks; exit code 0 if all pass
+python tests/reproduce.py --tables   # also regenerate the report tables
+\end{lstlisting}
+On the development machine all 14 checks pass in about 20 seconds.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Expected exact-match counts, checked by \texttt{tests/reproduce.py}.}
+  \label{tab:expected}
+  \begin{tabular}{L{3.0cm}rrrr}
+    \toprule
+    Split & Deductive & Ded.\ + abd. & Ded.\ + cons. & Complete \\
+    \midrule
+    Smoke (4 cases) & 4 & 4 & 4 & 4 \\
+    Calibration (255) & 230 & 238 & 234 & 238 \\
+    Held-out (255) & 232 & 241 & 238 & 239 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{What is not exactly reproducible.} Reasoning times are wall-clock measurements and vary with the machine and its load, so only their order of magnitude, about a millisecond per case, should be expected to reproduce. Everything else, including every diagnosis, count and table, is deterministic.
+
+\paragraph{Version control.} The project folder is a git repository. The submitted version should be committed and tagged, so that the exact state of the code, data and report behind these results can always be recovered.

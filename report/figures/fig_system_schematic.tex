@@ -1,0 +1,66 @@
+% Figure 1: industrial system schematic (plan view of the row).
+\begin{tikzpicture}[x=1cm, y=1cm]
+  % ---- aisles (drawn first so everything else sits on top)
+  \fill[accBlue!8] (3.2,0.25) rectangle (12.25,1.15);
+  \fill[accOrange!10] (3.2,3.45) rectangle (12.25,4.6);
+  \draw[inkSoft, dashed, rounded corners=2pt] (3.2,3.45) rectangle (12.25,4.6);
+  \node[tag, anchor=south east] at (12.2,0.27) {cold aisle};
+  \node[tag, anchor=north east] at (12.2,4.58) {contained hot aisle};
+
+  % ---- racks
+  \foreach \i in {1,...,6} {
+    \pgfmathsetmacro{\xa}{3.4 + (\i-1)*1.45}
+    \pgfmathsetmacro{\xc}{\xa + 0.6}
+    \draw[inkSoft, fill=white, line width=0.5pt, rounded corners=1pt] (\xa,1.3) rectangle ++(1.2,2.0);
+    \node[font=\footnotesize, text=inkMain] at (\xc,2.55) {A0\i};
+    \draw[-{Stealth[length=1.6mm]}, draw=inkSoft, line width=0.5pt] (\xc,1.75) -- (\xc,2.25);
+    \node[sensor] at (\xc,1.3) {T};
+    \node[sensor] at (\xc,3.3) {T};
+    \draw[cold] (\xc,0.7) -- (\xc,1.12);
+  }
+
+  % ---- cooling unit
+  \draw[accBlue!80!black, fill=accBlue!5, line width=0.6pt, rounded corners=2pt] (0,0.2) rectangle (2.2,4.4);
+  \node[font=\small\bfseries, text=inkMain] at (1.1,4.12) {CRAH-1};
+  \node[base, fill=white, text width=1.6cm, font=\scriptsize, minimum height=6mm] at (1.1,3.4) {air filter\\ $\Delta p_{filt}$};
+  \node[base, fill=white, text width=1.6cm, font=\scriptsize, minimum height=6mm] at (1.1,2.3) {cooling coil};
+  \node[base, fill=white, text width=1.6cm, font=\scriptsize, minimum height=6mm] at (1.1,1.0) {supply fan, VFD\\ $N$, $P_f$};
+
+  % ---- air paths
+  \draw[cold] (2.2,1.0) -- (2.9,1.0) |- (11.9,0.7);
+  \draw[hot] (11.9,4.0) -- (2.9,4.0) |- (2.2,3.4);
+  \node[sensor] at (2.55,1.0) {T};
+  \node[tag, anchor=north] at (2.55,0.78) {$T_{sa}$};
+  \node[sensor] at (2.55,3.4) {T};
+  \node[tag, anchor=south] at (2.55,3.62) {$T_{ra}$};
+
+  % ---- chilled water
+  \node[ext=1.5cm, font=\scriptsize] (plant) at (-1.55,2.3) {chiller plant\\ (outside\\ boundary)};
+  \draw[water] (plant.east |- 0,2.55) -- (0,2.55);
+  \draw[water] (0,2.05) -- (plant.east |- 0,2.05);
+  \node[sensor] at (-0.4,2.55) {$\theta$};
+  \node[tag, anchor=south] at (-1.55,3.0) {valve $\theta_v$, $\dot m_w$, $T_{ws}$};
+  \node[tag, anchor=north] at (-0.4,1.9) {$T_{wr}$};
+
+  % ---- power path
+  \node[ext=1.3cm, font=\scriptsize] (util) at (-1.6,7.0) {utility\\ 400 V};
+  \node[base, fill=white, text width=2.1cm, font=\scriptsize] (ups) at (0.9,7.0) {UPS-1\\ $P_{in}$, $P_{out}$, mode};
+  \node[base, fill=white, text width=2.1cm, font=\scriptsize, minimum height=6mm] (bat) at (0.9,5.55) {VRLA battery\\ $V$, $R_{cell}$, $T_b$};
+  \node[base, fill=white, text width=1.3cm, font=\scriptsize] (pdu) at (3.0,7.0) {PDU-1};
+  \draw[power] (util) -- (ups);
+  \draw[power] (ups) -- (pdu);
+  \draw[power] (ups) -- (bat);
+  \draw[power] (pdu.east) -- (11.4,7.0);
+  \foreach \i in {1,...,6} {
+    \pgfmathsetmacro{\xc}{3.4 + (\i-1)*1.45 + 0.6}
+    \draw[power, line width=0.6pt] (\xc,7.0) -- (\xc,3.5);
+    \node[sensor] at (\xc,5.6) {I};
+  }
+  \node[tag, anchor=south west] at (4.4,7.05) {rack PDUs: feeds A and B, three phases each};
+
+  % ---- key
+  \node[note, anchor=north west, text width=12cm, align=left] at (-2.3,-0.05)
+    {\textcolor{accBlue!80!black}{T}~temperature (inlet middle and top at the front of each rack, outlet mean and top at the rear);
+     \textcolor{accBlue!80!black}{I}~phase currents; blue arrows supply air, orange arrows return air.
+     Each server also reports CPU temperature, clock and fan speed.};
+\end{tikzpicture}

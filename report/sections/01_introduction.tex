@@ -1,0 +1,84 @@
+\chapter{Introduction}
+\label{ch:introduction}
+
+% ---------------------------------------------------------------------------
+\section{Background}
+\label{sec:background}
+
+Data centres house the computing on which much of modern life depends, and their servers can only run while two supporting systems work. The cooling system must remove almost all of the electrical power the servers draw, which reappears as heat, so that every server inlet stays within the thermal envelope recommended by ASHRAE \parencite{ashrae2021}. The power system must deliver conditioned electricity continuously, with stored energy to ride through interruptions of the utility supply \parencite{barroso2018}. When either fails, servers throttle, shut down or lose power, and the services they host fail with them.
+
+These systems are densely instrumented. A single row of racks reports hundreds of temperatures, currents, powers and status flags. The readings alone, however, do not say what is wrong. A hot rack inlet may mean a failed cooling fan, a loss of chilled water, hot air leaking back through a missing blanking panel or simply a faulty sensor, and each calls for a different repair. Turning readings into a diagnosis, and a diagnosis into the right maintenance action, requires engineering knowledge.
+
+Fault detection and diagnosis for engineering systems has a long history, spanning quantitative model-based methods, qualitative and knowledge-based methods and data-driven methods \parencite{venkat2003,isermann2006}. Knowledge-based methods have one property that matters particularly for maintenance decisions: they can explain their conclusions in terms an engineer can check \parencite{jackson1998}. Logic programming offers a natural way to build them, because Prolog's Horn clauses have both a declarative reading as knowledge and a procedural reading as a program \parencite{kowalski1979,bratko2012}. Artificial intelligence research has also developed formal theories of diagnosis that go beyond simple rules: abduction, which seeks the faults that best explain what is observed \parencite{poole1989,peng1990}, and consistency-based diagnosis, which seeks the components whose failure is consistent with a model of correct behaviour \parencite{reiter1987,dekleer1987}.
+
+% ---------------------------------------------------------------------------
+\section{Problem Statement}
+\label{sec:problem}
+
+Diagnosing faults in data centre cooling and power infrastructure from monitoring data raises five difficulties:
+\begin{itemize}
+  \item different faults produce overlapping symptoms, such as row-wide overheating from either a fan failure or a chilled-water loss;
+  \item instrumentation is itself fallible, so a biased sensor can imitate a fault or hide one;
+  \item readings are noisy and sometimes missing or stale;
+  \item several faults can occur at once and interact;
+  \item a diagnosis is useful only if a maintenance engineer can trust it and act on it, which requires an explanation and a concrete plan.
+\end{itemize}
+A purely data-driven classifier can learn symptom patterns, but it cannot easily explain its conclusions or recognise a sensor that is lying, and it needs fault data that are rarely available. A simple rule base is transparent, but brittle under noise and silent about faults it has no rule for. The problem addressed by this project is to build a diagnostic system that keeps the transparency of explicit knowledge while handling these difficulties.
+
+% ---------------------------------------------------------------------------
+\section{Aim}
+\label{sec:aim}
+
+The aim of this project is to develop and evaluate an explainable expert system, implemented in Prolog, that diagnoses faults in the cooling and power infrastructure of a data centre row and recommends corrective maintenance, by representing engineering knowledge formally and reasoning over it deductively, abductively and by consistency.
+
+% ---------------------------------------------------------------------------
+\section{Objectives}
+\label{sec:objectives}
+
+\begin{enumerate}
+  \item To define the system, its normal operating envelope and an engineering-justified taxonomy of physical and instrumentation faults.
+  \item To formulate the engineering model of the system mathematically, in at least 40 equations.
+  \item To acquire the diagnostic knowledge from standards, literature and stated engineering assumptions, and to represent it in Prolog with provenance for every rule and threshold.
+  \item To implement deductive, abductive and consistency-based reasoning, together with an explanation facility and a corrective-maintenance planner.
+  \item To build a documented, reproducible synthetic dataset that covers normal operation, single and multiple faults, and imperfect evidence.
+  \item To evaluate the system quantitatively, compare the reasoning modes, and analyse its sensitivity to noise, missing data, multiple faults, sensor bias and threshold choice.
+  \item To document the development of the software so that its results can be reproduced.
+\end{enumerate}
+
+% ---------------------------------------------------------------------------
+\section{Research Questions}
+\label{sec:questions}
+
+The central question, set by the project framework, is:
+
+\begin{quote}
+  \emph{Can engineering knowledge be formally represented and computationally reasoned over in Prolog to produce an explainable, defensible diagnosis and an appropriate corrective-maintenance decision?}
+\end{quote}
+
+It is broken down into four sub-questions:
+\begin{description}
+  \item[RQ1] How can the engineering knowledge of data centre cooling and power infrastructure be represented formally, with traceable provenance?
+  \item[RQ2] How do deductive, abductive and consistency-based reasoning compare in accuracy, robustness to imperfect evidence and computational cost?
+  \item[RQ3] Can the system distinguish instrumentation faults from equipment faults that produce similar symptoms?
+  \item[RQ4] Can every diagnosis be explained, and linked to a valid corrective-maintenance plan?
+\end{description}
+Chapter~\ref{ch:conclusion} answers each question.
+
+% ---------------------------------------------------------------------------
+\section{Significance}
+\label{sec:significance}
+
+The project is significant in three ways. For practice, it shows how a maintenance engineer could be given not only a diagnosis but the evidence, rules and alternatives behind it, together with an ordered plan of work. For knowledge representation and reasoning, it provides a worked, quantitatively evaluated comparison of three classical theories of diagnosis on one engineering problem, including where each helps and where it costs accuracy. For methodology, it shows how a physics-based simulator with separate calibration and held-out data can expose errors in engineering knowledge, and how documentation can be generated from the code so that the report cannot drift from the system it describes.
+
+% ---------------------------------------------------------------------------
+\section{Scope and Limitations}
+\label{sec:scope}
+
+The system covers one row of six racks with one chilled-water cooling unit, one UPS with its battery string, and the power distribution to the racks. The chiller plant, the utility supply, the standby generator and humidity control are outside its scope. The engineering model is steady state.
+
+No measured fault data were available, so every test case is synthetic, generated by a physics simulator of the row. Because the knowledge base and the simulator rest on the same engineering model, the evaluation demonstrates internal consistency and robustness, not accuracy on a real facility. This and the other limitations are discussed in Section~\ref{sec:limitations}.
+
+\section{Structure of the Report}
+\label{sec:structure-report}
+
+Chapter~\ref{ch:theory_and_kr} sets out the engineering theory, the fault mechanisms, the foundations of knowledge representation and reasoning, the mathematical model and the knowledge acquisition. Chapter~\ref{ch:design_and_development} describes the design and implementation of the Prolog expert system. Chapter~\ref{ch:dataset_and_evaluation} presents the dataset, the experimental method and the results. Chapter~\ref{ch:software_and_reproducibility} documents the software development and how to reproduce the results. Chapter~\ref{ch:assessment_and_deliverables} assesses the project against the framework, and Chapter~\ref{ch:conclusion} concludes.

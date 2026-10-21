@@ -1,0 +1,32 @@
+% Figure 8: experimental and evaluation workflow.
+\begin{tikzpicture}[x=1cm, y=1cm]
+  \node[data=4.4cm, align=left] (sim) at (0.6,0)
+    {\textbf{Physics simulator}\\
+     \footnotesize steady-state model, Stage 4\\
+     \footnotesize faults injected into the physics\\
+     \footnotesize sensor layer: noise, bias,\\
+     \footnotesize \quad stale and missing data};
+  \node[data=3cm] (hand) at (0.6,-2.6) {Hand-written smoke cases};
+
+  \node[data=3.4cm] (cal) at (5.9,1.3) {Calibration split\\ \footnotesize 255 cases, seed 20261020};
+  \node[data=3.4cm] (hold) at (5.9,-0.1) {Held-out split\\ \footnotesize 255 cases, seed 777};
+  \node[data=3.4cm] (swp) at (5.9,-1.5) {Sensitivity sweeps\\ \footnotesize 24 sets of 60 cases};
+
+  \node[reason=3.2cm] (pl) at (10.6,-0.1) {Prolog, four reasoning modes};
+  \node[out=3.2cm] (met) at (10.6,-2.0) {Metrics\\ \footnotesize \texttt{tests/metrics.pl}};
+  \node[out=3.7cm] (sen) at (10.6,-3.4) {Sensitivity analysis\\ \footnotesize \texttt{tests/sensitivity.py}};
+  \node[kb=3.4cm] (kb) at (5.9,3.2) {Knowledge base};
+
+  \draw[flow] (sim.east) -- ++(0.4,0) |- (cal.west);
+  \draw[flow] (sim.east) -- ++(0.4,0) |- (hold.west);
+  \draw[flow] (sim.east) -- ++(0.4,0) |- (swp.west);
+  \draw[flow] (hand.east) -- (8.45,-2.6) |- (pl.west);
+  \draw[flow] (cal.east) -- ++(0.5,0) |- (pl.west);
+  \draw[flow] (hold) -- (pl);
+  \draw[flow] (swp.east) -- ++(0.5,0) |- (pl.west);
+  \draw[flow] (pl) -- (met);
+  \draw[flow] (met) -- (sen);
+  \draw[uses] (kb.east) -| (pl.north);
+  \draw[feedback] (cal.north) -- node[tag, right] {threshold checks, rule fixes} (kb.south);
+  \node[note] at (4.6,-3.55) {the held-out split is never used to tune anything};
+\end{tikzpicture}

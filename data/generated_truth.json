@@ -1,0 +1,6886 @@
+{
+ "seed": 20261020,
+ "note": "Synthetic ground truth. Not real measurements.",
+ "cases": [
+  {
+   "id": "g001",
+   "category": "normal",
+   "load": "low",
+   "mode": "clear",
+   "desc": "Normal operation, low load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 59.12,
+    "q_coil_kw": 63.57,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1767243896655568,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.975416093023248,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g002",
+   "category": "normal",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "Normal operation, nominal load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 82.03,
+    "q_coil_kw": 88.92,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3354676836943302,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0667643026053513,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g003",
+   "category": "normal",
+   "load": "high",
+   "mode": "clear",
+   "desc": "Normal operation, high load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 98.06,
+    "q_coil_kw": 106.78,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2779350528847084,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0256624700684749,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g004",
+   "category": "normal",
+   "load": "low",
+   "mode": "clear",
+   "desc": "Normal operation, low load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 57.24,
+    "q_coil_kw": 61.52,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2335339230176117,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0328980680676214,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g005",
+   "category": "normal",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "Normal operation, nominal load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 81.99,
+    "q_coil_kw": 88.98,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3871937435272534,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9759242955562886,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g006",
+   "category": "normal",
+   "load": "high",
+   "mode": "clear",
+   "desc": "Normal operation, high load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 100.29,
+    "q_coil_kw": 109.43,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3520264763705792,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.099594261830989,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g007",
+   "category": "normal",
+   "load": "low",
+   "mode": "clear",
+   "desc": "Normal operation, low load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 53.54,
+    "q_coil_kw": 57.57,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3926234695658308,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9570540747186256,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g008",
+   "category": "normal",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "Normal operation, nominal load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 77.5,
+    "q_coil_kw": 83.72,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1329440383726486,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.060555421103307,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g009",
+   "category": "normal",
+   "load": "high",
+   "mode": "clear",
+   "desc": "Normal operation, high load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 95.31,
+    "q_coil_kw": 103.73,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2068241058626517,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0028618303048875,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g010",
+   "category": "normal",
+   "load": "low",
+   "mode": "clear",
+   "desc": "Normal operation, low load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 55.5,
+    "q_coil_kw": 59.75,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3940968543350727,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.00498291992964,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g011",
+   "category": "normal",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "Normal operation, nominal load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 74.7,
+    "q_coil_kw": 80.76,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2346092414628542,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.082431235508275,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g012",
+   "category": "normal",
+   "load": "high",
+   "mode": "clear",
+   "desc": "Normal operation, high load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 96.56,
+    "q_coil_kw": 104.82,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0391553593496392,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9998708828607973,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g013",
+   "category": "normal",
+   "load": "low",
+   "mode": "clear",
+   "desc": "Normal operation, low load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 54.84,
+    "q_coil_kw": 58.89,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1315518197487338,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.023751026447877,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g014",
+   "category": "normal",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "Normal operation, nominal load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 73.07,
+    "q_coil_kw": 78.83,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1191380816309264,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9501563056582638,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g015",
+   "category": "normal",
+   "load": "high",
+   "mode": "clear",
+   "desc": "Normal operation, high load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 96.36,
+    "q_coil_kw": 104.54,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0273607238313454,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.11896666875277,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g016",
+   "category": "normal",
+   "load": "low",
+   "mode": "clear",
+   "desc": "Normal operation, low load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 55.53,
+    "q_coil_kw": 59.65,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1928040578340904,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0435015476289569,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g017",
+   "category": "normal",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "Normal operation, nominal load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 79.78,
+    "q_coil_kw": 86.34,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.246445863952298,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0200354923074655,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g018",
+   "category": "normal",
+   "load": "high",
+   "mode": "clear",
+   "desc": "Normal operation, high load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 99.31,
+    "q_coil_kw": 107.96,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0573367851394622,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9656809459626379,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g019",
+   "category": "normal",
+   "load": "low",
+   "mode": "clear",
+   "desc": "Normal operation, low load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 58.93,
+    "q_coil_kw": 63.46,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2617369925880488,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.1196281639314216,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g020",
+   "category": "normal",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "Normal operation, nominal load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 78.79,
+    "q_coil_kw": 85.23,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.162851740982793,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0782289560848612,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g021",
+   "category": "normal",
+   "load": "high",
+   "mode": "clear",
+   "desc": "Normal operation, high load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 101.19,
+    "q_coil_kw": 110.05,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.08900840799137,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9939274371948664,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g022",
+   "category": "normal",
+   "load": "low",
+   "mode": "clear",
+   "desc": "Normal operation, low load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 55.85,
+    "q_coil_kw": 60.11,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2035933935570446,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0571060620759698,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g023",
+   "category": "normal",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "Normal operation, nominal load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 79.67,
+    "q_coil_kw": 86.21,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.36501955006223,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9888264216753537,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g024",
+   "category": "normal",
+   "load": "high",
+   "mode": "clear",
+   "desc": "Normal operation, high load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 97.24,
+    "q_coil_kw": 105.95,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2474254908144173,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9693768502706082,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g025",
+   "category": "normal",
+   "load": "low",
+   "mode": "clear",
+   "desc": "Normal operation, low load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 53.69,
+    "q_coil_kw": 57.73,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2947987012165627,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9734794288388022,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g026",
+   "category": "normal",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "Normal operation, nominal load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 81.69,
+    "q_coil_kw": 88.48,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.260083307974609,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.960837637787269,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g027",
+   "category": "normal",
+   "load": "high",
+   "mode": "clear",
+   "desc": "Normal operation, high load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 101.0,
+    "q_coil_kw": 109.6,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0199189988392983,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0936945400771896,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g028",
+   "category": "normal",
+   "load": "low",
+   "mode": "clear",
+   "desc": "Normal operation, low load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 59.26,
+    "q_coil_kw": 63.83,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2934403390635003,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0760936223425985,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g029",
+   "category": "normal",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "Normal operation, nominal load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 77.75,
+    "q_coil_kw": 84.05,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.263803488888597,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0619263285215328,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g030",
+   "category": "normal",
+   "load": "high",
+   "mode": "clear",
+   "desc": "Normal operation, high load",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 99.97,
+    "q_coil_kw": 108.89,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.17007349426485,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.057670783759475,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g031",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "CRAH fan failure, high load",
+   "expected": [
+    "crah_fan_failure(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 97.48,
+    "q_coil_kw": 4.44,
+    "fan_health": 0.014200456349993985,
+    "chw_availability": 1.0,
+    "filter_loading": 1.109556795311673,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0886325272335637,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g032",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "CRAH fan failure, high load",
+   "expected": [
+    "crah_fan_failure(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 100.81,
+    "q_coil_kw": 2.48,
+    "fan_health": 0.006435306774823114,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1895576272830564,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0718485444167072,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g033",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "CRAH fan failure, high load",
+   "expected": [
+    "crah_fan_failure(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 100.68,
+    "q_coil_kw": 2.27,
+    "fan_health": 0.0054563977970860655,
+    "chw_availability": 1.0,
+    "filter_loading": 1.197439086732238,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0844503366892806,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g034",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "CRAH fan failure, high load",
+   "expected": [
+    "crah_fan_failure(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 99.59,
+    "q_coil_kw": 16.89,
+    "fan_health": 0.08598224123946861,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2839970170323702,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0952453256325763,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g035",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "CRAH fan failure, high load",
+   "expected": [
+    "crah_fan_failure(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 96.73,
+    "q_coil_kw": 7.9,
+    "fan_health": 0.028383222243770004,
+    "chw_availability": 1.0,
+    "filter_loading": 1.356894543399674,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0329716283888222,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g036",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "CRAH fan failure, low load",
+   "expected": [
+    "crah_fan_failure(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 57.33,
+    "q_coil_kw": 12.14,
+    "fan_health": 0.09009197775075173,
+    "chw_availability": 1.0,
+    "filter_loading": 1.332605200094436,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0206082357660655,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g037",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "CRAH fan failure, high load",
+   "expected": [
+    "crah_fan_failure(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 96.05,
+    "q_coil_kw": 9.8,
+    "fan_health": 0.03958209701443674,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2770800023878788,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0218564943557358,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g038",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "CRAH fan failure, low load",
+   "expected": [
+    "crah_fan_failure(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 56.59,
+    "q_coil_kw": 3.77,
+    "fan_health": 0.01727434583933103,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1786151867640229,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.1165874293459563,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g039",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "CRAH fan failure, high load",
+   "expected": [
+    "crah_fan_failure(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 97.05,
+    "q_coil_kw": 9.46,
+    "fan_health": 0.036681512719015145,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1741538288046,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.08219522087657,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g040",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "CRAH fan failure, low load",
+   "expected": [
+    "crah_fan_failure(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 57.11,
+    "q_coil_kw": 12.55,
+    "fan_health": 0.09536487676971278,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2070069707558797,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9971164840189752,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g041",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "CRAH fan failure, low load",
+   "expected": [
+    "crah_fan_failure(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 59.22,
+    "q_coil_kw": 6.93,
+    "fan_health": 0.034506519832624316,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0389246184659364,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0875443436943333,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g042",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "CRAH fan failure, high load",
+   "expected": [
+    "crah_fan_failure(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 97.06,
+    "q_coil_kw": 9.43,
+    "fan_health": 0.03792830265200273,
+    "chw_availability": 1.0,
+    "filter_loading": 1.326836982458795,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0485053116037812,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g043",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "CRAH fan failure, low load",
+   "expected": [
+    "crah_fan_failure(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 58.94,
+    "q_coil_kw": 10.76,
+    "fan_health": 0.07575811192368843,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2102498725315616,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9838509612939613,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g044",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "CRAH fan failure, low load",
+   "expected": [
+    "crah_fan_failure(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 59.27,
+    "q_coil_kw": 13.38,
+    "fan_health": 0.09650283319420516,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2331624621534774,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.048963020685722,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g045",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "CRAH fan failure, nominal load",
+   "expected": [
+    "crah_fan_failure(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 75.11,
+    "q_coil_kw": 13.76,
+    "fan_health": 0.07730976563953224,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2086671336463461,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9622560569640771,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g046",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "chilled-water supply loss, nominal load",
+   "expected": [
+    "chw_supply_loss(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 78.36,
+    "q_coil_kw": 75.98,
+    "fan_health": 1.0,
+    "chw_availability": 0.1296095839885067,
+    "filter_loading": 1.2522510075575362,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9505199432616982,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g047",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "chilled-water supply loss, low load",
+   "expected": [
+    "chw_supply_loss(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 59.82,
+    "q_coil_kw": 65.62,
+    "fan_health": 1.0,
+    "chw_availability": 0.16149649981956282,
+    "filter_loading": 1.0996618755207423,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9762763661818837,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g048",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "chilled-water supply loss, high load",
+   "expected": [
+    "chw_supply_loss(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 99.35,
+    "q_coil_kw": 64.88,
+    "fan_health": 1.0,
+    "chw_availability": 0.09534786731714419,
+    "filter_loading": 1.3617560503061865,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9714777332110984,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g049",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "chilled-water supply loss, low load",
+   "expected": [
+    "chw_supply_loss(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 57.74,
+    "q_coil_kw": 62.08,
+    "fan_health": 1.0,
+    "chw_availability": 0.19905758229877019,
+    "filter_loading": 1.0353869282831403,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9825716468880769,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g050",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "chilled-water supply loss, nominal load",
+   "expected": [
+    "chw_supply_loss(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 72.56,
+    "q_coil_kw": 81.95,
+    "fan_health": 1.0,
+    "chw_availability": 0.16205673987974906,
+    "filter_loading": 1.067821815608068,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.080792574179404,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g051",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "chilled-water supply loss, nominal load",
+   "expected": [
+    "chw_supply_loss(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 75.72,
+    "q_coil_kw": 58.03,
+    "fan_health": 1.0,
+    "chw_availability": 0.07684961739285957,
+    "filter_loading": 1.0581356898798915,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9763041340706855,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g052",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "chilled-water supply loss, nominal load",
+   "expected": [
+    "chw_supply_loss(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 80.96,
+    "q_coil_kw": 28.47,
+    "fan_health": 1.0,
+    "chw_availability": 0.027939385018570198,
+    "filter_loading": 1.2180970403964737,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9671519738905958,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g053",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "chilled-water supply loss, high load",
+   "expected": [
+    "chw_supply_loss(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 100.27,
+    "q_coil_kw": 75.73,
+    "fan_health": 1.0,
+    "chw_availability": 0.12594099109303894,
+    "filter_loading": 1.3327716753596768,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.1049504811007782,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g054",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "chilled-water supply loss, nominal load",
+   "expected": [
+    "chw_supply_loss(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 83.7,
+    "q_coil_kw": 64.22,
+    "fan_health": 1.0,
+    "chw_availability": 0.09157791087090858,
+    "filter_loading": 1.088656271709136,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9734830703122477,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g055",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "chilled-water supply loss, nominal load",
+   "expected": [
+    "chw_supply_loss(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 73.77,
+    "q_coil_kw": 83.18,
+    "fan_health": 1.0,
+    "chw_availability": 0.1837317636246412,
+    "filter_loading": 1.3542775391500037,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0806021640235302,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g056",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "chilled-water supply loss, low load",
+   "expected": [
+    "chw_supply_loss(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 55.19,
+    "q_coil_kw": 60.31,
+    "fan_health": 1.0,
+    "chw_availability": 0.14998968734730442,
+    "filter_loading": 1.2182677224548655,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.1182441785098396,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g057",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "chilled-water supply loss, nominal load",
+   "expected": [
+    "chw_supply_loss(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 77.37,
+    "q_coil_kw": 67.66,
+    "fan_health": 1.0,
+    "chw_availability": 0.10403422570878616,
+    "filter_loading": 1.3230643969939848,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0986270780225489,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g058",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "chilled-water supply loss, nominal load",
+   "expected": [
+    "chw_supply_loss(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 80.36,
+    "q_coil_kw": 32.76,
+    "fan_health": 1.0,
+    "chw_availability": 0.033481071035088864,
+    "filter_loading": 1.1097691868328687,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0869452059280054,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g059",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "chilled-water supply loss, nominal load",
+   "expected": [
+    "chw_supply_loss(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 75.99,
+    "q_coil_kw": 75.39,
+    "fan_health": 1.0,
+    "chw_availability": 0.12683810076888202,
+    "filter_loading": 1.1909773509911696,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0953240088191767,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g060",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "chilled-water supply loss, low load",
+   "expected": [
+    "chw_supply_loss(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 58.06,
+    "q_coil_kw": 66.6,
+    "fan_health": 1.0,
+    "chw_availability": 0.11108253298801417,
+    "filter_loading": 1.2182110169331568,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9557597685649577,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g061",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "filter clogging, nominal load",
+   "expected": [
+    "filter_clogging(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 80.27,
+    "q_coil_kw": 90.12,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 5.176357729464014,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9949458593047619,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g062",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "filter clogging, nominal load",
+   "expected": [
+    "filter_clogging(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 73.84,
+    "q_coil_kw": 81.59,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 3.5082761926855945,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9605118871096592,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g063",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "filter clogging, low load",
+   "expected": [
+    "filter_clogging(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 56.56,
+    "q_coil_kw": 62.92,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 5.15750529396758,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9916903712966951,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g064",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "filter clogging, high load",
+   "expected": [
+    "filter_clogging(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 97.78,
+    "q_coil_kw": 105.09,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 4.947642074892224,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0789804746139866,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g065",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "filter clogging, nominal load",
+   "expected": [
+    "filter_clogging(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 73.68,
+    "q_coil_kw": 83.0,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 5.513900809878754,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0972902065618821,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g066",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "filter clogging, nominal load",
+   "expected": [
+    "filter_clogging(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 84.01,
+    "q_coil_kw": 93.84,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 4.5849439818214055,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9965490179120882,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g067",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "filter clogging, nominal load",
+   "expected": [
+    "filter_clogging(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 73.14,
+    "q_coil_kw": 82.4,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 5.082907136038514,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.1149699922657483,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g068",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "filter clogging, low load",
+   "expected": [
+    "filter_clogging(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 58.33,
+    "q_coil_kw": 64.37,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 4.107813730486536,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.006682927257902,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g069",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "filter clogging, nominal load",
+   "expected": [
+    "filter_clogging(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 76.83,
+    "q_coil_kw": 86.58,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 5.55736076877719,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.036810450818072,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g070",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "filter clogging, low load",
+   "expected": [
+    "filter_clogging(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 53.88,
+    "q_coil_kw": 60.16,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 5.553978652814007,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9767042927343774,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g071",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "filter clogging, low load",
+   "expected": [
+    "filter_clogging(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 54.54,
+    "q_coil_kw": 59.72,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 3.4647204850466826,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0816678432461113,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g072",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "filter clogging, high load",
+   "expected": [
+    "filter_clogging(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 99.93,
+    "q_coil_kw": 104.45,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 5.610234978190691,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0098931906874926,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g073",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "filter clogging, low load",
+   "expected": [
+    "filter_clogging(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 58.23,
+    "q_coil_kw": 64.64,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 4.884166618745004,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.1144964340169552,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g074",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "filter clogging, low load",
+   "expected": [
+    "filter_clogging(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 58.28,
+    "q_coil_kw": 63.95,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 3.623497576228736,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.987907795280051,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g075",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "filter clogging, high load",
+   "expected": [
+    "filter_clogging(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 97.11,
+    "q_coil_kw": 102.18,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 5.773235316572521,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0607815408491978,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g076",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "hot-air recirculation, nominal load",
+   "expected": [
+    "hot_air_recirculation(rack_a04)"
+   ],
+   "truth": {
+    "p_it_kw": 77.73,
+    "q_coil_kw": 89.8,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2861704369355493,
+    "beta_local": {
+     "rack_a04": 0.38181726044565234
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9756125215723394,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g077",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "hot-air recirculation, high load",
+   "expected": [
+    "hot_air_recirculation(rack_a01)"
+   ],
+   "truth": {
+    "p_it_kw": 101.66,
+    "q_coil_kw": 118.88,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.041989238161095,
+    "beta_local": {
+     "rack_a01": 0.4258655034914475
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9507686780888404,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g078",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "hot-air recirculation, nominal load",
+   "expected": [
+    "hot_air_recirculation(rack_a03)"
+   ],
+   "truth": {
+    "p_it_kw": 76.17,
+    "q_coil_kw": 89.13,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1416990444487574,
+    "beta_local": {
+     "rack_a03": 0.4412188243514934
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0288665659009661,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g079",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "hot-air recirculation, nominal load",
+   "expected": [
+    "hot_air_recirculation(rack_a04)"
+   ],
+   "truth": {
+    "p_it_kw": 77.17,
+    "q_coil_kw": 86.52,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0932715701094362,
+    "beta_local": {
+     "rack_a04": 0.27306249282219236
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0876700094260807,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g080",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "hot-air recirculation, nominal load",
+   "expected": [
+    "hot_air_recirculation(rack_a01)"
+   ],
+   "truth": {
+    "p_it_kw": 76.44,
+    "q_coil_kw": 88.33,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.367847849107517,
+    "beta_local": {
+     "rack_a01": 0.38475894051035514
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9900792277814132,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g081",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "hot-air recirculation, low load",
+   "expected": [
+    "hot_air_recirculation(rack_a06)"
+   ],
+   "truth": {
+    "p_it_kw": 56.21,
+    "q_coil_kw": 63.22,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1403551787812651,
+    "beta_local": {
+     "rack_a06": 0.3027515026967176
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9768866145663961,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g082",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "hot-air recirculation, nominal load",
+   "expected": [
+    "hot_air_recirculation(rack_a03)"
+   ],
+   "truth": {
+    "p_it_kw": 81.72,
+    "q_coil_kw": 97.15,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.395011405921823,
+    "beta_local": {
+     "rack_a03": 0.46754893983882506
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9508902497712303,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g083",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "hot-air recirculation, low load",
+   "expected": [
+    "hot_air_recirculation(rack_a02)"
+   ],
+   "truth": {
+    "p_it_kw": 56.08,
+    "q_coil_kw": 65.95,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1115329462963137,
+    "beta_local": {
+     "rack_a02": 0.47971090923884185
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9567824098554515,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g084",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "hot-air recirculation, low load",
+   "expected": [
+    "hot_air_recirculation(rack_a01)"
+   ],
+   "truth": {
+    "p_it_kw": 59.64,
+    "q_coil_kw": 67.03,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1061529192186066,
+    "beta_local": {
+     "rack_a01": 0.29320638604673666
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0284834240459375,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g085",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "hot-air recirculation, nominal load",
+   "expected": [
+    "hot_air_recirculation(rack_a05)"
+   ],
+   "truth": {
+    "p_it_kw": 76.64,
+    "q_coil_kw": 85.98,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0033110464986397,
+    "beta_local": {
+     "rack_a05": 0.28201643768760365
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0227747527073616,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g086",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "hot-air recirculation, nominal load",
+   "expected": [
+    "hot_air_recirculation(rack_a03)"
+   ],
+   "truth": {
+    "p_it_kw": 84.75,
+    "q_coil_kw": 100.29,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0741622730638187,
+    "beta_local": {
+     "rack_a03": 0.46487737544017727
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0692195324148916,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g087",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "hot-air recirculation, high load",
+   "expected": [
+    "hot_air_recirculation(rack_a02)"
+   ],
+   "truth": {
+    "p_it_kw": 96.46,
+    "q_coil_kw": 109.94,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2027583811472162,
+    "beta_local": {
+     "rack_a02": 0.3177766593540368
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0157911874625023,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g088",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "hot-air recirculation, low load",
+   "expected": [
+    "hot_air_recirculation(rack_a04)"
+   ],
+   "truth": {
+    "p_it_kw": 59.15,
+    "q_coil_kw": 69.19,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2344710455236685,
+    "beta_local": {
+     "rack_a04": 0.4527647571519312
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0236835255918664,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g089",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "hot-air recirculation, nominal load",
+   "expected": [
+    "hot_air_recirculation(rack_a03)"
+   ],
+   "truth": {
+    "p_it_kw": 74.78,
+    "q_coil_kw": 86.96,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0094023635771676,
+    "beta_local": {
+     "rack_a03": 0.4239632206406092
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.092291433205593,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g090",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "hot-air recirculation, low load",
+   "expected": [
+    "hot_air_recirculation(rack_a02)"
+   ],
+   "truth": {
+    "p_it_kw": 53.69,
+    "q_coil_kw": 59.64,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2760142343931205,
+    "beta_local": {
+     "rack_a02": 0.25651563991193205
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9899673078001994,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g091",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "server fan failure, low load",
+   "expected": [
+    "server_fan_failure(rack_a02_s12)"
+   ],
+   "truth": {
+    "p_it_kw": 58.8,
+    "q_coil_kw": 63.09,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.006170535844787,
+    "beta_local": {},
+    "failed_server_fans": [
+     "rack_a02_s12"
+    ],
+    "phase_share": {},
+    "battery_r_ratio": 1.0487287276498638,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g092",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "server fan failure, nominal load",
+   "expected": [
+    "server_fan_failure(rack_a02_s10)"
+   ],
+   "truth": {
+    "p_it_kw": 81.56,
+    "q_coil_kw": 88.2,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2934487902930398,
+    "beta_local": {},
+    "failed_server_fans": [
+     "rack_a02_s10"
+    ],
+    "phase_share": {},
+    "battery_r_ratio": 1.1029516273358468,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g093",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "server fan failure, nominal load",
+   "expected": [
+    "server_fan_failure(rack_a06_s17)"
+   ],
+   "truth": {
+    "p_it_kw": 76.9,
+    "q_coil_kw": 83.07,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.128795951119602,
+    "beta_local": {},
+    "failed_server_fans": [
+     "rack_a06_s17"
+    ],
+    "phase_share": {},
+    "battery_r_ratio": 1.013745860387789,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g094",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "server fan failure, nominal load",
+   "expected": [
+    "server_fan_failure(rack_a04_s08)"
+   ],
+   "truth": {
+    "p_it_kw": 80.43,
+    "q_coil_kw": 86.82,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0181858269948871,
+    "beta_local": {},
+    "failed_server_fans": [
+     "rack_a04_s08"
+    ],
+    "phase_share": {},
+    "battery_r_ratio": 1.0566138775548708,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g095",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "server fan failure, nominal load",
+   "expected": [
+    "server_fan_failure(rack_a04_s14)"
+   ],
+   "truth": {
+    "p_it_kw": 78.6,
+    "q_coil_kw": 85.09,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.238462496816396,
+    "beta_local": {},
+    "failed_server_fans": [
+     "rack_a04_s14"
+    ],
+    "phase_share": {},
+    "battery_r_ratio": 1.070371881562129,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g096",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "server fan failure, nominal load",
+   "expected": [
+    "server_fan_failure(rack_a06_s11)"
+   ],
+   "truth": {
+    "p_it_kw": 73.85,
+    "q_coil_kw": 79.63,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.017299858241777,
+    "beta_local": {},
+    "failed_server_fans": [
+     "rack_a06_s11"
+    ],
+    "phase_share": {},
+    "battery_r_ratio": 0.9689717541869924,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g097",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "server fan failure, high load",
+   "expected": [
+    "server_fan_failure(rack_a02_s13)"
+   ],
+   "truth": {
+    "p_it_kw": 96.87,
+    "q_coil_kw": 105.06,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.131836227869965,
+    "beta_local": {},
+    "failed_server_fans": [
+     "rack_a02_s13"
+    ],
+    "phase_share": {},
+    "battery_r_ratio": 1.0840077903642027,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g098",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "server fan failure, nominal load",
+   "expected": [
+    "server_fan_failure(rack_a06_s20)"
+   ],
+   "truth": {
+    "p_it_kw": 73.15,
+    "q_coil_kw": 78.89,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0532991669226115,
+    "beta_local": {},
+    "failed_server_fans": [
+     "rack_a06_s20"
+    ],
+    "phase_share": {},
+    "battery_r_ratio": 1.10414199125055,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g099",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "server fan failure, low load",
+   "expected": [
+    "server_fan_failure(rack_a05_s11)"
+   ],
+   "truth": {
+    "p_it_kw": 59.63,
+    "q_coil_kw": 64.15,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2668100932601676,
+    "beta_local": {},
+    "failed_server_fans": [
+     "rack_a05_s11"
+    ],
+    "phase_share": {},
+    "battery_r_ratio": 0.9690578603566109,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g100",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "server fan failure, high load",
+   "expected": [
+    "server_fan_failure(rack_a04_s17)"
+   ],
+   "truth": {
+    "p_it_kw": 96.55,
+    "q_coil_kw": 104.57,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0258378838369464,
+    "beta_local": {},
+    "failed_server_fans": [
+     "rack_a04_s17"
+    ],
+    "phase_share": {},
+    "battery_r_ratio": 1.0970333941853248,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g101",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "server fan failure, low load",
+   "expected": [
+    "server_fan_failure(rack_a01_s08)"
+   ],
+   "truth": {
+    "p_it_kw": 56.65,
+    "q_coil_kw": 60.83,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0022831854401162,
+    "beta_local": {},
+    "failed_server_fans": [
+     "rack_a01_s08"
+    ],
+    "phase_share": {},
+    "battery_r_ratio": 1.054714919944774,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g102",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "server fan failure, nominal load",
+   "expected": [
+    "server_fan_failure(rack_a04_s04)"
+   ],
+   "truth": {
+    "p_it_kw": 84.25,
+    "q_coil_kw": 91.07,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1236385851057982,
+    "beta_local": {},
+    "failed_server_fans": [
+     "rack_a04_s04"
+    ],
+    "phase_share": {},
+    "battery_r_ratio": 1.0701908270988123,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g103",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "server fan failure, high load",
+   "expected": [
+    "server_fan_failure(rack_a03_s05)"
+   ],
+   "truth": {
+    "p_it_kw": 95.17,
+    "q_coil_kw": 103.32,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1435760291645902,
+    "beta_local": {},
+    "failed_server_fans": [
+     "rack_a03_s05"
+    ],
+    "phase_share": {},
+    "battery_r_ratio": 1.0431210497254029,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g104",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "server fan failure, high load",
+   "expected": [
+    "server_fan_failure(rack_a06_s08)"
+   ],
+   "truth": {
+    "p_it_kw": 98.55,
+    "q_coil_kw": 107.05,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1022373555931853,
+    "beta_local": {},
+    "failed_server_fans": [
+     "rack_a06_s08"
+    ],
+    "phase_share": {},
+    "battery_r_ratio": 1.0472603537554166,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g105",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "server fan failure, nominal load",
+   "expected": [
+    "server_fan_failure(rack_a03_s15)"
+   ],
+   "truth": {
+    "p_it_kw": 80.51,
+    "q_coil_kw": 86.88,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0839619139466248,
+    "beta_local": {},
+    "failed_server_fans": [
+     "rack_a03_s15"
+    ],
+    "phase_share": {},
+    "battery_r_ratio": 0.9572670967079631,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g106",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "branch overload, nominal load",
+   "expected": [
+    "branch_overload(rack_a01_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 75.11,
+    "q_coil_kw": 81.08,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2265831795412376,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a01": 0.9299330126906453
+    },
+    "battery_r_ratio": 1.0260602551592084,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g107",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "branch overload, nominal load",
+   "expected": [
+    "branch_overload(rack_a06_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 72.54,
+    "q_coil_kw": 78.32,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1463799511013308,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a06": 0.95
+    },
+    "battery_r_ratio": 1.0783507547151165,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g108",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "branch overload, nominal load",
+   "expected": [
+    "branch_overload(rack_a02_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 74.36,
+    "q_coil_kw": 80.44,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3442199058368414,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a02": 0.95
+    },
+    "battery_r_ratio": 1.0188720202757364,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g109",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "branch overload, high load",
+   "expected": [
+    "branch_overload(rack_a05_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 101.58,
+    "q_coil_kw": 110.47,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1991565940032056,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a05": 0.7333430194358171
+    },
+    "battery_r_ratio": 1.0033714936660598,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g110",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "branch overload, nominal load",
+   "expected": [
+    "branch_overload(rack_a04_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 81.53,
+    "q_coil_kw": 88.17,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.024934560082204,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a04": 0.8965169827206612
+    },
+    "battery_r_ratio": 0.9996316811137582,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g111",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "branch overload, nominal load",
+   "expected": [
+    "branch_overload(rack_a03_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 80.89,
+    "q_coil_kw": 87.7,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3627417479997417,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a03": 0.899638983274325
+    },
+    "battery_r_ratio": 1.0989257764163167,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g112",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "branch overload, nominal load",
+   "expected": [
+    "branch_overload(rack_a03_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 73.49,
+    "q_coil_kw": 79.27,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1375496386932147,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a03": 0.95
+    },
+    "battery_r_ratio": 1.085327662998755,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g113",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "branch overload, high load",
+   "expected": [
+    "branch_overload(rack_a06_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 100.44,
+    "q_coil_kw": 109.2,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0265354297498444,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a06": 0.7418152483221577
+    },
+    "battery_r_ratio": 0.9881019979673993,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g114",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "branch overload, nominal load",
+   "expected": [
+    "branch_overload(rack_a02_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 84.25,
+    "q_coil_kw": 91.4,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3756772887678685,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a02": 0.9078922513696911
+    },
+    "battery_r_ratio": 1.0227223162076886,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g115",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "branch overload, nominal load",
+   "expected": [
+    "branch_overload(rack_a06_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 77.56,
+    "q_coil_kw": 83.81,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1129767377501438,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a06": 0.95
+    },
+    "battery_r_ratio": 1.0136038576640418,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g116",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "branch overload, nominal load",
+   "expected": [
+    "branch_overload(rack_a04_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 78.42,
+    "q_coil_kw": 84.82,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.319033436897425,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a04": 0.95
+    },
+    "battery_r_ratio": 1.0391101946885948,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g117",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "branch overload, high load",
+   "expected": [
+    "branch_overload(rack_a06_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 97.06,
+    "q_coil_kw": 105.6,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.277694383543326,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a06": 0.7749258299148707
+    },
+    "battery_r_ratio": 1.0054363352859497,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g118",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "branch overload, nominal load",
+   "expected": [
+    "branch_overload(rack_a04_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 79.62,
+    "q_coil_kw": 86.17,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2251664956035577,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a04": 0.8715241198072496
+    },
+    "battery_r_ratio": 0.9506338199010094,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g119",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "branch overload, nominal load",
+   "expected": [
+    "branch_overload(rack_a06_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 79.03,
+    "q_coil_kw": 85.45,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0896655524422263,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a06": 0.95
+    },
+    "battery_r_ratio": 1.0275374570183118,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g120",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "branch overload, high load",
+   "expected": [
+    "branch_overload(rack_a05_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 99.76,
+    "q_coil_kw": 108.38,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0582900552171266,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a05": 0.797514702347452
+    },
+    "battery_r_ratio": 0.9939218960997855,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g121",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "battery degradation, high load",
+   "expected": [
+    "battery_degradation(battery_1)"
+   ],
+   "truth": {
+    "p_it_kw": 102.33,
+    "q_coil_kw": 111.78,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3496014298898096,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.5951152620857552,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g122",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "battery degradation, low load",
+   "expected": [
+    "battery_degradation(battery_1)"
+   ],
+   "truth": {
+    "p_it_kw": 58.06,
+    "q_coil_kw": 62.4,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.05238031957155,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 2.096087665827234,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g123",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "battery degradation, low load",
+   "expected": [
+    "battery_degradation(battery_1)"
+   ],
+   "truth": {
+    "p_it_kw": 58.88,
+    "q_coil_kw": 63.2,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0130662278559748,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.7469828932842497,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g124",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "battery degradation, high load",
+   "expected": [
+    "battery_degradation(battery_1)"
+   ],
+   "truth": {
+    "p_it_kw": 98.07,
+    "q_coil_kw": 106.44,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.085565893176319,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 2.1611753958834035,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g125",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "battery degradation, nominal load",
+   "expected": [
+    "battery_degradation(battery_1)"
+   ],
+   "truth": {
+    "p_it_kw": 72.79,
+    "q_coil_kw": 78.6,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2830764037043743,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 2.2611945219356127,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g126",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "battery degradation, high load",
+   "expected": [
+    "battery_degradation(battery_1)"
+   ],
+   "truth": {
+    "p_it_kw": 100.72,
+    "q_coil_kw": 109.64,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2084806226954523,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 2.4981848078512026,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g127",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "battery degradation, high load",
+   "expected": [
+    "battery_degradation(battery_1)"
+   ],
+   "truth": {
+    "p_it_kw": 99.6,
+    "q_coil_kw": 108.21,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1548250945460798,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.9498352409944815,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g128",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "battery degradation, low load",
+   "expected": [
+    "battery_degradation(battery_1)"
+   ],
+   "truth": {
+    "p_it_kw": 59.65,
+    "q_coil_kw": 64.06,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0495381540887585,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 2.3950282989330645,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g129",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "battery degradation, high load",
+   "expected": [
+    "battery_degradation(battery_1)"
+   ],
+   "truth": {
+    "p_it_kw": 99.68,
+    "q_coil_kw": 108.26,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0290979404382266,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 2.3972173219225943,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g130",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "battery degradation, low load",
+   "expected": [
+    "battery_degradation(battery_1)"
+   ],
+   "truth": {
+    "p_it_kw": 56.4,
+    "q_coil_kw": 60.55,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1454297431302485,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.8277606597963305,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g131",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "battery degradation, low load",
+   "expected": [
+    "battery_degradation(battery_1)"
+   ],
+   "truth": {
+    "p_it_kw": 56.72,
+    "q_coil_kw": 61.03,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2592862743543825,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 2.05628349304065,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g132",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "battery degradation, nominal load",
+   "expected": [
+    "battery_degradation(battery_1)"
+   ],
+   "truth": {
+    "p_it_kw": 76.06,
+    "q_coil_kw": 82.05,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1529561517380766,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.8733500741743283,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g133",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "battery degradation, nominal load",
+   "expected": [
+    "battery_degradation(battery_1)"
+   ],
+   "truth": {
+    "p_it_kw": 76.53,
+    "q_coil_kw": 82.82,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.265805329260061,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 2.154012473423438,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g134",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "battery degradation, low load",
+   "expected": [
+    "battery_degradation(battery_1)"
+   ],
+   "truth": {
+    "p_it_kw": 55.62,
+    "q_coil_kw": 59.8,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1853892194138989,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 2.3203023972997974,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g135",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "battery degradation, nominal load",
+   "expected": [
+    "battery_degradation(battery_1)"
+   ],
+   "truth": {
+    "p_it_kw": 81.97,
+    "q_coil_kw": 88.74,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.282329077719199,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 2.3413426944083997,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g136",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "UPS on static bypass, low load",
+   "expected": [
+    "ups_on_bypass(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 57.27,
+    "q_coil_kw": 61.64,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3280410978442498,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9640717852669991,
+    "ups_bypass": true,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g137",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "UPS on static bypass, low load",
+   "expected": [
+    "ups_on_bypass(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 53.92,
+    "q_coil_kw": 57.96,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2626657295638304,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9810140313256093,
+    "ups_bypass": true,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g138",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "UPS on static bypass, low load",
+   "expected": [
+    "ups_on_bypass(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 55.67,
+    "q_coil_kw": 59.95,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3739599447920317,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.958304414686677,
+    "ups_bypass": true,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g139",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "UPS on static bypass, low load",
+   "expected": [
+    "ups_on_bypass(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 59.15,
+    "q_coil_kw": 63.61,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.158472315241615,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.1195191670112214,
+    "ups_bypass": true,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g140",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "UPS on static bypass, low load",
+   "expected": [
+    "ups_on_bypass(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 54.47,
+    "q_coil_kw": 58.55,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2389001572308525,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0308664624998574,
+    "ups_bypass": true,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g141",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "UPS on static bypass, high load",
+   "expected": [
+    "ups_on_bypass(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 100.02,
+    "q_coil_kw": 108.86,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.087526156207345,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9821295466192184,
+    "ups_bypass": true,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g142",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "UPS on static bypass, nominal load",
+   "expected": [
+    "ups_on_bypass(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 78.41,
+    "q_coil_kw": 84.72,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1756427761184536,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0806662918108614,
+    "ups_bypass": true,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g143",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "UPS on static bypass, nominal load",
+   "expected": [
+    "ups_on_bypass(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 75.64,
+    "q_coil_kw": 81.73,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3196262995307684,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0293130360165499,
+    "ups_bypass": true,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g144",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "UPS on static bypass, high load",
+   "expected": [
+    "ups_on_bypass(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 97.46,
+    "q_coil_kw": 105.88,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1510400171707555,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0125623781985325,
+    "ups_bypass": true,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g145",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "UPS on static bypass, low load",
+   "expected": [
+    "ups_on_bypass(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 56.55,
+    "q_coil_kw": 60.81,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1855953346946382,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.055217459445605,
+    "ups_bypass": true,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g146",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "UPS on static bypass, low load",
+   "expected": [
+    "ups_on_bypass(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 57.71,
+    "q_coil_kw": 61.97,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1497606114304946,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9720664629362639,
+    "ups_bypass": true,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g147",
+   "category": "single_fault",
+   "load": "high",
+   "mode": "clear",
+   "desc": "UPS on static bypass, high load",
+   "expected": [
+    "ups_on_bypass(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 100.4,
+    "q_coil_kw": 108.94,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0079938351080866,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.992495395345183,
+    "ups_bypass": true,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g148",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "UPS on static bypass, low load",
+   "expected": [
+    "ups_on_bypass(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 56.26,
+    "q_coil_kw": 60.46,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2321543047364079,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0821025782960907,
+    "ups_bypass": true,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g149",
+   "category": "single_fault",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "UPS on static bypass, nominal load",
+   "expected": [
+    "ups_on_bypass(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 72.7,
+    "q_coil_kw": 78.46,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1967350907410783,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0836526885098576,
+    "ups_bypass": true,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g150",
+   "category": "single_fault",
+   "load": "low",
+   "mode": "clear",
+   "desc": "UPS on static bypass, low load",
+   "expected": [
+    "ups_on_bypass(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 55.45,
+    "q_coil_kw": 59.51,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1104289468170554,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.070462931879656,
+    "ups_bypass": true,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g151",
+   "category": "instrumentation",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "temperature sensor bias, nominal load",
+   "expected": [
+    "sensor_bias(t_inlet_mid, rack_a01)"
+   ],
+   "truth": {
+    "p_it_kw": 83.36,
+    "q_coil_kw": 90.13,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0085371069149416,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0331778936118008,
+    "ups_bypass": false,
+    "biases": {
+     "t_inlet_mid@rack_a01": 7.146313288851001
+    },
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g152",
+   "category": "instrumentation",
+   "load": "high",
+   "mode": "clear",
+   "desc": "temperature sensor bias, high load",
+   "expected": [
+    "sensor_bias(t_inlet_top, rack_a02)"
+   ],
+   "truth": {
+    "p_it_kw": 97.23,
+    "q_coil_kw": 105.82,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3161121109638376,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9774960925859038,
+    "ups_bypass": false,
+    "biases": {
+     "t_inlet_top@rack_a02": 6.671179783633152
+    },
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g153",
+   "category": "instrumentation",
+   "load": "high",
+   "mode": "clear",
+   "desc": "temperature sensor bias, high load",
+   "expected": [
+    "sensor_bias(t_inlet_mid, rack_a01)"
+   ],
+   "truth": {
+    "p_it_kw": 99.86,
+    "q_coil_kw": 108.86,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3821407299805943,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0902556292005423,
+    "ups_bypass": false,
+    "biases": {
+     "t_inlet_mid@rack_a01": -7.950539473295476
+    },
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g154",
+   "category": "instrumentation",
+   "load": "low",
+   "mode": "clear",
+   "desc": "temperature sensor bias, low load",
+   "expected": [
+    "sensor_bias(t_inlet_mid, rack_a06)"
+   ],
+   "truth": {
+    "p_it_kw": 58.82,
+    "q_coil_kw": 63.18,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0553947700675217,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0253287484124254,
+    "ups_bypass": false,
+    "biases": {
+     "t_inlet_mid@rack_a06": -6.5522895894452216
+    },
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g155",
+   "category": "instrumentation",
+   "load": "low",
+   "mode": "clear",
+   "desc": "temperature sensor bias, low load",
+   "expected": [
+    "sensor_bias(t_inlet_top, rack_a01)"
+   ],
+   "truth": {
+    "p_it_kw": 59.8,
+    "q_coil_kw": 64.29,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.103636051511109,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.017435423997188,
+    "ups_bypass": false,
+    "biases": {
+     "t_inlet_top@rack_a01": -6.632795948390873
+    },
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g156",
+   "category": "instrumentation",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "temperature sensor bias, nominal load",
+   "expected": [
+    "sensor_bias(t_inlet_mid, rack_a01)"
+   ],
+   "truth": {
+    "p_it_kw": 84.02,
+    "q_coil_kw": 90.91,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0500608084071772,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9910130263664844,
+    "ups_bypass": false,
+    "biases": {
+     "t_inlet_mid@rack_a01": 6.1881331542733715
+    },
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g157",
+   "category": "instrumentation",
+   "load": "high",
+   "mode": "clear",
+   "desc": "temperature sensor bias, high load",
+   "expected": [
+    "sensor_bias(t_inlet_mid, rack_a01)"
+   ],
+   "truth": {
+    "p_it_kw": 101.01,
+    "q_coil_kw": 109.79,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.029766009938466,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0518674441289617,
+    "ups_bypass": false,
+    "biases": {
+     "t_inlet_mid@rack_a01": 3.526484387445705
+    },
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g158",
+   "category": "instrumentation",
+   "load": "high",
+   "mode": "clear",
+   "desc": "temperature sensor bias, high load",
+   "expected": [
+    "sensor_bias(t_supply_air, crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 99.39,
+    "q_coil_kw": 108.21,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1457125090454816,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0328532018607928,
+    "ups_bypass": false,
+    "biases": {
+     "t_supply_air@crah_1": 4.97991504652705
+    },
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g159",
+   "category": "instrumentation",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "temperature sensor bias, nominal load",
+   "expected": [
+    "sensor_bias(t_inlet_mid, rack_a04)"
+   ],
+   "truth": {
+    "p_it_kw": 78.98,
+    "q_coil_kw": 85.32,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1946947169845608,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0969856888823224,
+    "ups_bypass": false,
+    "biases": {
+     "t_inlet_mid@rack_a04": 3.5761428503856085
+    },
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g160",
+   "category": "instrumentation",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "temperature sensor bias, nominal load",
+   "expected": [
+    "sensor_bias(t_supply_air, crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 79.43,
+    "q_coil_kw": 85.89,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0887030763923746,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0436431744973083,
+    "ups_bypass": false,
+    "biases": {
+     "t_supply_air@crah_1": 3.150531563357137
+    },
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g161",
+   "category": "instrumentation",
+   "load": "high",
+   "mode": "clear",
+   "desc": "temperature sensor bias, high load",
+   "expected": [
+    "sensor_bias(t_inlet_top, rack_a04)"
+   ],
+   "truth": {
+    "p_it_kw": 96.75,
+    "q_coil_kw": 105.42,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2998276125345083,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.061027809401365,
+    "ups_bypass": false,
+    "biases": {
+     "t_inlet_top@rack_a04": 4.664118754279446
+    },
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g162",
+   "category": "instrumentation",
+   "load": "low",
+   "mode": "clear",
+   "desc": "temperature sensor bias, low load",
+   "expected": [
+    "sensor_bias(t_supply_air, crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 57.02,
+    "q_coil_kw": 61.26,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.109908409504354,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0865918507524854,
+    "ups_bypass": false,
+    "biases": {
+     "t_supply_air@crah_1": 4.7608674777777535
+    },
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g163",
+   "category": "instrumentation",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "temperature sensor bias, nominal load",
+   "expected": [
+    "sensor_bias(t_supply_air, crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 83.95,
+    "q_coil_kw": 90.85,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1604216268407657,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9915606824191686,
+    "ups_bypass": false,
+    "biases": {
+     "t_supply_air@crah_1": -5.194360737558593
+    },
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g164",
+   "category": "instrumentation",
+   "load": "low",
+   "mode": "clear",
+   "desc": "temperature sensor bias, low load",
+   "expected": [
+    "sensor_bias(t_supply_air, crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 60.5,
+    "q_coil_kw": 65.03,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.086460327909799,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9597468082040143,
+    "ups_bypass": false,
+    "biases": {
+     "t_supply_air@crah_1": 5.159343647605265
+    },
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g165",
+   "category": "instrumentation",
+   "load": "low",
+   "mode": "clear",
+   "desc": "temperature sensor bias, low load",
+   "expected": [
+    "sensor_bias(t_supply_air, crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 54.12,
+    "q_coil_kw": 58.15,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.065858368598507,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0498926847196741,
+    "ups_bypass": false,
+    "biases": {
+     "t_supply_air@crah_1": -7.8116944844306175
+    },
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g166",
+   "category": "instrumentation",
+   "load": "low",
+   "mode": "clear",
+   "desc": "telemetry dropout, low load",
+   "expected": [
+    "telemetry_dropout(rack_a05)"
+   ],
+   "truth": {
+    "p_it_kw": 57.87,
+    "q_coil_kw": 62.31,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3310376718727892,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9692379270066429,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": "rack_a05",
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g167",
+   "category": "instrumentation",
+   "load": "low",
+   "mode": "clear",
+   "desc": "telemetry dropout, low load",
+   "expected": [
+    "telemetry_dropout(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 54.82,
+    "q_coil_kw": 58.86,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1962279614835276,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9679212880075638,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": "ups_1",
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g168",
+   "category": "instrumentation",
+   "load": "low",
+   "mode": "clear",
+   "desc": "telemetry dropout, low load",
+   "expected": [
+    "telemetry_dropout(rack_a02)"
+   ],
+   "truth": {
+    "p_it_kw": 60.04,
+    "q_coil_kw": 64.55,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0715587289552229,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0581574065743182,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": "rack_a02",
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g169",
+   "category": "instrumentation",
+   "load": "high",
+   "mode": "clear",
+   "desc": "telemetry dropout, high load",
+   "expected": [
+    "telemetry_dropout(rack_a04)"
+   ],
+   "truth": {
+    "p_it_kw": 101.48,
+    "q_coil_kw": 110.51,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.167451840527317,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0055422665536253,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": "rack_a04",
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g170",
+   "category": "instrumentation",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "telemetry dropout, nominal load",
+   "expected": [
+    "telemetry_dropout(battery_1)"
+   ],
+   "truth": {
+    "p_it_kw": 82.55,
+    "q_coil_kw": 89.13,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0655400672576762,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9698169732240765,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": "battery_1",
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g171",
+   "category": "instrumentation",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "telemetry dropout, nominal load",
+   "expected": [
+    "telemetry_dropout(rack_a02)"
+   ],
+   "truth": {
+    "p_it_kw": 78.52,
+    "q_coil_kw": 84.95,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1829549460706077,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0171568816937615,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": "rack_a02",
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g172",
+   "category": "instrumentation",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "telemetry dropout, nominal load",
+   "expected": [
+    "telemetry_dropout(rack_a02)"
+   ],
+   "truth": {
+    "p_it_kw": 74.87,
+    "q_coil_kw": 81.05,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3509499509943967,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.040158866464376,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": "rack_a02",
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g173",
+   "category": "instrumentation",
+   "load": "low",
+   "mode": "clear",
+   "desc": "telemetry dropout, low load",
+   "expected": [
+    "telemetry_dropout(rack_a06)"
+   ],
+   "truth": {
+    "p_it_kw": 55.28,
+    "q_coil_kw": 59.47,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3149265270918924,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.075396967978373,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": "rack_a06",
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g174",
+   "category": "instrumentation",
+   "load": "high",
+   "mode": "clear",
+   "desc": "telemetry dropout, high load",
+   "expected": [
+    "telemetry_dropout(rack_a02)"
+   ],
+   "truth": {
+    "p_it_kw": 100.18,
+    "q_coil_kw": 109.27,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3047712540841445,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.047968308399346,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": "rack_a02",
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g175",
+   "category": "instrumentation",
+   "load": "high",
+   "mode": "clear",
+   "desc": "telemetry dropout, high load",
+   "expected": [
+    "telemetry_dropout(rack_a02)"
+   ],
+   "truth": {
+    "p_it_kw": 100.16,
+    "q_coil_kw": 108.98,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.182399158732097,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0147952720458322,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": "rack_a02",
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g176",
+   "category": "instrumentation",
+   "load": "low",
+   "mode": "clear",
+   "desc": "telemetry dropout, low load",
+   "expected": [
+    "telemetry_dropout(rack_a02)"
+   ],
+   "truth": {
+    "p_it_kw": 54.93,
+    "q_coil_kw": 59.08,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.353001958705168,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0962005142054925,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": "rack_a02",
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g177",
+   "category": "instrumentation",
+   "load": "high",
+   "mode": "clear",
+   "desc": "telemetry dropout, high load",
+   "expected": [
+    "telemetry_dropout(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 102.56,
+    "q_coil_kw": 111.88,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3335640024702113,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0382397719390004,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": "crah_1",
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g178",
+   "category": "instrumentation",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "telemetry dropout, nominal load",
+   "expected": [
+    "telemetry_dropout(rack_a06)"
+   ],
+   "truth": {
+    "p_it_kw": 82.94,
+    "q_coil_kw": 89.93,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3558090850452755,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.065449083295478,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": "rack_a06",
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g179",
+   "category": "instrumentation",
+   "load": "high",
+   "mode": "clear",
+   "desc": "telemetry dropout, high load",
+   "expected": [
+    "telemetry_dropout(rack_a01)"
+   ],
+   "truth": {
+    "p_it_kw": 103.13,
+    "q_coil_kw": 112.02,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0217145930046259,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9514532075129084,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": "rack_a01",
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g180",
+   "category": "instrumentation",
+   "load": "low",
+   "mode": "clear",
+   "desc": "telemetry dropout, low load",
+   "expected": [
+    "telemetry_dropout(rack_a03)"
+   ],
+   "truth": {
+    "p_it_kw": 55.81,
+    "q_coil_kw": 60.04,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.275743039472036,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0925234675330777,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": "rack_a03",
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g181",
+   "category": "multiple",
+   "load": "low",
+   "mode": "clear",
+   "desc": "filter clogging + hot-air recirculation, low load",
+   "expected": [
+    "filter_clogging(crah_1)",
+    "hot_air_recirculation(rack_a06)"
+   ],
+   "truth": {
+    "p_it_kw": 53.7,
+    "q_coil_kw": 60.82,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 3.5329086737026167,
+    "beta_local": {
+     "rack_a06": 0.2635385635151509
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.017302795080078,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g182",
+   "category": "multiple",
+   "load": "high",
+   "mode": "clear",
+   "desc": "filter clogging + hot-air recirculation, high load",
+   "expected": [
+    "filter_clogging(crah_1)",
+    "hot_air_recirculation(rack_a05)"
+   ],
+   "truth": {
+    "p_it_kw": 96.78,
+    "q_coil_kw": 115.16,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 3.121670175914594,
+    "beta_local": {
+     "rack_a05": 0.4200214912853498
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0250160411766895,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g183",
+   "category": "multiple",
+   "load": "low",
+   "mode": "clear",
+   "desc": "filter clogging + hot-air recirculation, low load",
+   "expected": [
+    "filter_clogging(crah_1)",
+    "hot_air_recirculation(rack_a02)"
+   ],
+   "truth": {
+    "p_it_kw": 55.96,
+    "q_coil_kw": 65.42,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 4.749454940810558,
+    "beta_local": {
+     "rack_a02": 0.35080678493817385
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.1062193665780462,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g184",
+   "category": "multiple",
+   "load": "high",
+   "mode": "clear",
+   "desc": "filter clogging + hot-air recirculation, high load",
+   "expected": [
+    "filter_clogging(crah_1)",
+    "hot_air_recirculation(rack_a04)"
+   ],
+   "truth": {
+    "p_it_kw": 98.92,
+    "q_coil_kw": 113.95,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 4.533725991066225,
+    "beta_local": {
+     "rack_a04": 0.4568885562650498
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0704743938918742,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g185",
+   "category": "multiple",
+   "load": "low",
+   "mode": "clear",
+   "desc": "filter clogging + hot-air recirculation, low load",
+   "expected": [
+    "filter_clogging(crah_1)",
+    "hot_air_recirculation(rack_a01)"
+   ],
+   "truth": {
+    "p_it_kw": 54.39,
+    "q_coil_kw": 64.74,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 3.2201364402268977,
+    "beta_local": {
+     "rack_a01": 0.4561769016214767
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0434829789078202,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g186",
+   "category": "multiple",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "filter clogging + hot-air recirculation, nominal load",
+   "expected": [
+    "filter_clogging(crah_1)",
+    "hot_air_recirculation(rack_a06)"
+   ],
+   "truth": {
+    "p_it_kw": 75.13,
+    "q_coil_kw": 89.55,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 4.0822857808115565,
+    "beta_local": {
+     "rack_a06": 0.38840525665185927
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0722652759198759,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g187",
+   "category": "multiple",
+   "load": "high",
+   "mode": "clear",
+   "desc": "hot-air recirculation + sensor bias masking, high load",
+   "expected": [
+    "hot_air_recirculation(rack_a05)",
+    "sensor_bias(t_inlet_top, rack_a05)"
+   ],
+   "truth": {
+    "p_it_kw": 99.12,
+    "q_coil_kw": 115.94,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0500926883140713,
+    "beta_local": {
+     "rack_a05": 0.4234797074549822
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0872845232482218,
+    "ups_bypass": false,
+    "biases": {
+     "t_inlet_top@rack_a05": -10.848241783387104
+    },
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g188",
+   "category": "multiple",
+   "load": "high",
+   "mode": "clear",
+   "desc": "hot-air recirculation + sensor bias masking, high load",
+   "expected": [
+    "hot_air_recirculation(rack_a02)",
+    "sensor_bias(t_inlet_top, rack_a02)"
+   ],
+   "truth": {
+    "p_it_kw": 98.87,
+    "q_coil_kw": 113.92,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.207205608146895,
+    "beta_local": {
+     "rack_a02": 0.3603085725489379
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9669253162049032,
+    "ups_bypass": false,
+    "biases": {
+     "t_inlet_top@rack_a02": -9.304815525059906
+    },
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g189",
+   "category": "multiple",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "hot-air recirculation + sensor bias masking, nominal load",
+   "expected": [
+    "hot_air_recirculation(rack_a01)",
+    "sensor_bias(t_inlet_top, rack_a01)"
+   ],
+   "truth": {
+    "p_it_kw": 73.58,
+    "q_coil_kw": 82.28,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.092352019280741,
+    "beta_local": {
+     "rack_a01": 0.26970474758296015
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9805725091392898,
+    "ups_bypass": false,
+    "biases": {
+     "t_inlet_top@rack_a01": -6.046566410506173
+    },
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g190",
+   "category": "multiple",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "hot-air recirculation + sensor bias masking, nominal load",
+   "expected": [
+    "hot_air_recirculation(rack_a03)",
+    "sensor_bias(t_inlet_top, rack_a03)"
+   ],
+   "truth": {
+    "p_it_kw": 81.42,
+    "q_coil_kw": 91.15,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.249977689422235,
+    "beta_local": {
+     "rack_a03": 0.25610240091834174
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.1004501820303547,
+    "ups_bypass": false,
+    "biases": {
+     "t_inlet_top@rack_a03": -5.59675806809012
+    },
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g191",
+   "category": "multiple",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "hot-air recirculation + sensor bias masking, nominal load",
+   "expected": [
+    "hot_air_recirculation(rack_a03)",
+    "sensor_bias(t_inlet_top, rack_a03)"
+   ],
+   "truth": {
+    "p_it_kw": 80.96,
+    "q_coil_kw": 95.23,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2985574720491981,
+    "beta_local": {
+     "rack_a03": 0.4374175301227566
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.057479795968397,
+    "ups_bypass": false,
+    "biases": {
+     "t_inlet_top@rack_a03": -11.378305135740309
+    },
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g192",
+   "category": "multiple",
+   "load": "low",
+   "mode": "clear",
+   "desc": "hot-air recirculation + sensor bias masking, low load",
+   "expected": [
+    "hot_air_recirculation(rack_a02)",
+    "sensor_bias(t_inlet_top, rack_a02)"
+   ],
+   "truth": {
+    "p_it_kw": 58.53,
+    "q_coil_kw": 65.63,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1017368904805565,
+    "beta_local": {
+     "rack_a02": 0.29047657236976476
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0763183772432194,
+    "ups_bypass": false,
+    "biases": {
+     "t_inlet_top@rack_a02": -6.3497039841636145
+    },
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g193",
+   "category": "multiple",
+   "load": "high",
+   "mode": "clear",
+   "desc": "battery degradation + UPS on static bypass, high load",
+   "expected": [
+    "battery_degradation(battery_1)",
+    "ups_on_bypass(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 100.86,
+    "q_coil_kw": 110.01,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2564456054756268,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 2.4177314863361703,
+    "ups_bypass": true,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g194",
+   "category": "multiple",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "battery degradation + UPS on static bypass, nominal load",
+   "expected": [
+    "battery_degradation(battery_1)",
+    "ups_on_bypass(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 79.27,
+    "q_coil_kw": 85.73,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.175672002714313,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 2.12743283187944,
+    "ups_bypass": true,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g195",
+   "category": "multiple",
+   "load": "high",
+   "mode": "clear",
+   "desc": "battery degradation + UPS on static bypass, high load",
+   "expected": [
+    "battery_degradation(battery_1)",
+    "ups_on_bypass(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 96.83,
+    "q_coil_kw": 105.43,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3342711808869028,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.902829993296122,
+    "ups_bypass": true,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g196",
+   "category": "multiple",
+   "load": "low",
+   "mode": "clear",
+   "desc": "battery degradation + UPS on static bypass, low load",
+   "expected": [
+    "battery_degradation(battery_1)",
+    "ups_on_bypass(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 54.04,
+    "q_coil_kw": 58.14,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3380160152786071,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.7057631859176525,
+    "ups_bypass": true,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g197",
+   "category": "multiple",
+   "load": "high",
+   "mode": "clear",
+   "desc": "battery degradation + UPS on static bypass, high load",
+   "expected": [
+    "battery_degradation(battery_1)",
+    "ups_on_bypass(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 98.29,
+    "q_coil_kw": 107.16,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.351272001919692,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 2.233336470648501,
+    "ups_bypass": true,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g198",
+   "category": "multiple",
+   "load": "low",
+   "mode": "clear",
+   "desc": "battery degradation + UPS on static bypass, low load",
+   "expected": [
+    "battery_degradation(battery_1)",
+    "ups_on_bypass(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 58.99,
+    "q_coil_kw": 63.46,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2681292433477789,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.653111886756031,
+    "ups_bypass": true,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g199",
+   "category": "multiple",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "CRAH fan failure + branch overload, nominal load",
+   "expected": [
+    "crah_fan_failure(crah_1)",
+    "branch_overload(rack_a06_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 71.93,
+    "q_coil_kw": 8.1,
+    "fan_health": 0.034012620115410584,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1395253222240849,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a06": 0.95
+    },
+    "battery_r_ratio": 1.044133446882414,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g200",
+   "category": "multiple",
+   "load": "high",
+   "mode": "clear",
+   "desc": "CRAH fan failure + branch overload, high load",
+   "expected": [
+    "crah_fan_failure(crah_1)",
+    "branch_overload(rack_a03_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 97.96,
+    "q_coil_kw": 11.43,
+    "fan_health": 0.057158579076629946,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3801137735420623,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a03": 0.7807899265468629
+    },
+    "battery_r_ratio": 0.9937002751674203,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g201",
+   "category": "multiple",
+   "load": "high",
+   "mode": "clear",
+   "desc": "CRAH fan failure + branch overload, high load",
+   "expected": [
+    "crah_fan_failure(crah_1)",
+    "branch_overload(rack_a05_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 96.4,
+    "q_coil_kw": 12.19,
+    "fan_health": 0.06203542513803282,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3235270391328398,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a05": 0.7703699015815237
+    },
+    "battery_r_ratio": 1.072946962159289,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g202",
+   "category": "multiple",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "CRAH fan failure + branch overload, nominal load",
+   "expected": [
+    "crah_fan_failure(crah_1)",
+    "branch_overload(rack_a01_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 72.73,
+    "q_coil_kw": 12.81,
+    "fan_health": 0.07517463348799609,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0946142105286132,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a01": 0.95
+    },
+    "battery_r_ratio": 1.0480386199343605,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g203",
+   "category": "multiple",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "CRAH fan failure + branch overload, nominal load",
+   "expected": [
+    "crah_fan_failure(crah_1)",
+    "branch_overload(rack_a04_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 82.24,
+    "q_coil_kw": 11.3,
+    "fan_health": 0.055564768220746824,
+    "chw_availability": 1.0,
+    "filter_loading": 1.110924909930883,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a04": 0.95
+    },
+    "battery_r_ratio": 1.0111963767694037,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g204",
+   "category": "multiple",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "CRAH fan failure + branch overload, nominal load",
+   "expected": [
+    "crah_fan_failure(crah_1)",
+    "branch_overload(rack_a06_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 73.8,
+    "q_coil_kw": 13.06,
+    "fan_health": 0.07474863454865707,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0746808706026911,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a06": 0.95
+    },
+    "battery_r_ratio": 1.110073816369869,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g205",
+   "category": "multiple",
+   "load": "low",
+   "mode": "clear",
+   "desc": "hot-air recirculation + server fan failure, low load",
+   "expected": [
+    "hot_air_recirculation(rack_a03)",
+    "server_fan_failure(rack_a03_s18)"
+   ],
+   "truth": {
+    "p_it_kw": 57.13,
+    "q_coil_kw": 64.46,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1922083950099935,
+    "beta_local": {
+     "rack_a03": 0.3296271256862672
+    },
+    "failed_server_fans": [
+     "rack_a03_s18"
+    ],
+    "phase_share": {},
+    "battery_r_ratio": 1.0853515757435943,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g206",
+   "category": "multiple",
+   "load": "low",
+   "mode": "clear",
+   "desc": "hot-air recirculation + server fan failure, low load",
+   "expected": [
+    "hot_air_recirculation(rack_a04)",
+    "server_fan_failure(rack_a04_s03)"
+   ],
+   "truth": {
+    "p_it_kw": 59.19,
+    "q_coil_kw": 66.85,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3629472596725505,
+    "beta_local": {
+     "rack_a04": 0.3162453398632403
+    },
+    "failed_server_fans": [
+     "rack_a04_s03"
+    ],
+    "phase_share": {},
+    "battery_r_ratio": 1.0345779236232722,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g207",
+   "category": "multiple",
+   "load": "low",
+   "mode": "clear",
+   "desc": "hot-air recirculation + server fan failure, low load",
+   "expected": [
+    "hot_air_recirculation(rack_a06)",
+    "server_fan_failure(rack_a06_s11)"
+   ],
+   "truth": {
+    "p_it_kw": 56.74,
+    "q_coil_kw": 63.68,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3942466582958781,
+    "beta_local": {
+     "rack_a06": 0.30650315496404545
+    },
+    "failed_server_fans": [
+     "rack_a06_s11"
+    ],
+    "phase_share": {},
+    "battery_r_ratio": 0.99416805032237,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g208",
+   "category": "multiple",
+   "load": "low",
+   "mode": "clear",
+   "desc": "hot-air recirculation + server fan failure, low load",
+   "expected": [
+    "hot_air_recirculation(rack_a02)",
+    "server_fan_failure(rack_a02_s16)"
+   ],
+   "truth": {
+    "p_it_kw": 56.41,
+    "q_coil_kw": 64.25,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.117865367029698,
+    "beta_local": {
+     "rack_a02": 0.37271866773558643
+    },
+    "failed_server_fans": [
+     "rack_a02_s16"
+    ],
+    "phase_share": {},
+    "battery_r_ratio": 1.047376100693086,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g209",
+   "category": "multiple",
+   "load": "high",
+   "mode": "clear",
+   "desc": "hot-air recirculation + server fan failure, high load",
+   "expected": [
+    "hot_air_recirculation(rack_a06)",
+    "server_fan_failure(rack_a06_s07)"
+   ],
+   "truth": {
+    "p_it_kw": 100.21,
+    "q_coil_kw": 116.41,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.382249054378995,
+    "beta_local": {
+     "rack_a06": 0.375962468988716
+    },
+    "failed_server_fans": [
+     "rack_a06_s07"
+    ],
+    "phase_share": {},
+    "battery_r_ratio": 1.0832196287821447,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g210",
+   "category": "multiple",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "hot-air recirculation + server fan failure, nominal load",
+   "expected": [
+    "hot_air_recirculation(rack_a02)",
+    "server_fan_failure(rack_a02_s07)"
+   ],
+   "truth": {
+    "p_it_kw": 76.35,
+    "q_coil_kw": 88.26,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0865778717895287,
+    "beta_local": {
+     "rack_a02": 0.3976092890278111
+    },
+    "failed_server_fans": [
+     "rack_a02_s07"
+    ],
+    "phase_share": {},
+    "battery_r_ratio": 0.9750439709305304,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g211",
+   "category": "noisy",
+   "load": "high",
+   "mode": "clear",
+   "desc": "chilled-water supply loss, high load, 5x sensor noise",
+   "expected": [
+    "chw_supply_loss(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 96.67,
+    "q_coil_kw": 45.87,
+    "fan_health": 1.0,
+    "chw_availability": 0.049749156754348975,
+    "filter_loading": 1.0812821260226806,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0103612005730498,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 5.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g212",
+   "category": "noisy",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "battery degradation, nominal load, 5x sensor noise",
+   "expected": [
+    "battery_degradation(battery_1)"
+   ],
+   "truth": {
+    "p_it_kw": 73.84,
+    "q_coil_kw": 79.74,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.198958753346941,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.581212391360304,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 5.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g213",
+   "category": "noisy",
+   "load": "low",
+   "mode": "clear",
+   "desc": "UPS on static bypass, low load, 5x sensor noise",
+   "expected": [
+    "ups_on_bypass(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 55.69,
+    "q_coil_kw": 59.86,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2667185133487302,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.1120807491682692,
+    "ups_bypass": true,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 5.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g214",
+   "category": "noisy",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "UPS on static bypass, nominal load, 5x sensor noise",
+   "expected": [
+    "ups_on_bypass(ups_1)"
+   ],
+   "truth": {
+    "p_it_kw": 74.9,
+    "q_coil_kw": 80.9,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3476233669170399,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9811757781580714,
+    "ups_bypass": true,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 5.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g215",
+   "category": "noisy",
+   "load": "low",
+   "mode": "clear",
+   "desc": "hot-air recirculation, low load, 5x sensor noise",
+   "expected": [
+    "hot_air_recirculation(rack_a04)"
+   ],
+   "truth": {
+    "p_it_kw": 59.39,
+    "q_coil_kw": 70.96,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1046307126681247,
+    "beta_local": {
+     "rack_a04": 0.49707767378338874
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.035727073596756,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 5.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g216",
+   "category": "noisy",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "battery degradation, nominal load, 5x sensor noise",
+   "expected": [
+    "battery_degradation(battery_1)"
+   ],
+   "truth": {
+    "p_it_kw": 78.07,
+    "q_coil_kw": 84.62,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3807117354293932,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 2.0753447399738993,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 5.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g217",
+   "category": "noisy",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "chilled-water supply loss, nominal load, 5x sensor noise",
+   "expected": [
+    "chw_supply_loss(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 74.4,
+    "q_coil_kw": 57.84,
+    "fan_health": 1.0,
+    "chw_availability": 0.07882845246564313,
+    "filter_loading": 1.3653472142042606,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0556779879880227,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 5.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g218",
+   "category": "noisy",
+   "load": "high",
+   "mode": "clear",
+   "desc": "chilled-water supply loss, high load, 5x sensor noise",
+   "expected": [
+    "chw_supply_loss(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 96.37,
+    "q_coil_kw": 43.08,
+    "fan_health": 1.0,
+    "chw_availability": 0.04806838815989152,
+    "filter_loading": 1.3703905966078518,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9585228676764896,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 5.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g219",
+   "category": "noisy",
+   "load": "high",
+   "mode": "clear",
+   "desc": "filter clogging, high load, 5x sensor noise",
+   "expected": [
+    "filter_clogging(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 98.78,
+    "q_coil_kw": 104.06,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 5.494555409980313,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0162411868803514,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 5.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g220",
+   "category": "noisy",
+   "load": "high",
+   "mode": "clear",
+   "desc": "hot-air recirculation, high load, 5x sensor noise",
+   "expected": [
+    "hot_air_recirculation(rack_a01)"
+   ],
+   "truth": {
+    "p_it_kw": 97.7,
+    "q_coil_kw": 115.66,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0799433734333597,
+    "beta_local": {
+     "rack_a01": 0.45242516233911567
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0570766487565888,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 5.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g221",
+   "category": "noisy",
+   "load": "low",
+   "mode": "clear",
+   "desc": "hot-air recirculation, low load, 5x sensor noise",
+   "expected": [
+    "hot_air_recirculation(rack_a06)"
+   ],
+   "truth": {
+    "p_it_kw": 56.35,
+    "q_coil_kw": 66.1,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1320294193873504,
+    "beta_local": {
+     "rack_a06": 0.4558156199079359
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9699884164002389,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 5.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g222",
+   "category": "noisy",
+   "load": "high",
+   "mode": "clear",
+   "desc": "server fan failure, high load, 5x sensor noise",
+   "expected": [
+    "server_fan_failure(rack_a03_s11)"
+   ],
+   "truth": {
+    "p_it_kw": 101.07,
+    "q_coil_kw": 110.02,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.215946298898369,
+    "beta_local": {},
+    "failed_server_fans": [
+     "rack_a03_s11"
+    ],
+    "phase_share": {},
+    "battery_r_ratio": 1.1154981386939085,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 5.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g223",
+   "category": "noisy",
+   "load": "high",
+   "mode": "clear",
+   "desc": "CRAH fan failure, high load, 5x sensor noise",
+   "expected": [
+    "crah_fan_failure(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 101.03,
+    "q_coil_kw": 8.18,
+    "fan_health": 0.0284794025246206,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0408794637143621,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.977239362282805,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 5.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g224",
+   "category": "noisy",
+   "load": "low",
+   "mode": "clear",
+   "desc": "filter clogging, low load, 5x sensor noise",
+   "expected": [
+    "filter_clogging(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 60.69,
+    "q_coil_kw": 67.26,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 4.539798763181851,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9990103425044901,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 5.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g225",
+   "category": "noisy",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "CRAH fan failure, nominal load, 5x sensor noise",
+   "expected": [
+    "crah_fan_failure(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 80.32,
+    "q_coil_kw": 11.19,
+    "fan_health": 0.056393855534036044,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3480926196008314,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9840769172578147,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 5.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g226",
+   "category": "incomplete",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "chilled-water supply loss, nominal load, 15% of readings missing",
+   "expected": [
+    "chw_supply_loss(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 77.47,
+    "q_coil_kw": 67.8,
+    "fan_health": 1.0,
+    "chw_availability": 0.10319649709677017,
+    "filter_loading": 1.2554075947808196,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0525907201185807,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.15
+   }
+  },
+  {
+   "id": "g227",
+   "category": "incomplete",
+   "load": "low",
+   "mode": "clear",
+   "desc": "battery degradation, low load, 15% of readings missing",
+   "expected": [
+    "battery_degradation(battery_1)"
+   ],
+   "truth": {
+    "p_it_kw": 60.34,
+    "q_coil_kw": 64.9,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.091817700075105,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.524302649121851,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.15
+   }
+  },
+  {
+   "id": "g228",
+   "category": "incomplete",
+   "load": "high",
+   "mode": "clear",
+   "desc": "hot-air recirculation, high load, 15% of readings missing",
+   "expected": [
+    "hot_air_recirculation(rack_a02)"
+   ],
+   "truth": {
+    "p_it_kw": 97.17,
+    "q_coil_kw": 109.38,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1616301047146185,
+    "beta_local": {
+     "rack_a02": 0.2579642608304694
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0685239514163032,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.15
+   }
+  },
+  {
+   "id": "g229",
+   "category": "incomplete",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "server fan failure, nominal load, 15% of readings missing",
+   "expected": [
+    "server_fan_failure(rack_a01_s14)"
+   ],
+   "truth": {
+    "p_it_kw": 81.26,
+    "q_coil_kw": 87.94,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1610915599639262,
+    "beta_local": {},
+    "failed_server_fans": [
+     "rack_a01_s14"
+    ],
+    "phase_share": {},
+    "battery_r_ratio": 1.0999639176988714,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.15
+   }
+  },
+  {
+   "id": "g230",
+   "category": "incomplete",
+   "load": "high",
+   "mode": "clear",
+   "desc": "CRAH fan failure, high load, 15% of readings missing",
+   "expected": [
+    "crah_fan_failure(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 96.79,
+    "q_coil_kw": 8.96,
+    "fan_health": 0.03292821290359197,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0185298427386815,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9900954679098628,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.15
+   }
+  },
+  {
+   "id": "g231",
+   "category": "incomplete",
+   "load": "high",
+   "mode": "clear",
+   "desc": "branch overload, high load, 15% of readings missing",
+   "expected": [
+    "branch_overload(rack_a05_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 99.88,
+    "q_coil_kw": 108.42,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0656920582618872,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a05": 0.7730259284834894
+    },
+    "battery_r_ratio": 1.0953490872378622,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.15
+   }
+  },
+  {
+   "id": "g232",
+   "category": "incomplete",
+   "load": "low",
+   "mode": "clear",
+   "desc": "CRAH fan failure, low load, 15% of readings missing",
+   "expected": [
+    "crah_fan_failure(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 59.54,
+    "q_coil_kw": 5.76,
+    "fan_health": 0.027302351474472342,
+    "chw_availability": 1.0,
+    "filter_loading": 1.155050779524026,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0602888403882251,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.15
+   }
+  },
+  {
+   "id": "g233",
+   "category": "incomplete",
+   "load": "low",
+   "mode": "clear",
+   "desc": "Normal operation, low load, 15% of readings missing",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 55.68,
+    "q_coil_kw": 59.84,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.101232934424336,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.1142977854893434,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.15
+   }
+  },
+  {
+   "id": "g234",
+   "category": "incomplete",
+   "load": "high",
+   "mode": "clear",
+   "desc": "filter clogging, high load, 15% of readings missing",
+   "expected": [
+    "filter_clogging(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 101.24,
+    "q_coil_kw": 106.56,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 5.179874702205366,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9511914025905805,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.15
+   }
+  },
+  {
+   "id": "g235",
+   "category": "incomplete",
+   "load": "high",
+   "mode": "clear",
+   "desc": "CRAH fan failure, high load, 15% of readings missing",
+   "expected": [
+    "crah_fan_failure(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 96.29,
+    "q_coil_kw": 17.1,
+    "fan_health": 0.08799190734469152,
+    "chw_availability": 1.0,
+    "filter_loading": 1.387796035955382,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.107400372594002,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.15
+   }
+  },
+  {
+   "id": "g236",
+   "category": "incomplete",
+   "load": "high",
+   "mode": "clear",
+   "desc": "branch overload, high load, 15% of readings missing",
+   "expected": [
+    "branch_overload(rack_a02_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 102.38,
+    "q_coil_kw": 111.47,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.16869945907647,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a02": 0.7770406196083544
+    },
+    "battery_r_ratio": 1.005357397124635,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.15
+   }
+  },
+  {
+   "id": "g237",
+   "category": "incomplete",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "branch overload, nominal load, 15% of readings missing",
+   "expected": [
+    "branch_overload(rack_a03_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 72.7,
+    "q_coil_kw": 78.46,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1360259740676981,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a03": 0.95
+    },
+    "battery_r_ratio": 1.0282301838435428,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.15
+   }
+  },
+  {
+   "id": "g238",
+   "category": "incomplete",
+   "load": "high",
+   "mode": "clear",
+   "desc": "chilled-water supply loss, high load, 15% of readings missing",
+   "expected": [
+    "chw_supply_loss(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 98.73,
+    "q_coil_kw": 66.81,
+    "fan_health": 1.0,
+    "chw_availability": 0.10042417265062735,
+    "filter_loading": 1.343484648224986,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0715898335614595,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.15
+   }
+  },
+  {
+   "id": "g239",
+   "category": "incomplete",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "hot-air recirculation, nominal load, 15% of readings missing",
+   "expected": [
+    "hot_air_recirculation(rack_a03)"
+   ],
+   "truth": {
+    "p_it_kw": 81.91,
+    "q_coil_kw": 92.26,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3803801156483884,
+    "beta_local": {
+     "rack_a03": 0.2776719194750248
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0530146289848288,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.15
+   }
+  },
+  {
+   "id": "g240",
+   "category": "incomplete",
+   "load": "nominal",
+   "mode": "clear",
+   "desc": "Normal operation, nominal load, 15% of readings missing",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 74.12,
+    "q_coil_kw": 80.02,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2740300816400827,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9940667617889997,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.15
+   }
+  },
+  {
+   "id": "g241",
+   "category": "borderline",
+   "load": "low",
+   "mode": "borderline",
+   "desc": "CRAH fan failure, low load, near the detection threshold",
+   "expected": [
+    "crah_fan_failure(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 56.46,
+    "q_coil_kw": 37.88,
+    "fan_health": 0.3775238510499834,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3260777354503253,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0554234645331968,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g242",
+   "category": "borderline",
+   "load": "low",
+   "mode": "borderline",
+   "desc": "chilled-water supply loss, low load, near the detection threshold",
+   "expected": [
+    "chw_supply_loss(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 58.78,
+    "q_coil_kw": 63.29,
+    "fan_health": 1.0,
+    "chw_availability": 0.289889324774358,
+    "filter_loading": 1.3796696078244828,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9884131727937113,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g243",
+   "category": "borderline",
+   "load": "low",
+   "mode": "borderline",
+   "desc": "filter clogging, low load, near the detection threshold",
+   "expected": [
+    "filter_clogging(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 56.44,
+    "q_coil_kw": 61.11,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 2.1415847583288086,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0452713126668698,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g244",
+   "category": "borderline",
+   "load": "high",
+   "mode": "borderline",
+   "desc": "hot-air recirculation, high load, near the detection threshold",
+   "expected": [
+    "hot_air_recirculation(rack_a04)"
+   ],
+   "truth": {
+    "p_it_kw": 101.94,
+    "q_coil_kw": 113.57,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2604386502440854,
+    "beta_local": {
+     "rack_a04": 0.17744873636130826
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9856706325267134,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g245",
+   "category": "borderline",
+   "load": "high",
+   "mode": "borderline",
+   "desc": "branch overload, high load, near the detection threshold",
+   "expected": [
+    "branch_overload(rack_a03_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 99.5,
+    "q_coil_kw": 108.6,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.322817980251584,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a03": 0.6693370444684864
+    },
+    "battery_r_ratio": 1.0503341463545637,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g246",
+   "category": "borderline",
+   "load": "high",
+   "mode": "borderline",
+   "desc": "battery degradation, high load, near the detection threshold",
+   "expected": [
+    "battery_degradation(battery_1)"
+   ],
+   "truth": {
+    "p_it_kw": 99.39,
+    "q_coil_kw": 108.17,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.142565795158427,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.2621564531589384,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g247",
+   "category": "borderline",
+   "load": "high",
+   "mode": "borderline",
+   "desc": "Normal operation, high load, near the detection threshold",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 99.61,
+    "q_coil_kw": 108.55,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.3339619371816018,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9810164033301584,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g248",
+   "category": "borderline",
+   "load": "nominal",
+   "mode": "borderline",
+   "desc": "CRAH fan failure, nominal load, near the detection threshold",
+   "expected": [
+    "crah_fan_failure(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 81.2,
+    "q_coil_kw": 49.85,
+    "fan_health": 0.33159982314966857,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0388887966984388,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9824233357172462,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g249",
+   "category": "borderline",
+   "load": "nominal",
+   "mode": "borderline",
+   "desc": "chilled-water supply loss, nominal load, near the detection threshold",
+   "expected": [
+    "chw_supply_loss(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 74.71,
+    "q_coil_kw": 80.72,
+    "fan_health": 1.0,
+    "chw_availability": 0.3670828969978676,
+    "filter_loading": 1.3592604510670379,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0102877199569555,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g250",
+   "category": "borderline",
+   "load": "high",
+   "mode": "borderline",
+   "desc": "filter clogging, high load, near the detection threshold",
+   "expected": [
+    "filter_clogging(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 99.02,
+    "q_coil_kw": 109.42,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 2.347442242068883,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0088640951836363,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g251",
+   "category": "borderline",
+   "load": "high",
+   "mode": "borderline",
+   "desc": "hot-air recirculation, high load, near the detection threshold",
+   "expected": [
+    "hot_air_recirculation(rack_a05)"
+   ],
+   "truth": {
+    "p_it_kw": 101.33,
+    "q_coil_kw": 112.62,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1535098280826177,
+    "beta_local": {
+     "rack_a05": 0.17651152472736936
+    },
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9645229011883462,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g252",
+   "category": "borderline",
+   "load": "high",
+   "mode": "borderline",
+   "desc": "branch overload, high load, near the detection threshold",
+   "expected": [
+    "branch_overload(rack_a02_a_l1)"
+   ],
+   "truth": {
+    "p_it_kw": 96.51,
+    "q_coil_kw": 105.04,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.2824659532387652,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {
+     "rack_a02": 0.6709757022976397
+    },
+    "battery_r_ratio": 0.9988572995326063,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g253",
+   "category": "borderline",
+   "load": "nominal",
+   "mode": "borderline",
+   "desc": "battery degradation, nominal load, near the detection threshold",
+   "expected": [
+    "battery_degradation(battery_1)"
+   ],
+   "truth": {
+    "p_it_kw": 76.56,
+    "q_coil_kw": 82.66,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.0942820855898698,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.3198914760695104,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g254",
+   "category": "borderline",
+   "load": "high",
+   "mode": "borderline",
+   "desc": "Normal operation, high load, near the detection threshold",
+   "expected": [
+    "normal"
+   ],
+   "truth": {
+    "p_it_kw": 101.13,
+    "q_coil_kw": 109.92,
+    "fan_health": 1.0,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1308331092633068,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 1.0236182842696704,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  },
+  {
+   "id": "g255",
+   "category": "borderline",
+   "load": "high",
+   "mode": "borderline",
+   "desc": "CRAH fan failure, high load, near the detection threshold",
+   "expected": [
+    "crah_fan_failure(crah_1)"
+   ],
+   "truth": {
+    "p_it_kw": 101.85,
+    "q_coil_kw": 63.13,
+    "fan_health": 0.34072357492496874,
+    "chw_availability": 1.0,
+    "filter_loading": 1.1211702309224445,
+    "beta_local": {},
+    "failed_server_fans": [],
+    "phase_share": {},
+    "battery_r_ratio": 0.9768983345971697,
+    "ups_bypass": false,
+    "biases": {},
+    "stale": null,
+    "noise_scale": 1.0,
+    "drop_fraction": 0.0
+   }
+  }
+ ]
+}

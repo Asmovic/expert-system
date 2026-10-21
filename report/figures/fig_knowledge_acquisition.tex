@@ -1,0 +1,32 @@
+% Figure 3: knowledge-acquisition workflow.
+\begin{tikzpicture}[x=1cm, y=1cm]
+  \node[grouplabel] at (1.6,0.95) {Sources};
+  \node[data=3.1cm] (s1) at (1.6,0) {Standards\\ \footnotesize ASHRAE TC 9.9, electrical code};
+  \node[data=3.1cm] (s2) at (1.6,-1.5) {Literature\\ \footnotesize handbooks, journal papers};
+  \node[data=3.1cm] (s3) at (1.6,-3.0) {Manufacturer data\\ \footnotesize filters, batteries, UPS};
+  \node[data=3.1cm] (s4) at (1.6,-4.5) {Engineering assumptions\\ \footnotesize stated and justified};
+
+  \node[grouplabel] at (5.6,0.95) {Knowledge};
+  \node[kb=3.1cm] (k1) at (5.6,0) {Envelopes and thresholds};
+  \node[kb=3.1cm] (k2) at (5.6,-1.5) {Failure mechanisms and signatures};
+  \node[kb=3.1cm] (k3) at (5.6,-3.0) {Physical relations and balances};
+  \node[kb=3.1cm] (k4) at (5.6,-4.5) {Corrective actions};
+
+  \node[grouplabel] at (9.6,0.95) {Prolog representation};
+  \node[kb=3.1cm] (r1) at (9.6,0) {\texttt{threshold/4}\\ with \texttt{source/3}};
+  \node[kb=3.1cm] (r2) at (9.6,-1.5) {\texttt{drule/4}, \texttt{evidence/3}, \texttt{requires/2}};
+  \node[kb=3.1cm] (r3) at (9.6,-3.0) {calculations, \texttt{arr/3}, \texttt{fm/2}};
+  \node[kb=3.1cm] (r4) at (9.6,-4.5) {\texttt{maintenance/5}};
+
+  \node[reason=2.6cm, minimum height=2.2cm] (test) at (13.5,-1.5) {Calibration tests\\ \footnotesize simulated cases, signature profiling};
+  \node[out=2.6cm] (table) at (13.5,-4.5) {Provenance tables\\ \scriptsize \texttt{07\_rule\_table.md}};
+
+  \foreach \i in {1,2,3,4} { \draw[flow] (s\i) -- (k\i); \draw[flow] (k\i) -- (r\i); }
+  \draw[flow] (s1.east) -- ++(0.3,0) |- (k2.west);
+  \draw[flow] (r1.east) -- ++(0.35,0) |- (test.west);
+  \draw[flow] (r2.east) -- (test.west |- r2.east);
+  \draw[flow] (r3.east) -- ++(0.35,0) |- (test.west);
+  \draw[flow] (r4) -- (table);
+  \draw[flow] (test) -- (table);
+  \draw[feedback] (test.north) -- (13.5,1.55) -- node[tag, above] {revise when the physics disagrees} (6.8,1.55) -- (k1.north -| 6.8,0);
+\end{tikzpicture}

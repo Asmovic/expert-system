@@ -1,0 +1,47 @@
+% report/figures/styles.tex - shared TikZ styles for every diagram.
+% Needs: \usepackage{tikz} and \usetikzlibrary{positioning,arrows.meta,shapes,fit,calc,backgrounds}
+%
+% Colour encodes the role of a box, using the validated categorical palette:
+% grey for data, blue for knowledge, orange for reasoning, aqua for outputs.
+% Every box also carries a text label, so colour is never the only cue.
+
+\definecolor{inkMain}{HTML}{262624}
+\definecolor{inkSoft}{HTML}{6B6A64}
+\definecolor{accBlue}{HTML}{2A78D6}
+\definecolor{accOrange}{HTML}{EB6834}
+\definecolor{accAqua}{HTML}{1BAF7A}
+
+\tikzset{
+  base/.style={draw=inkSoft, line width=0.5pt, rounded corners=2pt, align=center,
+               font=\small, text=inkMain, inner sep=3pt, minimum height=8mm},
+  box/.style={base, text width=#1},
+  box/.default=3cm,
+  data/.style={box=#1, fill=black!5},
+  data/.default=3cm,
+  kb/.style={box=#1, fill=accBlue!10, draw=accBlue!80!black},
+  kb/.default=3cm,
+  reason/.style={box=#1, fill=accOrange!10, draw=accOrange!85!black},
+  reason/.default=3cm,
+  out/.style={box=#1, fill=accAqua!12, draw=accAqua!80!black},
+  out/.default=3cm,
+  ext/.style={box=#1, fill=white, dashed},
+  ext/.default=3cm,
+  decision/.style={diamond, aspect=2.2, draw=accOrange!85!black, fill=accOrange!6,
+                   line width=0.5pt, align=center, font=\footnotesize, text=inkMain,
+                   inner sep=1pt, text width=#1},
+  decision/.default=2.6cm,
+  flow/.style={-{Stealth[length=2mm,width=1.6mm]}, draw=inkSoft, line width=0.6pt},
+  uses/.style={flow, dashed},
+  feedback/.style={flow, dashed, draw=accOrange!85!black},
+  air/.style={-{Stealth[length=2.2mm,width=1.8mm]}, line width=1.1pt},
+  cold/.style={air, draw=accBlue},
+  hot/.style={air, draw=accOrange},
+  water/.style={-{Stealth[length=1.8mm]}, line width=0.8pt, draw=accBlue!70!black},
+  power/.style={line width=0.9pt, draw=inkMain},
+  note/.style={font=\footnotesize\itshape, text=inkSoft, align=center},
+  tag/.style={font=\scriptsize, text=inkSoft},
+  group/.style={draw=inkSoft, dashed, rounded corners=3pt, inner sep=5pt},
+  grouplabel/.style={font=\footnotesize\bfseries, text=inkSoft},
+  sensor/.style={circle, draw=accBlue!80!black, fill=white, line width=0.5pt,
+                 inner sep=0pt, minimum size=3.6mm, font=\scriptsize\bfseries, text=accBlue!80!black},
+}

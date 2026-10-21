@@ -1,0 +1,207 @@
+\chapter{Assessment Framework and Research Deliverables}
+\label{ch:assessment_and_deliverables}
+
+This chapter maps the project against the assessment criteria and minimum requirements of the project framework (Sections~\ref{sec:criteria} and~\ref{sec:requirements}), states its research contributions (Section~\ref{sec:contributions}), indexes the required tables, figures and deliverables (Sections~\ref{sec:tables-figures} and~\ref{sec:deliverables}), and sets out its limitations and the improvements they suggest (Sections~\ref{sec:limitations} and~\ref{sec:future}). Where a requirement is not yet fully met, this chapter says so.
+
+% ---------------------------------------------------------------------------
+\section{Assessment Criteria}
+\label{sec:criteria}
+
+The framework lists twelve criteria. Table~\ref{tab:criteria} gives, for each, where the evidence is and what it shows.
+
+\begin{small}
+\begin{longtable}{L{3.2cm}L{3.6cm}L{7.2cm}}
+  \caption{Evidence against the assessment criteria.}\label{tab:criteria}\\
+  \toprule
+  Criterion & Evidence & What it shows \\
+  \midrule
+  \endfirsthead
+  \toprule
+  Criterion & Evidence & What it shows \\
+  \midrule
+  \endhead
+  Engineering correctness & Sections~\ref{sec:engineering}, \ref{sec:maths}, \ref{sec:validation} & Physical model of the row with 60 tagged equations; simulator checked against hand calculations; three knowledge errors found and corrected against the physics \\
+  Depth of KRR treatment & Sections~\ref{sec:krr} to~\ref{sec:diagnosis-theory} & Horn clauses, negation as failure and the closed-world assumption; formal deductive, abductive and consistency-based diagnosis with fault models \\
+  Quality of knowledge representation & Section~\ref{sec:kr-scheme}; Tables~\ref{tab:kr-layers}, \ref{tab:kb-size} & Seven layers; rules stored as data with identifiers and provenance; graded symptoms that treat missing data as unknown \\
+  Correctness of Prolog rules & Table~\ref{tab:rules}; Section~\ref{sec:validation} & Every rule run against the calibration split before acceptance; all single-label held-out cases diagnosed correctly \\
+  Diagnostic accuracy & Tables~\ref{tab:modes-holdout}, \ref{tab:classes} & 91.0\% to 94.5\% exact match on unseen data across the four configurations; macro F1 up to 0.958 \\
+  Multiple-fault capability & Tables~\ref{tab:categories-holdout}, \ref{tab:sens-multi} & 29 or 30 of 30 multiple-fault cases; precision near 1 for up to four simultaneous faults \\
+  Robustness to imperfect evidence & Tables~\ref{tab:sens-noise}, \ref{tab:sens-missing}, \ref{tab:sens-bias} & Graceful degradation under noise and missing data; sensor biases of 3\,K and more detected \\
+  Explanation quality & Section~\ref{sec:explanation}; Listing~\ref{lst:why} & ExplainabilityRate of 100\%; every element the framework requires shown in a real trace; not yet assessed by human users \\
+  Maintenance-plan validity & Table~\ref{tab:maintenance}; Section~\ref{sec:planner} & A sourced plan for every diagnosis; plan interactions ordered; PlanValidity 85\% to 94\% \\
+  Computational tractability & Tables~\ref{tab:modes-holdout}, \ref{tab:sens-multi} & About 1\,ms per case; a few milliseconds with four simultaneous faults \\
+  Documentation quality & Chapters~\ref{ch:design_and_development} and~\ref{ch:software_and_reproducibility} & Design documents for every stage; rule, threshold, provenance, maintenance and result tables generated from the code \\
+  Reproducibility & Section~\ref{sec:reproducibility} & Datasets regenerate exactly from their seeds; a 14-check script reproduces every reported count \\
+  \bottomrule
+\end{longtable}
+\end{small}
+
+% ---------------------------------------------------------------------------
+\section{Minimum Technical Requirements}
+\label{sec:requirements}
+
+Table~\ref{tab:requirements} checks the minimum technical requirements of the framework. Two are only partly met, and both concern the bibliography rather than the system.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Minimum technical requirements.}
+  \label{tab:requirements}
+  \begin{tabular}{L{4.0cm}L{2.5cm}L{7.5cm}}
+    \toprule
+    Requirement & Status & Evidence \\
+    \midrule
+    Expert system in Prolog & Met & All reasoning in SWI-Prolog; Python only generates data and formats results \\
+    Explicit mathematical model & Met & Section~\ref{sec:maths} \\
+    At least 40 equations & Met & 60 tagged engineering equations, plus the logical and evaluation formulas \\
+    Engineering-justified fault classes & Met & Table~\ref{tab:taxonomy} and Section~\ref{sec:faults} \\
+    Deductive, abductive and consistency-based reasoning & Met & Sections~\ref{sec:deductive} to~\ref{sec:cbd} \\
+    Explanation & Met & Section~\ref{sec:explanation} \\
+    Maintenance recommendation & Met & Section~\ref{sec:planner}; Table~\ref{tab:maintenance} \\
+    Documented dataset & Met & Section~\ref{sec:dataset} \\
+    Normal, single and multiple faults & Met & Table~\ref{tab:test-categories} \\
+    Noisy and incomplete evidence & Met & Table~\ref{tab:test-categories}; Section~\ref{sec:sensitivity} \\
+    Instrumentation faults & Met & Sensor bias and telemetry dropout classes \\
+    Quantitative evaluation & Met & Section~\ref{sec:results} \\
+    Software documentation & Met & Chapter~\ref{ch:software_and_reproducibility} \\
+    Reproducibility & Met & Section~\ref{sec:reproducibility} \\
+    TikZ/LaTeX diagrams & Met & Eight TikZ diagrams and five pgfplots charts \\
+    Complete Prolog source & Met & Included in full \\
+    70 to 90 scholarly sources & \textbf{Partly met} & 69 entries, 25 of them checked against publisher or library records during writing; all still to be verified by the author \\
+    APA 7th edition via EndNote & \textbf{Partly met} & APA 7th edition style applied; the EndNote library and its export are still to be created \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% ---------------------------------------------------------------------------
+\section{Research Contributions}
+\label{sec:contributions}
+
+The individual techniques used in this project are established in the literature. Its contributions lie in how they are combined and applied to data centre cooling and power infrastructure, and in the evidence it provides about that combination.
+
+\begin{enumerate}
+  \item \textbf{An explainable hybrid diagnostic system for data centre infrastructure.} The system combines deductive rules, parsimonious-covering abduction and consistency-based diagnosis with fault models, as ``abduction proposes, consistency disposes''. It diagnoses eight equipment faults and two instrumentation faults across the cooling and power path, and explains every conclusion.
+  \item \textbf{Noise-adaptive graded evidence from in-case redundancy.} Symptom evidence is graded against measurement noise estimated from the case itself: from the robust spread of sensors that see the same air, and from the redundancy of the rack power balances. At four times the nominal noise, this lifts exact-match accuracy from 42\% to 73\% without any retuning.
+  \item \textbf{Separating sensor faults from equipment faults.} Treating sensors as components with fault models, and accepting a sensor-fault hypothesis only when assuming it restores an energy balance (Equation~\eqref{eq:e41b}), separates sensor faults from equipment faults that produce similar symptoms. Every single sensor fault in the held-out split is diagnosed correctly.
+  \item \textbf{A quantified comparison of the three reasoning modes.} The four configurations required by the framework were compared on identical data and under controlled noise, missing data, multiple faults, sensor bias and threshold changes. The comparison shows where each mode helps and where it costs accuracy, including the fragility of consistency checking to a mis-set redundancy relation.
+  \item \textbf{A physics-based test methodology for knowledge validation.} Injecting faults into a physical model rather than into readings, with separate calibration and held-out splits, exposed errors in the knowledge that hand-made cases did not, and guards the reported results against tuning bias.
+  \item \textbf{Documentation that cannot drift from the code.} Rule, threshold, provenance, maintenance and result tables are generated from the knowledge base and the test runs, and a reproduction script checks every reported count.
+\end{enumerate}
+
+% ---------------------------------------------------------------------------
+\section{Required Tables and Figures}
+\label{sec:tables-figures}
+
+The framework lists the tables and figures a report should contain. Table~\ref{tab:required} shows where each one is.
+
+\begin{small}
+\begin{longtable}{L{5.6cm}L{8.4cm}}
+  \caption{Index of the required tables and figures.}\label{tab:required}\\
+  \toprule
+  Required item & Location \\
+  \midrule
+  \endfirsthead
+  \toprule
+  Required item & Location \\
+  \midrule
+  \endhead
+  Fault taxonomy table & Table~\ref{tab:taxonomy} \\
+  Observation-variable dictionary & Table~\ref{tab:variables} \\
+  Engineering-equation dictionary & Section~\ref{sec:maths}; nomenclature in Table~\ref{tab:nomenclature} \\
+  Predicate and knowledge-representation table & Tables~\ref{tab:kr-layers}, \ref{tab:kb-size} and~\ref{tab:predicates} \\
+  Diagnostic-rule table & Table~\ref{tab:rules} \\
+  Rule-provenance table & Tables~\ref{tab:thresholds} and~\ref{tab:provenance} \\
+  Dataset and test-case table & Tables~\ref{tab:datasets} and~\ref{tab:test-categories} \\
+  Confusion matrix & Table~\ref{tab:confusion} \\
+  Performance metrics & Tables~\ref{tab:modes-holdout}, \ref{tab:modes-calibration} and~\ref{tab:classes} \\
+  Explanation-quality assessment & ExplainabilityRate in Table~\ref{tab:modes-holdout}; trace in Listing~\ref{lst:why} \\
+  Maintenance-action mapping & Table~\ref{tab:maintenance} \\
+  Comparison of reasoning modes & Tables~\ref{tab:modes-holdout} and~\ref{tab:categories-holdout}; Section~\ref{sec:sensitivity} \\
+  Industrial system schematic & Figure~\ref{fig:system} \\
+  Expert-system architecture & Figure~\ref{fig:architecture} \\
+  Knowledge-acquisition workflow & Figure~\ref{fig:acquisition} \\
+  Fault-propagation structure & Figure~\ref{fig:propagation} \\
+  Diagnostic reasoning workflow & Figure~\ref{fig:diagnostic} \\
+  Explanation-generation workflow & Figure~\ref{fig:explanation} \\
+  Maintenance-planning workflow & Figure~\ref{fig:maintenance} \\
+  Experimental and evaluation workflow & Figure~\ref{fig:evaluation} \\
+  \bottomrule
+\end{longtable}
+\end{small}
+
+% ---------------------------------------------------------------------------
+\section{Software Deliverables}
+\label{sec:deliverables}
+
+Table~\ref{tab:deliverables} maps the ten deliverables of the framework to the submitted files.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Deliverables.}
+  \label{tab:deliverables}
+  \begin{tabular}{L{4.6cm}L{9.4cm}}
+    \toprule
+    Deliverable & Files \\
+    \midrule
+    Final report & \texttt{report/main.pdf}, built from \texttt{report/} \\
+    Complete Prolog source code & \texttt{main.pl}, \texttt{run.pl}, \texttt{kb/}, \texttt{engine/} \\
+    Documented knowledge base & \texttt{kb/} with comments; generated tables in Chapter~\ref{ch:design_and_development}; \texttt{docs/07\_rule\_table.md} \\
+    Dataset and data dictionary & \texttt{data/} as Prolog, CSV and JSON; Table~\ref{tab:variables}; \texttt{docs/06\_dataset\_and\_simulator.md} \\
+    Test-case suite & \texttt{data/cases.pl}, the calibration and held-out splits, \texttt{tests/run\_suite.pl} \\
+    Evaluation results & \texttt{docs/08\_evaluation\_results.md}, \texttt{docs/10\_sensitivity\_results.md}, \texttt{data/sweeps/results.json} \\
+    Explanation traces & \texttt{why/1} for any case; \texttt{report/listings/why\_h188.txt} \\
+    Corrective-maintenance outputs & Part of every \texttt{why/1} trace; Table~\ref{tab:maintenance} \\
+    Software-development documentation & Chapter~\ref{ch:software_and_reproducibility}; \texttt{docs/01} to \texttt{docs/10}; \texttt{README.md} \\
+    Reproducibility instructions & Section~\ref{sec:reproducibility}; \texttt{tests/reproduce.py}; \texttt{README.md} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% ---------------------------------------------------------------------------
+\section{Limitations}
+\label{sec:limitations}
+
+\paragraph{Data and validation.}
+\begin{itemize}
+  \item Every test case is synthetic. The knowledge base and the simulator rest on the same engineering model, so agreement between them shows internal consistency, not accuracy on a real data centre.
+  \item The model is steady state. Real faults develop over time, and a chilled-water loss, for example, heats a room over minutes.
+  \item The scope is one row with one cooling unit. Humidity, the chiller plant and the generator are outside the boundary.
+\end{itemize}
+
+\paragraph{Knowledge.}
+\begin{itemize}
+  \item 17 of the 24 sources in the knowledge base are engineering assumptions rather than citations, and 36 of the 47 rules rest on one. The sensitivity analysis shows that the results are robust to moderate changes in them, but each still needs a source or a written justification.
+  \item The confidence weights of the causal knowledge were set by engineering judgement and not fitted to data. Confidence is a ranking, not a probability.
+  \item One physical interaction is not modelled: a failed server fan inside a recirculating rack reduces the exhaust stratification.
+\end{itemize}
+
+\paragraph{Reasoning.}
+\begin{itemize}
+  \item Under heavy noise, consistency checking can turn a chance violation of a balance into a reported sensor fault, which lowers sensor-fault precision to 0.656.
+  \item A wrongly set redundancy-relation threshold acts as a hard constraint and can corrupt every diagnosis of the complete system.
+  \item The noise of the cooling-unit instruments is inferred from the temperature sensors, which assumes that they degrade together.
+  \item Explanations and diagnoses are capped at four simultaneous faults.
+\end{itemize}
+
+\paragraph{Evaluation and reporting.}
+\begin{itemize}
+  \item Explanation quality was assessed by criteria, not by maintenance engineers using the system.
+  \item Reasoning times were measured on one machine.
+  \item The bibliography has 69 entries, one short of the recommended range, and every entry still has to be verified by the author (Table~\ref{tab:requirements}).
+\end{itemize}
+
+% ---------------------------------------------------------------------------
+\section{Future Improvements}
+\label{sec:future}
+
+The limitations suggest seven improvements, roughly in order of importance:
+\begin{enumerate}
+  \item \textbf{Validation on measured data,} ideally logged telemetry from a real facility with recorded faults, to test the knowledge against behaviour outside the shared model.
+  \item \textbf{Time-series reasoning.} Repeated readings with the noise filter of Equation E54 would reduce false findings under noise, and would let the system recognise faults by how they develop.
+  \item \textbf{Sources for every assumption,} or, where none exists, thresholds estimated from normal operating data with stated confidence.
+  \item \textbf{Graded consistency checking,} in which a relation's violation counts in proportion to its evidence strength, so that one marginal violation cannot veto a well-supported explanation.
+  \item \textbf{A wider scope:} several rows and cooling units, humidity, and the chiller plant.
+  \item \textbf{User evaluation of explanations} by data centre maintenance engineers.
+  \item \textbf{Integration with live monitoring,} so that diagnoses and plans are produced as telemetry arrives.
+\end{enumerate}

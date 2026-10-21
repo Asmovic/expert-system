@@ -1,0 +1,15 @@
+% Figure 7: corrective-maintenance planning workflow.
+\begin{tikzpicture}[x=1cm, y=1cm]
+  \node[out=3.4cm] (lab) at (-0.5,0) {Diagnosed fault labels\\ \footnotesize e.g.\ a branch overload on phase A1 of rack A02};
+  \node[reason=3.4cm] (map) at (4.4,0) {Split each label into fault class and entity};
+  \node[kb=3.4cm] (kb) at (8.8,0) {Look up \texttt{maintenance/5}\\ \footnotesize priority, actions, rationale, source};
+  \node[kb=3.4cm] (int) at (8.8,-2.2) {Check \texttt{\footnotesize plan\_interaction/3} for every pair of labels};
+  \node[out=3.4cm] (plan) at (4.4,-2.2) {Ordered work plan\\ \footnotesize repairs that others depend on come first};
+  \node[data=3.4cm] (eval) at (-0.5,-2.2) {PlanValidity\\ \footnotesize does each plan address a fault really present?};
+
+  \draw[flow] (lab) -- (map);
+  \draw[flow] (map) -- (kb);
+  \draw[flow] (kb) -- (int);
+  \draw[flow] (int) -- (plan);
+  \draw[uses] (plan) -- node[tag, above] {evaluated} (eval);
+\end{tikzpicture}

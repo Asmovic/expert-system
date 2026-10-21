@@ -1,0 +1,689 @@
+\chapter{Theoretical Foundation and Knowledge Representation}
+\label{ch:theory_and_kr}
+
+This chapter sets out the engineering knowledge that the expert system reasons over and the formal machinery it reasons with. It begins with a review of the literature that the project draws on (Section~\ref{sec:litreview}). It then describes the physical system and how it fails (Sections~\ref{sec:engineering} and~\ref{sec:faults}). It then introduces the foundations of knowledge representation and reasoning (Section~\ref{sec:krr}), the representation scheme used in this project (Section~\ref{sec:kr-scheme}) and the three theories of diagnosis that the system implements (Section~\ref{sec:diagnosis-theory}). Section~\ref{sec:maths} gives the engineering and logical model in full, and Section~\ref{sec:acquisition} explains where the knowledge came from.
+
+% ---------------------------------------------------------------------------
+\section{Literature Review}
+\label{sec:litreview}
+
+The review is organised around the twelve themes of the project framework, from the engineering system to the gaps that motivate this project. For each theme it asks what the literature establishes and what this project takes from it. Table~\ref{tab:traceability} at the end traces the most important sources through to the rules, predicates and tests that use them.
+
+\subsection{Data centre cooling and power}
+
+Data centres are significant consumers of electricity. Estimates for the United States \parencite{shehabi2016} and the world \parencite{masanet2020} put their share at around 2\% and 1\% respectively, and \textcite{masanet2020} show that efficiency gains have largely offset rapid growth in demand. Cooling is a major part of that load, reaching up to 40\% of facility energy where cooling is inefficient \parencite{capozzoli2015}. Reviews of cooling technology describe the air-cooled architectures studied here, with computer-room air handlers supplying a cold aisle and hot-aisle or cold-aisle containment separating supply from exhaust \parencite{ebrahimi2014,capozzoli2015}. \textcite{schmidt2005} trace how rising rack power density strains thermal management and present measurements and models of high-density racks. \textcite{patankar2010} shows how computational models predict the full airflow and temperature distribution of a data centre, validated against measurements in operating facilities. The supply heat index of \textcite{sharma2002} quantifies one consequence of that airflow: the hot exhaust that recirculates into the cold aisle. The thermal envelope that defines normal operation comes from \textcite{ashrae2021}, and the quantitative indices of rack cooling performance from \textcite{sharma2002} and \textcite{herrlin2005}. \textcite{barroso2018} describe the power path from utility to server, including UPS and distribution losses, and \textcite{fan2007} provide the linear relationship between server utilisation and power that this project uses to estimate heat loads.
+
+\emph{Taken into this project:} the system boundary, the operating envelope, the hot-aisle containment layout, the server power model (Equation E1) and the recirculation mechanism behind fault $F_4$.
+
+\subsection{Failure modes and maintenance}
+
+At data centre scale, hardware failure is routine rather than exceptional. \textcite{vishwanath2010} analysed server failures and repairs across large data centres, and \textcite{schroeder2007} showed that field replacement rates of disks greatly exceed what datasheet reliability figures suggest. Failures of the supporting infrastructure are less studied in the open literature, so the fault taxonomy of this project draws on engineering sources for each subsystem: fans and filters \parencite{ashraehvac2020}, branch circuits \parencite{nfpa702023}, and the maintenance and testing of VRLA batteries \parencite{ieee1188}. On the maintenance side, \textcite{jardine2006} describe condition-based maintenance as data acquisition, data processing and maintenance decision, with diagnosis and prognosis as its core. \textcite{moubray1997} sets out reliability-centred maintenance, which ties each maintenance task to a failure mode and its consequences.
+
+\emph{Taken into this project:} the failure mechanisms of Table~\ref{tab:taxonomy}, and the principle that each diagnosis must lead to a specific, verifiable maintenance action.
+
+\subsection{Fault detection and diagnosis}
+
+The classical review by \textcite{venkat2003,venkat2003b,venkat2003c} divides diagnostic methods into quantitative model-based, qualitative model-based and process-history-based families, and compares them on criteria that include explanation, isolability and robustness. \textcite{isermann2005,isermann2006} develop model-based fault detection through residuals: differences between measured and model-predicted behaviour that stay near zero when the system is healthy. \textcite{gao2015} survey model-based and signal-based diagnosis, and \textcite{chandola2009} survey anomaly detection more widely. For buildings, \textcite{katipamula2005a,katipamula2005b} review fault detection, diagnosis and prognosis for heating, ventilation and air-conditioning, and \textcite{kim2018} update that review and compare commercial tools. The closest precedent for the deductive layer of this project is APAR, a set of expert rules for air-handling units derived from mass and energy balances \parencite{house2001}. It applies only the rules relevant to the current operating mode and is simple enough to embed in building controls \parencite{schein2006}. Its fault detection was found to depend on fault severity and operating conditions \parencite{house2001}, which the sensitivity analysis of this project also shows.
+
+Work specific to data centres is recent and mostly data-driven. \textcite{asgari2021} combine a grey-box temperature model with convolutional and recurrent neural networks to diagnose simultaneous cooling faults, with up to 100\% accuracy in low-noise conditions. \textcite{wang2024} combine a multi-label random forest with Bayesian inference to detect, diagnose and correct sensor faults in computer-room air handlers, with about 97\% diagnostic accuracy.
+
+\emph{Taken into this project:} residuals from energy balances as the basis of the redundancy relations (Section~\ref{sec:balances}), rules derived from mass and energy balances, and the evaluation of single and multiple faults with standard classification metrics.
+
+\subsection{Knowledge representation}
+
+\textcite{davis1993} identify five roles that a knowledge representation plays: a surrogate for the world, a set of ontological commitments, a fragmentary theory of intelligent reasoning, a medium for efficient computation and a medium of human expression. \textcite{brachman2004} and the handbook of \textcite{vanharmelen2008} develop the formal foundations, which general textbooks place within artificial intelligence as a whole \parencite{russell2021}, including the trade-off between expressiveness and tractable reasoning. For an engineering expert system, the medium-of-expression role is as important as the computational one, because an engineer must be able to read, check and correct the knowledge.
+
+\emph{Taken into this project:} representing knowledge in a restricted, readable form (Horn clauses over named thresholds with sources) so that each rule can be read as an engineering statement and traced to its origin.
+
+\subsection{Expert systems}
+
+The rule-based expert system was established by MYCIN, whose developers also showed the value of explaining a conclusion by the rules that produced it \parencite{buchanan1984}. Textbooks set out the architecture of separate knowledge base and inference engine \parencite{jackson1998,giarratano2005}. \textcite{liao2005} review 166 articles on expert-system applications from 1995 to 2004 and classify the methods into eleven families, from rule-based systems to case-based reasoning and ontologies. They observe that the methods were tending towards expertise orientation, with applications developed around specific problems.
+
+\emph{Taken into this project:} the separation of knowledge from inference, and rule identifiers that support explanation.
+
+\subsection{Prolog and logic programming}
+
+Logic programming treats a set of Horn clauses as both a theory and a program \parencite{kowalski1979}. Prolog grew out of work on natural-language processing and theorem proving \parencite{colmerauer1993}, and its programming techniques, including meta-interpreters, are set out by \textcite{sterling1994} and \textcite{bratko2012}. \textcite{lloyd1987} gives the formal semantics. SWI-Prolog, used here, is described by \textcite{wielemaker2012}.
+
+\emph{Taken into this project:} the proof-recording meta-interpreter of Section~\ref{sec:deductive}, a standard Prolog technique that makes rule-based reasoning explainable without leaving the logical framework.
+
+\subsection{Deductive reasoning}
+
+Resolution gave automated deduction a single, complete inference rule \parencite{robinson1965}. For definite clauses, the least-model and fixpoint semantics coincide with what SLD resolution derives \parencite{apt1982,lloyd1987}. Negation as failure, needed for conclusions such as ``no fault is present'', is sound with respect to the completion of the program \parencite{clark1978}.
+
+\emph{Taken into this project:} deductive diagnosis as $\mathit{KB} \cup E \models F$, and the controlled use of negation as failure for guards and for the closed-world conclusion of normal operation.
+
+\subsection{Abductive reasoning}
+
+Abduction infers the hypotheses that would best explain an observation \parencite{josephson1994}. \textcite{poole1989} formalise explanation as a set of hypotheses that, with a background theory, entails the observations while staying consistent with them. \textcite{kakas1992} survey abductive logic programming and its relation to default reasoning and negation as failure. \textcite{peng1990} develop parsimonious covering theory, in which the preferred explanations are the smallest sets of disorders that cover all observed manifestations.
+
+\emph{Taken into this project:} parsimonious covering over causal signatures, minimality as the preference criterion, and masking, by which one hypothesis can account for the absence of another's expected symptom.
+
+\subsection{Consistency-based diagnosis}
+
+\textcite{reiter1987} defined a diagnosis as a set of abnormal components that makes the system description consistent with the observations, and showed that minimal diagnoses are the minimal hitting sets of the conflict sets. \textcite{greiner1989} corrected an error in Reiter's algorithm for computing them. \textcite{dekleer1987} developed the general diagnostic engine for multiple faults, and \textcite{dekleer1992} characterised diagnoses more fully through kernel diagnoses. Because pure consistency-based diagnosis cannot exonerate a component, \textcite{struss1989} added fault models that predict how a component behaves when it fails. \textcite{console1991} place abductive and consistency-based diagnosis on a single spectrum, and \textcite{hamscher1992} collect the key papers of the field. \textcite{cordier2004} show how conflicts in this tradition correspond to the analytical redundancy relations of control engineering.
+
+\emph{Taken into this project:} redundancy relations with support sets, minimal hitting sets, fault models for exoneration, sensors treated as components, and the combination of abduction and consistency in one system.
+
+\subsection{Explainable artificial intelligence}
+
+Explanation was central to early expert systems. \textcite{swartout1983} argued that a good explanation must justify why a conclusion is reasonable, not merely trace how it was computed. Recent work on explainable artificial intelligence is surveyed by \textcite{adadi2018}. \textcite{miller2019} draws on the social sciences to show that people expect explanations to be contrastive, saying why this conclusion and not another. \textcite{rudin2019} argues that for high-stakes decisions inherently interpretable models are preferable to explaining black boxes after the fact, and \textcite{doshivelez2017} call for rigorous evaluation of interpretability, including evaluation with users.
+
+\emph{Taken into this project:} explanations that report competing hypotheses and the reason each was rejected, which makes them contrastive in Miller's sense; a symbolic model that is interpretable by construction; and the recognition that explanation quality should eventually be evaluated with users (Section~\ref{sec:limitations}).
+
+\subsection{Engineering mathematical models}
+
+The model of Section~\ref{sec:maths} rests on standard engineering sources: sensible heat transfer and the effectiveness--NTU method for the coil \parencite{incropera2011}, the fan affinity laws \parencite{ashraehvac2020}, and three-phase power and the continuous-load limit \parencite{nfpa702023}. The thresholds on energy-balance residuals follow first-order propagation of measurement uncertainty \parencite{jcgm2008}. The noise estimate uses the median absolute deviation, a robust scale estimator that one outlying sensor cannot distort \parencite{rousseeuw1993}.
+
+\subsection{Research gaps}
+
+The review points to three gaps that this project addresses:
+\begin{enumerate}
+  \item \textbf{Explainable diagnosis of data centre infrastructure.} Diagnosis work specific to data centres found in this review is data-driven \parencite{asgari2021,wang2024}. It reports high accuracy, but it needs labelled fault data for training and does not explain its conclusions in engineering terms. The closest knowledge-based work addresses building air-handling units \parencite{house2001,schein2006}, not the combined cooling and power path of a data centre.
+  \item \textbf{Combining reasoning modes on one engineering problem.} The theories of abductive and consistency-based diagnosis are well developed \parencite{reiter1987,peng1990,console1991}, but this review found few studies that implement all three reasoning modes for one engineering system and compare them quantitatively under noise, missing data and multiple faults.
+  \item \textbf{Separating sensor faults from equipment faults with explanations.} Sensor faults in data centre cooling have been addressed with machine learning \parencite{wang2024}. The use of redundancy relations, fault models and hypothesis tests to separate a biased sensor from a real fault, while explaining why, has received less attention for this domain.
+\end{enumerate}
+These gaps define the contribution claimed in Section~\ref{sec:contributions}. The review did not search exhaustively, so the gaps are stated relative to the literature examined here.
+
+\begin{small}
+\begin{longtable}{L{3.0cm}L{4.4cm}L{3.6cm}L{3.0cm}}
+  \caption{Traceability from literature to knowledge, rule, predicate and test.}\label{tab:traceability}\\
+  \toprule
+  Source & Knowledge & Rule or predicate & Test \\
+  \midrule
+  \endfirsthead
+  \toprule
+  Source & Knowledge & Rule or predicate & Test \\
+  \midrule
+  \endhead
+  \textcite{ashrae2021} & Recommended inlet envelope, 18 to 27\,\textdegree C & \texttt{threshold/4}; rule r01 & Normal and all thermal fault cases \\
+  \textcite{fan2007} & Server power linear in utilisation & Equation E1; simulator & All cases \\
+  \textcite{sharma2002} & Hot exhaust recirculates into the cold aisle & Equations E14, E18, E19; rules r22 to r24 & $F_4$ cases \\
+  \textcite{ashraehvac2020} & Fan affinity laws & \texttt{expected\_\allowbreak{}fan\_\allowbreak{}power/3}; rules r07, r08, r48, r49 & $F_1$, $F_3$ cases \\
+  \textcite{nfpa702023} & 80\% continuous-load limit & \texttt{branch\_\allowbreak{}loading/3}; rule r17 & $F_6$ cases \\
+  \textcite{ieee1188} & Resistance rise shows capacity fade & \texttt{cell\_\allowbreak{}resistance\_\allowbreak{}ratio/3}; rule r18 & $F_7$ cases \\
+  \textcite{house2001} & Rules from mass and energy balances & Coil balance relations; rule r43 & Sensor-bias cases \\
+  \textcite{isermann2006} & Residual-based detection & \texttt{coil\_\allowbreak{}balance\_\allowbreak{}residual/3} & Sensor-bias and fan cases \\
+  \textcite{jcgm2008} & Uncertainty propagation & Equations E39, E40; residual thresholds & Threshold sensitivity \\
+  \textcite{rousseeuw1993} & Robust scale estimation & \texttt{sigma\_\allowbreak{}temp/2} & High-noise sweep \\
+  \textcite{peng1990} & Parsimonious covering & \texttt{abduce/2} & All categories \\
+  \textcite{reiter1987} & Minimal hitting sets & \texttt{cbd\_\allowbreak{}diagnoses/2} & Multiple-fault cases \\
+  \textcite{struss1989} & Fault models exonerate components & \texttt{fm/2} & Sensor-bias cases \\
+  \textcite{miller2019} & Contrastive explanation & \texttt{why/1}, competing hypotheses & Explanation traces \\
+  \bottomrule
+\end{longtable}
+\end{small}
+
+% ---------------------------------------------------------------------------
+\section{Engineering Theory of the Data Centre Row}
+\label{sec:engineering}
+
+\subsection{Purpose and system boundary}
+
+The system studied is the cooling and power infrastructure that serves one row of a data centre. It has two functions. It must remove the heat that the servers dissipate, so that every server inlet stays within the thermal envelope recommended by ASHRAE \parencite{ashrae2021}. It must also deliver conditioned electrical power continuously, with enough stored energy to ride through a utility interruption until standby generation takes over.
+
+To keep the project tractable, the boundary encloses one row of six racks, A01 to A06, in a hot-aisle containment layout (Figure~\ref{fig:system}). Each rack holds twenty servers. The row is served by one chilled-water computer-room air handler (CRAH-1), one double-conversion uninterruptible power supply (UPS-1) with a valve-regulated lead-acid (VRLA) battery string, one row power distribution unit (PDU-1) and a rack power distribution unit with two independent feeds, A and B, in every rack. The chiller plant, the utility supply and the standby generator lie outside the boundary and are treated as inputs. Humidity control is excluded, so the thermal model is sensible-heat only.
+
+\begin{figure}[htbp]
+  \centering
+  \input{figures/fig_system_schematic.tex}
+  \caption{Plan view of the data centre row: cooling unit, contained hot aisle, power path and sensors.}
+  \label{fig:system}
+\end{figure}
+
+\subsection{Energy and material flows}
+
+Four flows connect the components:
+
+\begin{itemize}
+  \item \textbf{Electrical.} Utility power passes through UPS-1, PDU-1 and the rack PDUs to the servers. Almost all of the electrical energy that the servers draw ends up as heat.
+  \item \textbf{Air.} CRAH-1 discharges supply air into the cold aisle. Server fans draw it through the servers into the contained hot aisle, from which it returns to CRAH-1 through the filter and cooling coil.
+  \item \textbf{Water.} Chilled water from the plant passes through a modulating control valve and the coil, absorbs the heat and returns to the plant.
+  \item \textbf{Heat.} Server heat is carried by the air, transferred to the chilled water at the coil and leaves the boundary. UPS and PDU losses add to the room load.
+\end{itemize}
+
+In steady state, the heat removed from the air must equal the IT power plus the fan heat. The same heat must also equal what the water absorbs. These two balances can be computed from independent sensors, which gives the analytical redundancy that later separates sensor faults from equipment faults \parencite{isermann2006}.
+
+\subsection{Operating conditions and control}
+
+The row operates between low, nominal and high load, corresponding to mean processor utilisations of about 10\%, 50\% and 90\% and row IT loads of 54, 78 and 102\,kW (Section~\ref{sec:maths}). Four control loops shape its behaviour:
+
+\begin{itemize}
+  \item the CRAH valve modulates water flow to hold a supply-air setpoint of 20\,\textdegree C;
+  \item the CRAH fan speed follows the airflow demand of the servers;
+  \item each server's management controller sets its own fan speed from its internal temperatures;
+  \item the UPS runs in double conversion, on battery or on static bypass.
+\end{itemize}
+
+\subsection{Governing principles}
+
+Table~\ref{tab:principles} summarises the physical principles that the diagnostic knowledge relies on. Sensible heat transfer and the first law of thermodynamics underpin the energy balances. The fan affinity laws predict fan power from fan speed \parencite{ashraehvac2020}. The effectiveness--NTU method describes the cooling coil \parencite{incropera2011}. On the electrical side, three-phase power and the continuous-load limit of branch circuits \parencite{nfpa702023} govern overloads, while rising internal resistance indicates fading battery capacity \parencite{ieee1188}. On the computing side, server power grows roughly linearly with utilisation \parencite{fan2007}, and processors throttle their clock when they approach their junction temperature limit.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Governing principles and their diagnostic use.}
+  \label{tab:principles}
+  \begin{tabular}{L{3.1cm}L{5.9cm}L{5.0cm}}
+    \toprule
+    Domain & Principle & Diagnostic use \\
+    \midrule
+    Heat transfer & Sensible heat: $Q = \dot m c_p \Delta T$ & Air-side and water-side heat flows \\
+    Thermodynamics & First law over the row & Cross-checks between independent sensors \\
+    Fluid mechanics & Fan affinity laws & Expected fan power at a given speed \\
+    Fluid mechanics & Filter pressure drop grows with loading & Filter clogging \\
+    Heat exchange & Effectiveness--NTU coil model & Coil capacity and valve behaviour \\
+    Electrical & Three-phase power; 80\% continuous-load limit & Branch overload, rack power balance \\
+    Electrochemistry & Internal resistance rises as capacity fades & Battery degradation \\
+    Computing & Server power linear in utilisation; thermal throttling & Expected heat; consequences of faults \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Normal and abnormal operation}
+
+Table~\ref{tab:envelope} defines the normal operating envelope. Abnormal operation is any sustained departure from this envelope, or any break in the energy balances that exceeds the combined sensor uncertainty (Section~\ref{sec:balances}). Values marked as assumptions are design choices for the modelled row. They are justified where they are used, and their sensitivity is quantified in Chapter~\ref{ch:dataset_and_evaluation}.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Normal operating envelope of the row.}
+  \label{tab:envelope}
+  \begin{tabular}{L{5.4cm}L{4.4cm}L{4.2cm}}
+    \toprule
+    Variable & Normal range & Source \\
+    \midrule
+    Rack inlet temperature & 18 to 27\,\textdegree C (allowable 15 to 32\,\textdegree C, class A1) & \textcite{ashrae2021} \\
+    Inlet stratification, top minus middle & below 3\,K & Assumption \\
+    Supply-air temperature & 20\,\textdegree C $\pm$ 2\,K & Design setpoint \\
+    Chilled-water temperature rise & about 5 to 7\,K & Design value \\
+    Fan power over affinity-law prediction & 0.95 to 1.05 & Assumption \\
+    Branch current & at most 80\% of breaker rating & \textcite{nfpa702023} \\
+    UPS efficiency, double conversion & about 0.95 & Manufacturer data (to verify) \\
+    VRLA float voltage & 2.25 to 2.30\,V per cell at 25\,\textdegree C & Manufacturer data (to verify) \\
+    Cell internal resistance & within 15\% of commissioning baseline & Assumption, after \textcite{ieee1188} \\
+    Telemetry sample age & below 60\,s & Assumption \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% ---------------------------------------------------------------------------
+\section{Fault Mechanisms}
+\label{sec:faults}
+
+\subsection{Fault taxonomy}
+
+The fault universe contains eight physical faults, two instrumentation faults and normal operation:
+\begin{equation}
+  \mathcal{F} = \{F_1, \dots, F_8, S_1, S_2, F_N\}.
+\end{equation}
+Each fault was admitted only if it is a recognised failure mode with a distinct observable signature inside the system boundary. No category was created merely to increase the number of classes. Physical faults ($F$) are kept separate from instrumentation faults ($S$), because a sensor fault calls for a different corrective action than an equipment fault. Table~\ref{tab:taxonomy} gives the physical meaning, causes, symptoms and consequences of each.
+
+\begin{small}
+\begin{longtable}{L{2.0cm}L{2.9cm}L{2.8cm}L{3.3cm}L{2.5cm}}
+  \caption{Fault taxonomy.}\label{tab:taxonomy}\\
+  \toprule
+  Fault & Physical meaning & Typical causes & Observable symptoms & Consequences \\
+  \midrule
+  \endfirsthead
+  \toprule
+  Fault & Physical meaning & Typical causes & Observable symptoms & Consequences \\
+  \midrule
+  \endhead
+  $F_N$ normal & All variables within the envelope; balances close & -- & Inlets 18 to 27\,\textdegree C; supply at setpoint; fan power matches speed & -- \\
+  $F_1$ CRAH fan failure & Fan delivers little or no air at its commanded speed & Motor burnout, broken belt or coupling, drive trip & Fan power far below prediction; row-wide hot inlets; supply air colder than setpoint & Row overheating, throttling, shutdowns \\
+  $F_2$ chilled-water loss & Coil receives too little water flow & Seized valve, plant pump trip, closed isolation valve, air lock & Water flow far below the valve prediction; supply air hot; fan healthy & Row overheating \\
+  $F_3$ filter clogging & Filter resistance rises, cutting airflow at a given speed & Missed replacement, construction dust & High filter loading ratio; fan speed rising & Higher fan energy; leads towards $F_1$ \\
+  $F_4$ hot-air recirculation & Hot exhaust re-enters the server inlets & Missing blanking panels, open containment doors & Top inlet and exhaust stratified on one rack; CRAH healthy & Local overheating of upper servers \\
+  $F_5$ server fan failure & One server loses internal airflow & Fan wear, failed fan controller & Server fan speed near zero; CPU near 95\,\textdegree C; clock reduced & Throttling or shutdown of one server \\
+  $F_6$ branch overload & A phase circuit exceeds its continuous rating & Added servers, peaks, phase imbalance & Phase current above 80\% of the breaker rating & Breaker trip dropping all servers on the circuit \\
+  $F_7$ battery degradation & Capacity has faded, shortening ride-through & Age, heat, sulphation, dry-out & Cell resistance well above baseline; low float voltage & Load drop during a utility event \\
+  $F_8$ UPS on bypass & UPS has transferred the load to static bypass & Inverter or rectifier fault, overload & Mode flag shows bypass; efficiency about 1.0 & No battery protection \\
+  $S_1$ sensor bias & A temperature sensor reads offset from the truth & Drift, poor placement, loose mounting & One sensor disagrees with neighbours and with the energy balance & False alarms or a masked fault \\
+  $S_2$ telemetry dropout & Readings are stale or missing & Agent crash, network loss & Sample age above the limit & Incomplete evidence \\
+  \bottomrule
+\end{longtable}
+\end{small}
+
+Several pairs of faults share symptoms, and the observation vector was chosen to separate them. $F_1$ and $F_2$ both overheat the whole row. They differ in fan power and in chilled-water flow measured against valve position. $F_3$ and $F_1$ are points on the same airflow-loss path, gradual and abrupt, but call for different actions. $F_4$ is local to a rack while the cooling unit is healthy, and $F_5$ is local to one server. $S_1$ can either imitate $F_4$, when a top inlet sensor reads high, or hide it, when the sensor reads low. Figure~\ref{fig:propagation} traces each fault from its mechanism to its observable effect and its consequence.
+
+\begin{figure}[htbp]
+  \centering
+  \input{figures/fig_fault_propagation.tex}
+  \caption{Fault propagation: how each fault in the taxonomy leads to observable effects and consequences.}
+  \label{fig:propagation}
+\end{figure}
+
+\subsection{Multiple and interacting faults}
+
+Faults can occur together and interact. Five combinations are used in the multiple-fault tests (Table~\ref{tab:interactions}). They were chosen because each tests a distinct interaction: aggravation, masking, compound risk and co-location.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Interacting faults used in the multiple-fault tests.}
+  \label{tab:interactions}
+  \begin{tabular}{L{3.2cm}L{10.8cm}}
+    \toprule
+    Combination & Interaction \\
+    \midrule
+    $F_3$ with $F_4$ & Reduced airflow aggravates recirculation at a leaky rack. \\
+    $F_4$ with $S_1$ & A low-reading top inlet sensor hides a real recirculation hot spot. \\
+    $F_7$ with $F_8$ & The load sits on bypass while the battery is weak, a compound risk to continuity. \\
+    $F_1$ with $F_6$ & A cooling and an electrical fault occur together and must both be reported. \\
+    $F_4$ with $F_5$ & A failed server fan inside a recirculating rack. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% ---------------------------------------------------------------------------
+\section{Foundations of Knowledge Representation and Reasoning}
+\label{sec:krr}
+
+Knowledge representation and reasoning studies how knowledge can be written in a formal language so that a program can draw conclusions from it that are justified by the knowledge alone \parencite{brachman2004}. Two properties matter most for engineering diagnosis. The representation must be \emph{declarative}, so that each piece of knowledge has a meaning independent of how it is used. The reasoning must be \emph{sound} with respect to that meaning, so that every conclusion can be justified by tracing it back to the knowledge and the observations that support it.
+
+\subsection{Logic programming and Horn clauses}
+
+Logic programming represents knowledge as definite clauses, also called Horn clauses, of the form $H \leftarrow B_1 \wedge \dots \wedge B_n$: the head $H$ holds whenever every body literal $B_i$ holds \parencite{kowalski1979,lloyd1987}. A set of such clauses has a least Herbrand model, and SLD resolution derives exactly the ground atoms that are true in it, so the procedural reading of a Prolog program coincides with its logical reading for this fragment \parencite{lloyd1987}. Prolog adds arithmetic, built-in predicates and a fixed left-to-right, depth-first search strategy \parencite{bratko2012}.
+
+\subsection{Negation as failure and the closed-world assumption}
+
+Diagnosis needs negative conclusions, such as ``the supply air is \emph{not} hot'' or ``no fault rule fires''. Prolog provides negation as failure: $\neg G$ succeeds when every attempt to prove $G$ fails. Under the closed-world assumption, whatever cannot be derived is taken to be false, and \textcite{clark1978} showed that negation as failure is sound with respect to the completion of the program. This project uses negation as failure in two controlled places: to conclude normal operation when no fault rule fires and every inlet is within the envelope, and to block a rule when contrary evidence can be proved. Section~\ref{sec:kr-scheme} explains why missing evidence is never treated as negative evidence in the model-based modules, which would otherwise make the closed-world assumption dangerous.
+
+\subsection{Expert systems and explanation}
+
+An expert system separates a knowledge base, written by or with domain experts, from an inference engine that applies it \parencite{jackson1998}. Its defining requirement is transparency: it must be able to say why it reached a conclusion and which knowledge it used. Rule-based systems meet this naturally, because every conclusion is the head of a rule whose body was proved. This project keeps that property for all three reasoning modes by recording the proof of every deductive conclusion, the evidence behind every abductive hypothesis and the conflict sets behind every consistency-based diagnosis (Chapter~\ref{ch:design_and_development}).
+
+% ---------------------------------------------------------------------------
+\section{Knowledge Representation Scheme}
+\label{sec:kr-scheme}
+
+\subsection{Observation vector}
+
+The observation vector is $\mathbf{x} = [x_1, x_2, \dots, x_{26}]^{\mathsf T}$. Every variable that appears in an equation, a table, a figure or a Prolog predicate is defined in Table~\ref{tab:variables}. Each observation is stored as a fact \texttt{obs(Case, Variable, Entity, Value)}. Entities are named systematically: racks \texttt{rack\_a01} to \texttt{rack\_a06}, servers \texttt{rack\_a01\_s01} onwards, rack PDU phases \texttt{rack\_a01\_a\_l1} onwards, and \texttt{crah\_1}, \texttt{ups\_1} and \texttt{battery\_1}.
+
+\begin{small}
+\begin{longtable}{L{1.2cm}L{4.3cm}L{1.2cm}L{3.1cm}L{3.9cm}}
+  \caption{Observation variables.}\label{tab:variables}\\
+  \toprule
+  Symbol & Variable & Unit & Prolog name & Diagnostic relevance \\
+  \midrule
+  \endfirsthead
+  \toprule
+  Symbol & Variable & Unit & Prolog name & Diagnostic relevance \\
+  \midrule
+  \endhead
+  $x_1$ & Rack inlet temperature, middle & \textdegree C & \texttt{t\_inlet\_mid} & Envelope; neighbour consistency \\
+  $x_2$ & Rack inlet temperature, top & \textdegree C & \texttt{t\_inlet\_top} & Stratification ($F_4$, $S_1$) \\
+  $x_3$ & Rack outlet temperature, mean & \textdegree C & \texttt{t\_outlet} & Outlet stratification \\
+  $x_4$ & CRAH supply-air temperature & \textdegree C & \texttt{t\_supply\_air} & $F_1$, $F_2$, $S_1$ \\
+  $x_5$ & CRAH return-air temperature & \textdegree C & \texttt{t\_return\_air} & Air-side balance \\
+  $x_6$ & CRAH fan speed & \% & \texttt{fan\_speed} & Affinity-law prediction \\
+  $x_7$ & CRAH fan electrical power & kW & \texttt{fan\_power} & $F_1$ \\
+  $x_8$ & Filter differential pressure & Pa & \texttt{dp\_filter} & $F_3$ \\
+  $x_9$ & Chilled-water supply temperature & \textdegree C & \texttt{t\_chw\_supply} & Water-side balance \\
+  $x_{10}$ & Chilled-water return temperature & \textdegree C & \texttt{t\_chw\_return} & Water-side balance \\
+  $x_{11}$ & Chilled-water valve position & \% & \texttt{valve\_position} & Valve prediction ($F_2$) \\
+  $x_{12}$ & Rack PDU phase current & A & \texttt{i\_branch} & $F_6$; power balance \\
+  $x_{13}$ & Rack IT power & kW & \texttt{p\_rack} & Power balance \\
+  $x_{14}$ & Mean CPU utilisation of a rack & -- & \texttt{cpu\_util} & Expected heat \\
+  $x_{15}$ & Server CPU temperature & \textdegree C & \texttt{t\_cpu} & $F_5$ \\
+  $x_{16}$ & Server CPU clock frequency & GHz & \texttt{f\_cpu} & Throttling \\
+  $x_{17}$ & Server fan speed & rpm & \texttt{server\_fan\_rpm} & $F_5$ \\
+  $x_{18}$ & UPS input power & kW & \texttt{p\_ups\_in} & UPS efficiency ($F_8$) \\
+  $x_{19}$ & UPS output power & kW & \texttt{p\_ups\_out} & UPS efficiency ($F_8$) \\
+  $x_{20}$ & UPS operating mode & -- & \texttt{ups\_mode} & $F_8$ \\
+  $x_{21}$ & Battery string float voltage & V & \texttt{v\_battery} & $F_7$ \\
+  $x_{22}$ & Highest cell internal resistance & m$\Omega$ & \texttt{r\_cell} & $F_7$ \\
+  $x_{23}$ & Battery temperature & \textdegree C & \texttt{t\_battery} & Ageing \\
+  $x_{24}$ & Telemetry sample age & s & \texttt{sample\_age} & $S_2$ \\
+  $x_{25}$ & Chilled-water mass flow & kg/s & \texttt{m\_chw} & $F_2$; water-side balance \\
+  $x_{26}$ & Rack outlet temperature, top & \textdegree C & \texttt{t\_outlet\_top} & Outlet stratification \\
+  \bottomrule
+\end{longtable}
+\end{small}
+
+\subsection{Layers of the knowledge base}
+
+The knowledge base is organised in seven layers, each a set of Prolog facts or Horn clauses. Table~\ref{tab:kr-layers} lists them. Two design choices deserve explanation.
+
+\paragraph{Rules as data.} Diagnostic rules are stored as facts \texttt{drule(Id, Head, Body, Source)} rather than as ordinary clauses. A small meta-interpreter proves them and returns a proof tree for every conclusion. Each rule remains a Horn clause, $\textit{Head} \leftarrow \textit{Body}$, so the logical reading is unchanged. Storing rules as data gives every rule an identifier and a source, which the explanation facility reports, and lets the rule table in the report be generated directly from the knowledge base.
+
+\paragraph{Provenance on every threshold and rule.} Every threshold fact (\texttt{threshold/4}) and every rule names a source fact (\texttt{source/3}), whose type is \texttt{standard}, \texttt{literature}, \texttt{assumption} or \texttt{method}. This keeps four kinds of information apart, as the project framework requires: measured data (none in this project), synthetic test cases, engineering assumptions and literature-supported rules.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Layers of the knowledge base.}
+  \label{tab:kr-layers}
+  \begin{tabular}{L{3.4cm}L{4.6cm}L{6.0cm}}
+    \toprule
+    Layer & Representation & Content \\
+    \midrule
+    Structure & \texttt{component/2}, \texttt{serves/2}, \texttt{rated/4} & Components, topology and ratings \\
+    Reference values & \texttt{threshold/4}, \texttt{source/3} & Envelopes and limits with provenance \\
+    Engineering calculations & Horn clauses with arithmetic & The equations of Section~\ref{sec:maths} \\
+    Diagnostic rules & \texttt{drule/4} & 47 rules deriving conditions and faults \\
+    Causal knowledge & \texttt{evidence/3}, \texttt{requires/2}, \texttt{masks/2} & Fault signatures for abduction \\
+    Redundancy relations & \texttt{arr/3}, \texttt{fm/2} & Relations, support sets and fault models \\
+    Maintenance knowledge & \texttt{maintenance/5}, \texttt{plan\_interaction/3} & Corrective plans and their ordering \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Graded evidence and the open-world treatment of missing data}
+
+The deductive rules compare features with crisp thresholds. The abductive and consistency-based modules instead use graded symptoms. Each symptom receives an evidence strength between 0 and 1, scaled to the measurement noise estimated from the case itself (Equations~\eqref{eq:grade} and~\eqref{eq:sigma}), and a status of present, absent, uncertain or unknown. A symptom whose inputs are missing is \emph{unknown}, never absent. The closed-world assumption is therefore applied only where it is safe: in the deductive rules, and in the final ``normal'' conclusion. It is never used to infer that a symptom is absent merely because it could not be computed.
+
+% ---------------------------------------------------------------------------
+\section{Diagnosis Theory: Deductive, Abductive and Consistency-Based}
+\label{sec:diagnosis-theory}
+
+Let $\mathit{KB}$ be the knowledge base and $E$ the evidence: the observations of a case together with the conditions derived from them. Three theories of diagnosis are implemented. \textcite{console1991} show that they are points on one spectrum of logical definitions of model-based diagnosis.
+
+\paragraph{Deductive diagnosis.} A fault $F_k$ is diagnosed when it follows from the knowledge base and the evidence:
+\begin{equation}
+  \mathit{KB} \cup E \models F_k .
+  \label{eq:deductive}
+\end{equation}
+This is the classical reading of a rule-based expert system. It is efficient and transparent, but it needs a rule for every symptom pattern, and a crisp rule turns measurement noise directly into false findings.
+
+\paragraph{Abductive diagnosis.} Abduction reasons from effects to causes. A set of hypotheses $D \subseteq \mathcal{H}$, where $\mathcal{H} = \mathcal{F} \setminus \{F_N\}$, is an explanation when it entails the evidence and is consistent with it \parencite{poole1989}:
+\begin{equation}
+  D \cup \mathit{KB} \models E, \qquad D \cup \mathit{KB} \cup E \not\models \bot .
+  \label{eq:abductive}
+\end{equation}
+Among the explanations, the parsimony principle prefers the smallest:
+\begin{equation}
+  D^{*} = \arg\min_{D} \lvert D \rvert .
+  \label{eq:parsimony}
+\end{equation}
+The implementation follows parsimonious covering theory \parencite{peng1990}: causal knowledge states which symptoms each fault can explain, and the search finds minimal sets of faults that cover every clearly present symptom.
+
+\paragraph{Consistency-based diagnosis.} Consistency-based diagnosis reasons from a model of correct behaviour \parencite{reiter1987,dekleer1987}. Let $\mathit{SD}$ be the system description, $\mathit{COMPS}$ the set of components, $\mathit{OBS}$ the observations and $\mathit{AB}(c)$ the statement that component $c$ is abnormal. A set $\Delta \subseteq \mathit{COMPS}$ is a diagnosis when
+\begin{equation}
+  \mathit{SD} \cup \mathit{OBS} \cup \{\mathit{AB}(c) \mid c \in \Delta\} \cup \{\neg\mathit{AB}(c) \mid c \in \mathit{COMPS} \setminus \Delta\} \not\models \bot .
+  \label{eq:reiter}
+\end{equation}
+A conflict set is a set of components that cannot all be healthy given the observations. \textcite{reiter1987} proved that the minimal diagnoses are exactly the minimal hitting sets of the conflict sets. In this project the behaviour model is written as analytical redundancy relations, each of which holds when a named set of components is healthy, which links consistency-based diagnosis to the fault detection practice of control engineering \parencite{cordier2004}. Sensors are treated as components, so a sensor fault is a diagnosis like any other. Pure consistency-based diagnosis cannot exonerate a component, because it never predicts what a fault would look like. Fault models remove this limitation \parencite{struss1989}: if a component is abnormal, a named relation must also be violated, so a component whose fault model predicts a violation that clearly did not happen is exonerated.
+
+\paragraph{Combining the three.} The complete system combines the modes as ``abduction proposes, consistency disposes''. Abduction produces ranked candidate explanations, and the best-ranked one that is also a consistent diagnosis in the sense of Equation~\eqref{eq:reiter} is accepted. Chapter~\ref{ch:design_and_development} describes the implementation, and Chapter~\ref{ch:dataset_and_evaluation} compares the four configurations that the framework asks for.
+
+% ---------------------------------------------------------------------------
+\section{Mathematical Formulation}
+\label{sec:maths}
+
+This section gives the engineering and logical model in full. Equations carry the tags E1 to E56 used in the design documents and in the comments of \texttt{kb/calculations.pl}, so that each equation can be traced to the predicate that implements it. Equations with a letter suffix, such as E11a, were added during development. Every symbol is defined where it first appears and again in Table~\ref{tab:nomenclature}.
+
+\subsection{Sets and indices}
+
+$\mathcal{R} = \{r_1, \dots, r_6\}$ is the set of racks, with $n_R = \lvert\mathcal{R}\rvert = 6$. $\mathcal{S}_r$ is the set of servers in rack $r$, with $\lvert\mathcal{S}_r\rvert = 20$.
+
+\subsection{IT power}
+
+Server power is close to linear in CPU utilisation $u_s \in [0,1]$ \parencite{fan2007}:
+\begin{align}
+  P_s &= P_{idle} + (P_{max} - P_{idle})\, u_s , \tag{E1}\label{eq:e1}\\
+  P_r &= \textstyle\sum_{s \in \mathcal{S}_r} P_s , \tag{E2}\\
+  P_{IT} &= \textstyle\sum_{r \in \mathcal{R}} P_r , \tag{E3}\\
+  \varepsilon_{P,r} &= \frac{P_r^{meas} - P_r}{P_r} . \tag{E4}
+\end{align}
+With $P_{idle} = 0.40$\,kW and $P_{max} = 0.90$\,kW per server, utilisations of 10\%, 50\% and 90\% give row loads of 54, 78 and 102\,kW. $P_r^{meas}$ is the metered rack power and $\varepsilon_{P,r}$ the model residual.
+
+\subsection{Server and rack thermal model}
+
+\begin{align}
+  \dot m &= \rho_a \dot V , \tag{E5}\\
+  \Delta T_s &= \frac{P_s}{\dot m_s\, c_{p,a}} , \tag{E6}\\
+  T_{out,r} &= T_{in,r} + \frac{P_r}{\dot m_r\, c_{p,a}} , \tag{E7}\\
+  T_{cpu,s} &= T_{in,r} + R_{th}(\omega_s)\, P_{cpu,s} , \tag{E8}\\
+  \phi_{f,s} &= f_{cpu,s} / f_{nom,s} . \tag{E9}
+\end{align}
+$\dot m$ is mass flow, $\rho_a$ air density, $\dot V$ volume flow and $c_{p,a}$ the specific heat of air. Equation E6 gives a rise of about 13\,K across a server at nominal load. In E8, the junction-to-inlet thermal resistance $R_{th}$ rises as the server fan speed $\omega_s$ falls, so a failed server fan ($F_5$) raises the CPU temperature even when the inlet is normal. A frequency ratio $\phi_{f,s} < 1$ shows throttling, which is a consequence of $F_1$, $F_2$, $F_4$ or $F_5$ and not a fault class of its own.
+
+\subsection{Rack inlet indicators}
+
+\begin{align}
+  T_{in,max,r} &= \max(T_{in,top,r},\, T_{in,mid,r}) , \tag{E10}\\
+  \Delta T_{strat,r} &= T_{in,top,r} - T_{in,mid,r} , \tag{E11}\\
+  \Delta T_{strat,out,r} &= T_{out,top,r} - T_{out,bot,r} = 2\,(T_{out,top,r} - T_{out,r}) , \tag{E11a}\label{eq:e11a}\\
+  h_r &= \mathbf{1}\!\left[T_{in,max,r} > T_{rec,max}\right] , \tag{E12}\\
+  \phi_{hot} &= \frac{1}{n_R} \textstyle\sum_{r} h_r . \tag{E13}
+\end{align}
+$\mathbf{1}[\cdot]$ is 1 when its condition holds and 0 otherwise, and $T_{rec,max} = 27$\,\textdegree C \parencite{ashrae2021}. A hot-rack fraction $\phi_{hot} \ge 0.5$ points to a row-level cause such as $F_1$ or $F_2$; a smaller fraction points to a rack-level cause such as $F_4$. Equation E11a assumes that the two halves of a rack carry similar airflow, so the lower-half outlet temperature is $2T_{out,r} - T_{out,top,r}$. Real recirculation heats the upper servers' inlet air, so their exhaust becomes hotter too and E11a rises with E11. A biased top inlet sensor changes E11 but not E11a, which is how $F_4$ is separated from $S_1$.
+
+The supply and return heat indices \parencite{sharma2002} and the rack cooling indices \parencite{herrlin2005} summarise the thermal health of the row:
+\begin{align}
+  \mathit{SHI} &= \frac{\sum_r (T_{in,r} - T_{sa})}{\sum_r (T_{out,r} - T_{sa})} , \qquad \mathit{RHI} = 1 - \mathit{SHI} , \tag{E14--E15}\\
+  \mathit{RCI}_{HI} &= \left[1 - \frac{\sum_r (T_{in,r} - T_{rec,max})\,\mathbf{1}[T_{in,r} > T_{rec,max}]}{n_R\,(T_{all,max} - T_{rec,max})}\right] \times 100\% , \tag{E16}\\
+  \mathit{RCI}_{LO} &= \left[1 - \frac{\sum_r (T_{rec,min} - T_{in,r})\,\mathbf{1}[T_{in,r} < T_{rec,min}]}{n_R\,(T_{rec,min} - T_{all,min})}\right] \times 100\% . \tag{E17}
+\end{align}
+The mixing model behind $F_4$ treats the air at an inlet as a blend of supply air and exhaust, with recirculation fraction $\beta_r \in [0,1]$:
+\begin{equation}
+  T_{in,r} = (1 - \beta_r)\, T_{sa} + \beta_r\, T_{out,r} , \qquad
+  \beta_r = \frac{T_{in,r} - T_{sa}}{T_{out,r} - T_{sa}} . \tag{E18--E19}\label{eq:mixing}
+\end{equation}
+Because $\beta_r \ge 0$ and $T_{out,r} > T_{sa}$, the mixing model implies that a top inlet can never be colder than the middle inlet. A top sensor that reads colder must therefore be faulty.
+
+\subsection{CRAH air side and fan}
+
+\begin{align}
+  Q_a &= \dot m_a\, c_{p,a}\, (T_{ra} - T_{sa}) , \tag{E20}\\
+  \dot V_a &= \dot V_{rated}\,(N / N_{rated}) , \tag{E21}\\
+  \Delta p_{fan} &= \Delta p_{rated}\,(N / N_{rated})^2 , \tag{E22}\\
+  P_{f,exp} &= P_{f,rated}\,(N / N_{rated})^3 , \tag{E23}\\
+  \rho_f &= P_f / P_{f,exp} , \tag{E24}\\
+  P_f &= \dot V_a\, \Delta p_{tot} / \eta_f , \tag{E25}\\
+  \Delta p_{filt} &= K_{filt}\, \dot V_a^2 , \tag{E26}\\
+  \lambda_{filt} &= \frac{\Delta p_{filt} / \dot V_a^2}{K_{filt,clean}} , \tag{E27}\\
+  \delta_{sa} &= T_{sa} - T_{sp} . \tag{E28}
+\end{align}
+Equations E21 to E23 are the fan affinity laws \parencite{ashraehvac2020}. A healthy fan has a power ratio $\rho_f$ within about 5\% of 1. A ratio below 0.85 shows a partial failure such as belt slip, and below 0.5 a fan that is not moving air at all ($F_1$). The filter loading ratio $\lambda_{filt}$ normalises the filter resistance by its clean value, so it does not depend on fan speed; values well above 1 indicate $F_3$. A negative supply-air deviation $\delta_{sa}$ with row-wide overheating supports $F_1$, because the coil over-cools the small airflow that remains.
+
+\subsection{Chilled-water side and coil}
+
+\begin{align}
+  \Delta T_w &= T_{wr} - T_{ws} , \tag{E29}\\
+  Q_w &= \dot m_w\, c_{p,w}\, \Delta T_w , \tag{E30}\\
+  Q_{coil} &= \varepsilon\, C_{min}\, (T_{ra} - T_{ws}) , \tag{E31}\\
+  \mathit{NTU} &= \frac{UA}{C_{min}} , \qquad C^{*} = \frac{C_{min}}{C_{max}} , \tag{E32}\\
+  \varepsilon &= \frac{1 - \exp[-\mathit{NTU}(1 - C^{*})]}{1 - C^{*}\exp[-\mathit{NTU}(1 - C^{*})]} , \tag{E33}\\
+  \dot m_w^{exp} &= \dot m_{w,max}\, \mathcal{R}_v^{\,\theta_v - 1} , \tag{E34}\\
+  \rho_w &= \dot m_w^{meas} / \dot m_w^{exp} . \tag{E34a}
+\end{align}
+Equations E31 to E33 are the effectiveness--NTU model of the coil in counterflow form \parencite{incropera2011}, where $C = \dot m c_p$ is a heat capacity rate. Equation E34 is the characteristic of an equal-percentage valve with rangeability $\mathcal{R}_v$ and opening fraction $\theta_v$. The ratio $\rho_w$ compares measured flow with the flow the valve opening predicts. A ratio far below 1 with the valve open is the signature of $F_2$. The water temperature rise $\Delta T_w$ is \emph{not} a reliable signature of $F_2$: low flow makes it larger, not smaller. An earlier version of the knowledge base assumed the opposite, and Section~\ref{sec:acquisition} describes how the simulator exposed the error.
+
+\subsection{Energy balances and analytical redundancy}
+\label{sec:balances}
+
+\begin{align}
+  Q_a &= P_{IT} + P_f + Q_{env} , \tag{E35}\\
+  Q_w &= Q_a , \tag{E36}\\
+  r_1 &= \frac{Q_a - (P_{IT} + P_f)}{P_{IT}} , \tag{E37}\\
+  r_2 &= \frac{Q_w - Q_a}{Q_a} . \tag{E38}
+\end{align}
+Equation E35 is the first law over the row, with fan heat in the airstream and a small envelope gain $Q_{env}$. Equation E36 states that the coil is adiabatic. A residual counts as violated only when it exceeds what sensor uncertainty can explain. For a product $Q = \dot m c_p \Delta T$, first-order propagation gives
+\begin{equation}
+  \frac{u_Q}{Q} = \sqrt{\left(\frac{u_{\dot m}}{\dot m}\right)^{2} + \left(\frac{\sqrt{2}\,u_T}{\Delta T}\right)^{2}} , \qquad
+  \lvert r_i \rvert > \vartheta_i = k_c\, u_{r_i} , \tag{E39--E40}\label{eq:uncertainty}
+\end{equation}
+where $u$ denotes a standard uncertainty and $k_c$ a coverage factor. With the sensor accuracies of the modelled row, $u_{r_2} \approx 0.07$. The knowledge base uses $\vartheta_2 = 0.2$, close to $k_c = 3$, because chilled-water loss alone can produce $\lvert r_2 \rvert \approx 0.14$.
+
+Two neighbour-consistency relations check individual temperature sensors against sensors that see the same air:
+\begin{align}
+  r_{S,r} &= T_{in,r} - \operatorname{median}_{j \in \mathcal{N}(r)} T_{in,j} , \tag{E41}\\
+  r_{sa} &= T_{sa} - \operatorname{median}_{r \in \mathcal{R}} T_{in,mid,r} . \tag{E41a}
+\end{align}
+A large $r_{sa}$ can come from a biased supply-air sensor or from a real airflow shortfall, which warms the inlets with room and hot-aisle air. The two are separated by recomputing E38 with the supply-air reading replaced by the median middle inlet:
+\begin{equation}
+  r_2' = \frac{Q_w - \rho_a \dot V_a c_{p,a}\,(T_{ra} - \operatorname{median}_r T_{in,mid,r})}{\rho_a \dot V_a c_{p,a}\,(T_{ra} - \operatorname{median}_r T_{in,mid,r})} . \tag{E41b}\label{eq:e41b}
+\end{equation}
+If the sensor is biased, the substitution removes the error and $\lvert r_2' \rvert$ falls within the threshold. If airflow is really lost, the estimated airflow is still wrong and the balance stays broken. The sensor-fault hypothesis is accepted only if assuming it restores consistency, which is consistency-based reasoning applied to a single hypothesis.
+
+\subsection{Electrical distribution and battery}
+
+\begin{align}
+  P &= \sqrt{3}\, V_{LL}\, I \cos\varphi , \tag{E42}\\
+  L_b &= I_b / I_{brk,b} , \tag{E43}\\
+  \mathit{IU} &= \frac{\max_{p} \lvert I_p - \bar I \rvert}{\bar I} , \tag{E44}\\
+  \eta_{UPS} &= P_{UPS,out} / P_{UPS,in} , \qquad P_{UPS,loss} = P_{UPS,in} - P_{UPS,out} , \tag{E45--E46}\\
+  \mathit{pPUE} &= \frac{P_{IT} + P_f + P_{UPS,loss}}{P_{IT}} , \tag{E47}\\
+  V_{cell} &= V_{str} / n_{cell} , \qquad \rho_R = R_{cell} / R_{cell,0} , \tag{E48--E49}\\
+  t_{run} &= H \left(\frac{C_H}{I_{dis}\, H}\right)^{k_p} , \tag{E50}\\
+  \mathcal{L}(T_b) &= \mathcal{L}_{25} \cdot 2^{-(T_b - 25)/10} . \tag{E51}
+\end{align}
+A branch loading ratio $L_b$ above 0.8 is an overload ($F_6$) under the continuous-load rule \parencite{nfpa702023}. Phase imbalance $\mathit{IU}$ is a common root cause. On static bypass ($F_8$), the UPS passes utility power straight through and $\eta_{UPS}$ rises from about 0.95 to about 1. Each rack's metered power should also equal the sum of its six phase powers, computed with E42 per phase. That relation separates a real overload from a faulty current sensor. A cell resistance ratio $\rho_R$ well above 1 indicates battery degradation ($F_7$) \parencite{ieee1188}. Equation E50 is Peukert's law for runtime, and E51 the common rule of thumb that VRLA life halves for every 10\,K above 25\,\textdegree C; both constants are to be confirmed against manufacturer data.
+
+\subsection{Evidence, noise estimation and ranking}
+
+\begin{align}
+  a_x &= t_{now} - t_x , \tag{E52}\\
+  \delta_x &= \frac{x - x_{ref}}{x_{ref}} , \qquad z_x = \frac{x - \mu_x}{\sigma_x} , \tag{E53}\label{eq:sigma}\\
+  \hat x_k &= \alpha\, x_k + (1 - \alpha)\, \hat x_{k-1} , \tag{E54}\\
+  e_j &= \min\!\left(1, \max\!\left(0,\ \tfrac{1}{2} + \frac{d_j}{4\sigma_j}\right)\right) , \tag{E55}\label{eq:grade}\\
+  E_k &= \textstyle\sum_j w_{jk}\, e_j , \qquad \mathrm{Conf}(k) = \frac{E_k}{E_k + E_{\neg k} + \epsilon} . \tag{E56}
+\end{align}
+A sample older than 60\,s is stale ($S_2$). In E55, $d_j$ is the signed distance of a feature past its threshold and $\sigma_j$ its noise, so a symptom has evidence 0.5 exactly at its threshold and counts as present only one standard deviation beyond it. The noise is estimated from the case itself: the six middle inlets all see the same supply air, so their spread measures temperature-sensor noise. The robust estimate $\sigma_T = \max(0.15\,\mathrm{K},\ 1.4826\,\mathrm{MAD})$, using the median absolute deviation, cannot be distorted by one biased sensor \parencite{rousseeuw1993}. Electrical features use a noise scale estimated in the same way from the rack power balances. In E56, $w_{jk}$ is the weight of symptom $j$ for hypothesis $k$ and $E_{\neg k}$ the evidence against $k$ from expected symptoms that are clearly absent. $\mathrm{Conf}(k)$ ranks competing hypotheses. It is not a probability, and the model makes no probabilistic claim. Equation E54 is a noise filter for repeated readings and is not used, because each test case is a single snapshot.
+
+\subsection{Closed-world normality and evaluation metrics}
+
+Normal operation is concluded under the closed-world assumption when no fault can be derived and every inlet is within the envelope:
+\begin{equation}
+  F_N \iff \left(\forall F_k \in \mathcal{H}:\ \mathit{KB} \cup E \not\models F_k\right) \wedge \left(\forall r:\ T_{in,max,r} \le T_{rec,max}\right) .
+\end{equation}
+Performance is measured with the metrics required by the framework. With $\mathit{TP}$, $\mathit{TN}$, $\mathit{FP}$ and $\mathit{FN}$ the true and false positives and negatives of a fault class,
+\begin{gather}
+  \mathrm{Accuracy} = \frac{\mathit{TP} + \mathit{TN}}{\mathit{TP} + \mathit{TN} + \mathit{FP} + \mathit{FN}} , \quad
+  \mathrm{Precision} = \frac{\mathit{TP}}{\mathit{TP} + \mathit{FP}} , \quad
+  \mathrm{Recall} = \frac{\mathit{TP}}{\mathit{TP} + \mathit{FN}} , \label{eq:metrics} \\
+  F_1 = \frac{2\,\mathrm{Precision}\cdot\mathrm{Recall}}{\mathrm{Precision} + \mathrm{Recall}} , \quad
+  \mathrm{Coverage} = \frac{N_{correct}}{N_{test}} , \quad
+  \mathrm{EMR} = \frac{1}{N_{test}} \textstyle\sum_i \mathbf{1}[\hat Y_i = Y_i] , \\
+  \mathrm{ExplainabilityRate} = \frac{N_{valid\ explanations}}{N_{diagnoses}} , \qquad
+  \mathrm{PlanValidity} = \frac{N_{valid\ plans}}{N_{plans}} ,
+\end{gather}
+where $Y_i$ and $\hat Y_i$ are the true and diagnosed fault sets of case $i$. Mean and maximum reasoning time complete the set. Chapter~\ref{ch:dataset_and_evaluation} defines exactly how each is counted for multiple-fault cases.
+
+\begin{small}
+\begin{longtable}{L{3.6cm}L{8.6cm}L{1.8cm}}
+  \caption{Nomenclature.}\label{tab:nomenclature}\\
+  \toprule
+  Symbol & Meaning & Unit \\
+  \midrule
+  \endfirsthead
+  \toprule
+  Symbol & Meaning & Unit \\
+  \midrule
+  \endhead
+  $a_x$ & Sample age of variable $x$ & s \\
+  $C$, $C_{min}$, $C_{max}$, $C^{*}$ & Heat capacity rate $\dot m c_p$; smaller, larger; their ratio & kW/K \\
+  $C_H$, $H$ & Battery rated capacity at rated discharge time $H$ & Ah, h \\
+  $c_{p,a}$, $c_{p,w}$ & Specific heat of air (1.006) and water (4.186) & kJ/(kg\,K) \\
+  $d_j$, $e_j$ & Distance past threshold; graded evidence of symptom $j$ & --, -- \\
+  $E_k$, $E_{\neg k}$ & Weighted evidence for and against hypothesis $k$ & -- \\
+  $f_{cpu,s}$, $f_{nom,s}$ & Measured and nominal CPU clock & GHz \\
+  $h_r$ & Hot-rack indicator & -- \\
+  $I$, $I_p$, $\bar I$, $I_b$, $I_{brk,b}$ & Line, phase and mean phase current; branch current and rating & A \\
+  $I_{dis}$ & Battery discharge current & A \\
+  $\mathit{IU}$ & Phase current imbalance & -- \\
+  $K_{filt}$, $K_{filt,clean}$ & Filter resistance coefficient, current and clean & Pa\,s$^2$/m$^6$ \\
+  $k_c$, $k_p$ & Coverage factor; Peukert exponent & -- \\
+  $L_b$ & Branch loading ratio & -- \\
+  $\mathcal{L}(T_b)$, $\mathcal{L}_{25}$ & Battery service life at $T_b$ and at 25\,\textdegree C & years \\
+  $\dot m$, $\dot m_a$, $\dot m_r$, $\dot m_s$, $\dot m_w$ & Mass flow: general, CRAH air, rack, server, water & kg/s \\
+  $\dot m_{w,max}$, $\dot m_w^{exp}$, $\dot m_w^{meas}$ & Water flow: valve fully open, predicted, measured & kg/s \\
+  $N$, $N_{rated}$ & CRAH fan speed and rated speed & \% \\
+  $n_R$, $n_{cell}$ & Number of racks; number of cells in series & -- \\
+  $\mathit{NTU}$ & Number of transfer units & -- \\
+  $P$, $P_s$, $P_r$, $P_{IT}$ & Three-phase power; server, rack and row IT power & kW \\
+  $P_{idle}$, $P_{max}$, $P_{cpu,s}$ & Server idle and full-load power; CPU power & kW \\
+  $P_f$, $P_{f,exp}$, $P_{f,rated}$ & Fan power: measured, expected, rated & kW \\
+  $P_{UPS,in}$, $P_{UPS,out}$, $P_{UPS,loss}$ & UPS input, output and loss power & kW \\
+  $\mathit{pPUE}$ & Partial power usage effectiveness of the row & -- \\
+  $Q_a$, $Q_w$, $Q_{coil}$, $Q_{env}$ & Heat flows: air side, water side, coil, envelope & kW \\
+  $R_{cell}$, $R_{cell,0}$ & Cell internal resistance, current and baseline & m$\Omega$ \\
+  $R_{th}$ & CPU junction-to-inlet thermal resistance & K/kW \\
+  $\mathcal{R}_v$ & Valve rangeability & -- \\
+  $r_1$, $r_2$, $r_2'$ & Energy balance residuals; $r_2$ with substituted supply air & -- \\
+  $r_{S,r}$, $r_{sa}$ & Neighbour-consistency residuals & K \\
+  $\mathit{RCI}_{HI}$, $\mathit{RCI}_{LO}$ & Rack cooling indices & \% \\
+  $\mathit{SHI}$, $\mathit{RHI}$ & Supply and return heat indices & -- \\
+  $T_{in,r}$, $T_{in,top,r}$, $T_{in,mid,r}$, $T_{in,max,r}$ & Rack inlet temperature: general, top, middle, maximum & \textdegree C \\
+  $T_{out,r}$, $T_{out,top,r}$, $T_{out,bot,r}$ & Rack outlet temperature: mean, upper half, lower half & \textdegree C \\
+  $T_{sa}$, $T_{ra}$, $T_{sp}$ & CRAH supply, return and setpoint temperatures & \textdegree C \\
+  $T_{ws}$, $T_{wr}$ & Chilled-water supply and return temperatures & \textdegree C \\
+  $T_{cpu,s}$, $T_b$ & CPU temperature; battery temperature & \textdegree C \\
+  $T_{rec,max}$, $T_{rec,min}$, $T_{all,max}$, $T_{all,min}$ & ASHRAE limits: 27, 18, 32 and 15 & \textdegree C \\
+  $t_{run}$, $t_{now}$, $t_x$ & Battery runtime; evaluation time; sample timestamp & h, s, s \\
+  $u_s$ & Server CPU utilisation & -- \\
+  $u_Q$, $u_T$, $u_{\dot m}$, $u_{r_i}$ & Standard uncertainties & as quantity \\
+  $UA$ & Coil overall heat-transfer conductance & kW/K \\
+  $V_{LL}$, $V_{str}$, $V_{cell}$ & Line voltage; battery string and cell voltage & V \\
+  $\dot V$, $\dot V_a$, $\dot V_{rated}$ & Volume flow: general, CRAH, rated & m$^3$/s \\
+  $w_{jk}$ & Weight of symptom $j$ for hypothesis $k$ & -- \\
+  $x$, $x_{ref}$, $\hat x_k$ & Variable, reference value, filtered value & as variable \\
+  $\alpha$ & Smoothing weight & -- \\
+  $\beta_r$ & Recirculation fraction of rack $r$ & -- \\
+  $\Delta p_{fan}$, $\Delta p_{rated}$, $\Delta p_{tot}$, $\Delta p_{filt}$ & Pressure rise or drop: fan, rated, system, filter & Pa \\
+  $\Delta T_s$, $\Delta T_w$ & Temperature rise across a server; of the chilled water & K \\
+  $\Delta T_{strat,r}$, $\Delta T_{strat,out,r}$ & Inlet and outlet stratification & K \\
+  $\delta_{sa}$, $\delta_x$ & Supply-air deviation; relative deviation & K, -- \\
+  $\varepsilon$, $\varepsilon_{P,r}$, $\epsilon$ & Coil effectiveness; rack power residual; small constant & -- \\
+  $\eta_f$, $\eta_{UPS}$ & Fan and UPS efficiency & -- \\
+  $\theta_v$ & Valve opening fraction & -- \\
+  $\vartheta_i$ & Violation threshold of residual $r_i$ & -- \\
+  $\lambda_{filt}$ & Filter loading ratio & -- \\
+  $\mu_x$, $\sigma_x$, $z_x$, $\sigma_j$, $\sigma_T$ & Mean, standard deviation, z-score; feature and temperature noise & as variable \\
+  $\rho_a$ & Air density, 1.2 & kg/m$^3$ \\
+  $\rho_f$, $\rho_w$, $\rho_R$ & Fan power, water flow and cell resistance ratios & -- \\
+  $\varphi$ & Phase angle; $\cos\varphi$ is the power factor & rad \\
+  $\phi_{hot}$, $\phi_{f,s}$ & Hot-rack fraction; CPU frequency ratio & -- \\
+  $\omega_s$ & Server fan speed & rpm \\
+  \bottomrule
+\end{longtable}
+\end{small}
+
+% ---------------------------------------------------------------------------
+\section{Knowledge Acquisition}
+\label{sec:acquisition}
+
+The knowledge in the system came from four kinds of source: engineering standards, literature, manufacturer data and explicitly stated engineering assumptions (Figure~\ref{fig:acquisition}). Each piece of knowledge was converted into one of the representations of Table~\ref{tab:kr-layers} and tagged with its source, so that every rule has an identifiable provenance. Table~\ref{tab:acquisition} gives representative entries. The complete rule and provenance tables are generated from the knowledge base itself and reproduced in Chapter~\ref{ch:design_and_development}.
+
+\begin{figure}[htbp]
+  \centering
+  \input{figures/fig_knowledge_acquisition.tex}
+  \caption{Knowledge-acquisition workflow, from sources to Prolog representation, with feedback from calibration tests.}
+  \label{fig:acquisition}
+\end{figure}
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Representative knowledge-acquisition entries.}
+  \label{tab:acquisition}
+  \begin{tabular}{L{4.0cm}L{3.4cm}L{6.6cm}}
+    \toprule
+    Knowledge & Source & Converted into \\
+    \midrule
+    Recommended inlet envelope 18 to 27\,\textdegree C & \textcite{ashrae2021} & Threshold facts; rule r01 \\
+    Fan power scales with speed cubed & \textcite{ashraehvac2020} & Equation E23; rules r07, r08, r48, r49 \\
+    Continuous load at most 80\% of rating & \textcite{nfpa702023} & Threshold fact; rule r17 \\
+    Rising resistance indicates capacity fade & \textcite{ieee1188} & Equation E49; rule r18 \\
+    Blanking panels prevent recirculation & Industry best practice (to verify) & Maintenance plan for $F_4$ \\
+    Server power linear in utilisation & \textcite{fan2007} & Equation E1 \\
+    Minimal diagnoses are minimal hitting sets & \textcite{reiter1987} & Consistency-based module \\
+    Parsimonious covering & \textcite{peng1990} & Abductive module \\
+    Fault models exonerate components & \textcite{struss1989} & \texttt{fm/2} facts \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Engineering assumptions.} Where no source gave a value for this particular row, the value was set by engineering reasoning and recorded as a source of type \texttt{assumption}. Examples are the 3\,K inlet stratification limit, chosen above the 1 to 2\,K seen in sealed racks, and the 0.85 fan power ratio, chosen well outside the $\pm$5\% scatter of a healthy fan. Of the 47 rules, 36 rest at least partly on such an assumption. Chapter~\ref{ch:dataset_and_evaluation} quantifies how sensitive the results are to each one, and shows that the large effects occur only when a threshold moves inside the scatter of normal operation.
+
+\paragraph{Validation against a physics simulator.} Because no measured fault data were available, the knowledge was tested against cases generated by a steady-state simulator of the row, built from the equations of Section~\ref{sec:maths} (Chapter~\ref{ch:dataset_and_evaluation}). This exposed three errors that hand-made test cases had not revealed:
+\begin{enumerate}
+  \item The first rule for $F_2$ expected the chilled-water temperature rise to fall to zero. Physically, low flow makes it rise. The rule was rewritten to compare measured flow with the valve prediction (Equation E34a).
+  \item A single-feed rack design ran at 81\% of its breaker rating in normal operation at high load, which would have made every overload rule fire falsely. The design was changed to dual feeds, as in real data centres.
+  \item A rule that compared inlet and outlet stratification directly failed, because server fans speed up when their inlet air is hot. The final rules compare outlet stratification on its own with a fixed threshold (Equation E11a).
+\end{enumerate}
+In each case the knowledge was revised to agree with the physics, which is the feedback loop shown in Figure~\ref{fig:acquisition}. Thresholds were checked only against a calibration dataset. A separate held-out dataset was never used to adjust anything, so that the reported performance is not inflated by tuning.

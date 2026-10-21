@@ -1,0 +1,79 @@
+\chapter{Conclusion and Final Project Specification}
+\label{ch:conclusion}
+
+% ---------------------------------------------------------------------------
+\section{Summary of the Developed System}
+\label{sec:summary}
+
+This project developed an explainable expert system, implemented in SWI-Prolog, that diagnoses faults in the cooling and power infrastructure of a data centre row and recommends corrective maintenance. Its knowledge base represents the row's components, a 60-equation engineering model, 24 sourced thresholds, 47 diagnostic rules, causal signatures for abduction, 20 analytical redundancy relations with fault models, and a corrective plan for every diagnosis. Three inference mechanisms reason over it: deductive rules executed by a proof-recording meta-interpreter, abduction by parsimonious covering, and consistency-based diagnosis by minimal hitting sets with fault models. They are combined as ``abduction proposes, consistency disposes''. An explanation facility reports, for every diagnosis, the evidence, the rules, the competing hypotheses and the reasons the weaker ones were rejected. A physics simulator generated the synthetic datasets used to test the system.
+
+% ---------------------------------------------------------------------------
+\section{Diagnostic Performance}
+\label{sec:performance}
+
+On 255 held-out cases that played no part in development, the four configurations required by the framework reached 91.0\% to 94.5\% exact-match accuracy and a macro F1-score of up to 0.958 (Table~\ref{tab:modes-holdout}). Every configuration diagnosed every normal, single-fault and instrumentation case correctly. Every diagnosis was explained, and between 85\% and 94\% of the maintenance plans addressed a fault that was really present. Reasoning took about a millisecond per case.
+
+The configuration with deduction and abduction was the most accurate, at 94.5\%. The complete system, at 93.7\%, was the only configuration to catch the smallest supply-sensor bias in the calibration data, but under heavy noise it occasionally reported a meter fault that was not present. The sensitivity analysis showed graceful degradation where deduction alone collapsed. At four times the nominal sensor noise, abduction kept 73\% exact match against 42\% for deduction. With 20\% or more of the readings missing, the model-based configurations led deduction by about 22 percentage points. Precision stayed close to 1 with up to four simultaneous faults. Sensor biases of 3\,K and more were reliably detected.
+
+% ---------------------------------------------------------------------------
+\section{Answers to the Research Questions}
+\label{sec:answers}
+
+\paragraph{RQ1: representation.} Engineering knowledge was represented in seven layers of Prolog facts and Horn clauses, from component structure to maintenance plans (Section~\ref{sec:kr-scheme}). Storing rules as data, with identifiers and sources, gave every conclusion a traceable provenance and let the report's tables be generated from the knowledge base. Graded symptoms, which treat missing evidence as unknown rather than absent, extended the representation to noisy and incomplete data without giving up its logical reading.
+
+\paragraph{RQ2: comparison of reasoning modes.} Deduction is the fastest and most transparent mode and is accurate on clean data, but crisp thresholds turn noise into false findings and a missing reading disables a rule. Abduction gave the largest gain in accuracy and robustness, because parsimony keeps weakly supported faults out of an explanation. Consistency checking adds the ability to reject explanations that leave a violated physical relation unexplained, and to separate sensor faults from equipment faults, at the cost of fragility when a relation's threshold is wrong or the noise is heavy. All modes remain tractable, at a few milliseconds per case.
+
+\paragraph{RQ3: instrumentation faults.} Yes, within the limits of the available redundancy. Treating sensors as components with fault models, and accepting a sensor fault only when assuming it restores an energy balance, let the system tell a biased sensor from a real fault. It also found real faults that a biased sensor was hiding. Every sensor fault in the held-out data was diagnosed correctly. The price is some false sensor alarms under heavy noise.
+
+\paragraph{RQ4: explanation and maintenance.} Yes. Every diagnosis in every configuration was accompanied by an explanation containing each element the framework requires, and by a sourced corrective plan. Plan interactions order the work when one repair depends on another, such as fixing a biased sensor before using it to verify a recirculation repair.
+
+\paragraph{The central question.} The project's evidence supports a qualified yes. Engineering knowledge of data centre cooling and power can be represented formally in Prolog and reasoned over to produce explainable, defensible diagnoses and appropriate maintenance decisions. The answer is qualified because it has been demonstrated against a physics simulator, not yet against a real facility.
+
+% ---------------------------------------------------------------------------
+\section{Contribution to Knowledge Representation and Reasoning}
+\label{sec:krr-contribution}
+
+The project shows three classical theories of diagnosis working together on one engineering problem, and measures what each contributes. It shows that graded, noise-adaptive evidence lets abduction stay robust where crisp rules fail, without abandoning a symbolic, explainable core. It shows how fault models, combined with a hypothesis test on an energy balance, give consistency-based diagnosis the ability to exonerate components and separate sensors from equipment. It also documents the limits of that combination, in particular the fragility of hard consistency constraints to a mis-set relation threshold.
+
+% ---------------------------------------------------------------------------
+\section{Engineering Contribution}
+\label{sec:engineering-contribution}
+
+For data centre engineering, the project provides a formal fault taxonomy for the cooling and power path of a row, a set of diagnostic signatures grounded in the physics, and analytical redundancy relations that can be checked from standard monitoring data. Examples are the outlet stratification that separates recirculation from a biased sensor, the valve-characteristic flow ratio that identifies chilled-water loss, and the rack power balance that separates an overload from a faulty current sensor. The physics simulator and its calibration and held-out protocol offer a way to test diagnostic knowledge before it is applied to a real facility.
+
+% ---------------------------------------------------------------------------
+\section{Limitations and Future Work}
+\label{sec:conclusion-future}
+
+The main limitation is that all test data are synthetic and share the knowledge base's engineering model. The most important next step is therefore validation on measured data with recorded faults. After that, the most valuable improvements are reasoning over time series rather than snapshots, sources for the remaining engineering assumptions, graded rather than hard consistency checking, a wider scope covering several rows and the chiller plant, and evaluation of the explanations by maintenance engineers. Section~\ref{sec:limitations} lists the limitations in full and Section~\ref{sec:future} the improvements.
+
+% ---------------------------------------------------------------------------
+\section{Final Project Specification}
+\label{sec:specification}
+
+Table~\ref{tab:specification} summarises the system as delivered.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Final project specification.}
+  \label{tab:specification}
+  \begin{tabular}{L{4.2cm}L{9.8cm}}
+    \toprule
+    Item & Specification \\
+    \midrule
+    System & Cooling and power infrastructure of one data centre row: six racks of 20 servers, one chilled-water CRAH, one double-conversion UPS with VRLA battery, row and dual-feed rack PDUs \\
+    Fault classes & Normal, eight physical faults ($F_1$ to $F_8$) and two instrumentation faults ($S_1$, $S_2$) \\
+    Observation vector & 26 variables, about 460 readings per case \\
+    Engineering model & 60 tagged equations \\
+    Knowledge base & 47 rules, 24 thresholds, 24 sources, 31 causal links, 20 redundancy relations, 14 fault models, 12 maintenance plans \\
+    Reasoning & Deductive, abductive and consistency-based, in four configurations \\
+    Explanation & Proof traces, supporting evidence, competing hypotheses with reasons for rejection, conflict sets \\
+    Maintenance & Sourced plan for every diagnosis, with plan interactions \\
+    Implementation & SWI-Prolog 10.0.2; about 1{,}900 lines of Prolog for the knowledge base and engines \\
+    Data & Synthetic: 4 smoke cases, 255 calibration cases, 255 held-out cases and 24 sensitivity sets of 60 cases, all regenerable from seeds \\
+    Performance, held-out & 91.0\% to 94.5\% exact match; macro F1 up to 0.958; ExplainabilityRate 100\%; about 1\,ms per case \\
+    Reproducibility & Generated tables; a 14-check reproduction script \\
+    \bottomrule
+  \end{tabular}
+\end{table}

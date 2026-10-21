@@ -1,0 +1,31 @@
+% Figure 6: explanation-generation workflow of why/1.
+\begin{tikzpicture}[x=1cm, y=1cm]
+  \node[out=5cm] (diag) at (4.5,0) {Final diagnosis and how it was decided};
+  \node[decision=2.4cm] (dec) at (4.5,-2.0) {each label: proved by the rules?};
+  \node[kb=4.6cm, align=left] (proof) at (0.9,-4.4)
+    {\textbf{Deductive proof}\\
+     \footnotesize observed readings\\
+     \footnotesize derived engineering quantities\\
+     \footnotesize thresholds with their sources\\
+     \footnotesize derived conditions\\
+     \footnotesize rules fired, with provenance\\
+     \footnotesize full reasoning trace};
+  \node[kb=4.8cm, align=left] (abd) at (8.2,-4.4)
+    {\textbf{Abductive support}\\
+     \footnotesize supporting symptoms, each with\\
+     \footnotesize its value, threshold, noise,\\
+     \footnotesize evidence strength and source};
+  \node[out=5.8cm] (plan) at (4.5,-6.9) {Maintenance plan for each label\\ \footnotesize priority, ordered actions, rationale, source};
+  \node[out=5.8cm] (inter) at (4.5,-8.4) {Plan interactions\\ \footnotesize which repair must come first};
+  \node[reason=5.8cm] (comp) at (4.5,-9.9) {Competing hypotheses\\ \footnotesize confidence, verdict, reason for rejection};
+  \node[reason=5.8cm] (cons) at (4.5,-11.4) {Consistency check\\ \footnotesize conflict sets, alternative minimal diagnoses};
+
+  \draw[flow] (diag) -- (dec);
+  \draw[flow] (dec.west) -| node[tag, pos=0.25, above] {yes} (proof.north);
+  \draw[flow] (dec.east) -| node[tag, pos=0.25, above] {no} (abd.north);
+  \draw[flow] (proof.south) |- (plan.west);
+  \draw[flow] (abd.south) |- (plan.east);
+  \draw[flow] (plan) -- (inter);
+  \draw[flow] (inter) -- (comp);
+  \draw[flow] (comp) -- (cons);
+\end{tikzpicture}

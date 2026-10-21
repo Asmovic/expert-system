@@ -1,0 +1,119 @@
+
+=== Case h188: hot-air recirculation + sensor bias masking, high load  [data origin: synthetic] ===
+
+FINAL DIAGNOSIS (complete system): [hot_air_recirculation(rack_a04),sensor_bias(t_inlet_top,rack_a04)]
+  Decided by: the best-ranked abductive explanation, confirmed consistent with every conflict and fault model
+
+DIAGNOSIS: hot_air_recirculation(rack_a04)
+
+  Observed evidence:
+    - CRAH supply-air temperature of crah_1 = 19.734 degC
+    - rack outlet temperature of rack_a04 = 38.715 degC
+    - rack outlet temperature, top of rack_a04 = 41.208 degC
+    - rack inlet temperature, middle of rack_a04 = 19.867 degC
+    - rack inlet temperature, top of rack_a04 = 20.725 degC
+
+  Derived engineering quantities:
+    - outlet_stratification(h188,rack_a04,4.986)
+    - inlet_stratification(h188,rack_a04,0.858)
+
+  Reference values:
+    - strat_out_max = 3.5 kelvin  [source: a7_outlet_strat]
+    - strat_max = 3.0 kelvin  [source: a5_stratification]
+    - t_supply_setpoint = 20.0 degC  [source: a1_supply_setpoint]
+    - t_supply_band = 2.0 kelvin  [source: a1_supply_setpoint]
+
+  Derived conditions:
+    - outlet_stratified(rack_a04)  (by r11)
+    - inlet_not_stratified(rack_a04)  (by r13)
+    - supply_air_normal(crah_1)  (by r06)
+
+  Rules activated:
+    - r24  [source: eu_coc_dc, standard]
+    - r11  [source: a7_outlet_strat, assumption]
+    - r13  [source: a5_stratification, assumption]
+    - r06  [source: a1_supply_setpoint, assumption]
+
+  Reasoning trace:
+    fault(hot_air_recirculation(rack_a04))  [r24]
+      cond(outlet_stratified(rack_a04))  [r11]
+        outlet_stratification(h188,rack_a04,4.986)
+        threshold(strat_out_max,3.5)
+        4.986>3.5
+      cond(inlet_not_stratified(rack_a04))  [r13]
+        inlet_stratification(h188,rack_a04,0.858)
+        threshold(strat_max,3)
+        0.858=<3
+      serves(crah_1,rack_a04)
+      cond(supply_air_normal(crah_1))  [r06]
+        component(crah_1,crah)
+        obs(h188,t_supply_air,crah_1,19.734)
+        threshold(t_supply_setpoint,20)
+        threshold(t_supply_band,2)
+        19.734=<20+2
+
+  Recommended corrective maintenance for rack_a04  [priority: high]:
+    1. Inspect the rack for missing blanking panels and unsealed cable openings
+    2. Check containment doors and roof panels for gaps
+    3. Install blanking panels and seal the openings
+    4. Re-measure top and middle inlet temperatures to confirm the difference is below 3 K
+  Rationale: Hot exhaust air re-entering the front of the rack heats the upper servers while the cooling unit itself is healthy.  [source: eu_coc_dc]
+
+DIAGNOSIS: sensor_bias(t_inlet_top,rack_a04)
+
+  Observed evidence:
+    - rack outlet temperature of rack_a04 = 38.715 degC
+    - rack outlet temperature, top of rack_a04 = 41.208 degC
+    - rack inlet temperature, middle of rack_a04 = 19.867 degC
+    - rack inlet temperature, top of rack_a04 = 20.725 degC
+
+  Derived engineering quantities:
+    - outlet_stratification(h188,rack_a04,4.986)
+    - inlet_stratification(h188,rack_a04,0.858)
+
+  Reference values:
+    - strat_out_max = 3.5 kelvin  [source: a7_outlet_strat]
+    - strat_max = 3.0 kelvin  [source: a5_stratification]
+
+  Derived conditions:
+    - top_inlet_sensor_suspect(rack_a04)  (by r42)
+    - outlet_stratified(rack_a04)  (by r11)
+    - inlet_not_stratified(rack_a04)  (by r13)
+
+  Rules activated:
+    - r51  [source: a7_outlet_strat, assumption]
+    - r42  [source: a7_outlet_strat, assumption]
+    - r11  [source: a7_outlet_strat, assumption]
+    - r13  [source: a5_stratification, assumption]
+
+  Reasoning trace:
+    fault(sensor_bias(t_inlet_top,rack_a04))  [r51]
+      cond(top_inlet_sensor_suspect(rack_a04))  [r42]
+        cond(outlet_stratified(rack_a04))  [r11]
+          outlet_stratification(h188,rack_a04,4.986)
+          threshold(strat_out_max,3.5)
+          4.986>3.5
+        cond(inlet_not_stratified(rack_a04))  [r13]
+          inlet_stratification(h188,rack_a04,0.858)
+          threshold(strat_max,3)
+          0.858=<3
+        not cond(h188,mid_inlet_deviates(rack_a04))
+
+  Recommended corrective maintenance for t_inlet_top on rack_a04  [priority: high]:
+    1. Check the sensor against a calibrated reference instrument
+    2. Check the sensor mounting and position
+    3. Recalibrate or replace the sensor
+    4. Do not act on readings from this sensor until it is verified
+  Rationale: One sensor disagrees with independent sensors that measure the same air, so the sensor is more likely wrong than the equipment.  [source: a13_neighbour]
+
+  Plan interactions (order the work as follows):
+    - Fix the top inlet sensor on rack_a04 first. The last step of the recirculation plan re-measures with that sensor.
+
+  Clearly present symptoms: [outlet_stratified(rack_a04),top_reads_low(rack_a04)]
+
+  Competing hypotheses (Conf is Stage 4 Eq. 56, a ranking score, not a probability):
+    - sensor_bias(t_inlet_top,rack_a04)  Conf 0.99: part of a minimal explanation
+    - hot_air_recirculation(rack_a04)  Conf 0.55: part of a minimal explanation
+
+  Consistency check: 1 conflict set(s) from violated redundancy relations.
+    - at least one of [rack_seal(rack_a04),sensor(t_outlet_top,rack_a04),sensor(t_outlet,rack_a04)] is abnormal

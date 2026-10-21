@@ -1,0 +1,61 @@
+% Figure 4: fault propagation and causal structure.
+\begin{tikzpicture}[x=1cm, y=1cm]
+  \node[grouplabel] at (1.5,0.75) {Fault};
+  \node[grouplabel] at (5.3,0.75) {Mechanism};
+  \node[grouplabel] at (9.1,0.75) {Observable effect};
+  \node[grouplabel] at (12.9,0.75) {Consequence};
+
+  \tikzset{f/.style={kb=2.9cm, font=\footnotesize, minimum height=7mm},
+           m/.style={reason=2.9cm, font=\footnotesize, minimum height=7mm},
+           e/.style={data=2.9cm, font=\footnotesize, minimum height=7mm},
+           c/.style={out=2.9cm, font=\footnotesize, minimum height=7mm}}
+
+  % cooling chain
+  \node[f] (f3) at (1.5,0)    {F3 filter clogging};
+  \node[f] (f1) at (1.5,-1.1) {F1 CRAH fan failure};
+  \node[f] (f2) at (1.5,-2.2) {F2 chilled-water loss};
+  \node[m] (m3) at (5.3,0)    {airflow reduced};
+  \node[m] (m1) at (5.3,-1.1) {airflow lost};
+  \node[m] (m2) at (5.3,-2.2) {coil cannot absorb heat};
+  \node[e] (e1) at (9.1,-1.1) {row inlets above 27\,\textdegree C};
+  % rack and server
+  \node[f] (f4) at (1.5,-3.5) {F4 hot-air recirculation};
+  \node[m] (m4) at (5.3,-3.5) {exhaust re-enters the inlets};
+  \node[e] (e4) at (9.1,-3.5) {top inlet and exhaust stratified};
+  \node[f] (f5) at (1.5,-4.6) {F5 server fan failure};
+  \node[m] (m5) at (5.3,-4.6) {server airflow lost};
+  \node[e] (e5) at (9.1,-4.6) {CPU near 95\,\textdegree C};
+  \node[c] (c1) at (12.9,-2.8) {CPU throttling and server shutdown};
+  % power
+  \node[f] (f6) at (1.5,-5.9) {F6 branch overload};
+  \node[m] (m6) at (5.3,-5.9) {current above 80\% of rating};
+  \node[e] (e6) at (9.1,-5.9) {breaker trip};
+  \node[f] (f7) at (1.5,-7.0) {F7 battery degradation};
+  \node[m] (m7) at (5.3,-7.0) {capacity fades};
+  \node[f] (f8) at (1.5,-8.1) {F8 UPS on bypass};
+  \node[m] (m8) at (5.3,-8.1) {no battery path};
+  \node[e] (e7) at (9.1,-7.55) {no ride-through on a utility event};
+  \node[c] (c2) at (12.9,-6.7) {servers lose power};
+  % instrumentation
+  \node[f] (s1) at (1.5,-9.4) {S1 sensor bias};
+  \node[m] (ms1) at (5.3,-9.4) {false or hidden reading, can mask F4};
+  \node[f] (s2) at (1.5,-10.5) {S2 telemetry dropout};
+  \node[m] (ms2) at (5.3,-10.5) {stale data};
+  \node[c] (c3) at (12.9,-9.95) {wrong, missed or uncertain diagnosis};
+
+  \foreach \a/\b in {f3/m3, f1/m1, f2/m2, f4/m4, m4/e4, f5/m5, m5/e5, f6/m6, m6/e6, f7/m7, f8/m8, s1/ms1, s2/ms2}
+    \draw[flow] (\a) -- (\b);
+  \draw[flow] (m3.east) -- ++(0.4,0) |- (e1.west);
+  \draw[flow] (m1) -- (e1);
+  \draw[flow] (m2.east) -- ++(0.4,0) |- (e1.west);
+  \draw[flow] (e1.east) -- ++(0.4,0) |- (c1.west);
+  \draw[flow] (e4.east) -- ++(0.4,0) |- (c1.west);
+  \draw[flow] (e5.east) -- ++(0.4,0) |- (c1.west);
+  \draw[flow] (m7.east) -- ++(0.4,0) |- (e7.west);
+  \draw[flow] (m8.east) -- ++(0.4,0) |- (e7.west);
+  \draw[flow] (e6.east) -- ++(0.4,0) |- (c2.west);
+  \draw[flow] (e7.east) -- ++(0.4,0) |- (c2.west);
+  \draw[flow] (ms1.east) -- ++(0.6,0) |- (c3.west);
+  \draw[flow] (ms2.east) -- ++(0.6,0) |- (c3.west);
+  \draw[feedback] (f3.west) -- ++(-0.3,0) |- node[tag, pos=0.25, rotate=90, anchor=south] {worsens} (f1.west);
+\end{tikzpicture}

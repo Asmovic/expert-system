@@ -1,0 +1,338 @@
+\chapter{Design and Development of the Prolog Expert System}
+\label{ch:design_and_development}
+
+This chapter describes how the knowledge of Chapter~\ref{ch:theory_and_kr} was turned into a working expert system. It covers the architecture (Section~\ref{sec:architecture}), the design of the knowledge base (Section~\ref{sec:kb-design}), the predicates and rules (Section~\ref{sec:predicates}), the three inference mechanisms and their combination (Sections~\ref{sec:inference} to~\ref{sec:cbd}), the explanation facility (Section~\ref{sec:explanation}) and the corrective-maintenance planner (Section~\ref{sec:planner}). All diagnostic reasoning is implemented in SWI-Prolog. Python is used only to generate synthetic test data and to format results.
+
+\lstset{language=Prolog, basicstyle=\ttfamily\footnotesize, columns=fullflexible, keepspaces=true,
+        breaklines=true, frame=single, rulecolor=\color{black!35}, xleftmargin=2pt, xrightmargin=2pt,
+        commentstyle=\color{black!60}\itshape, keywordstyle={}, showstringspaces=false}
+
+% ---------------------------------------------------------------------------
+\section{System Architecture}
+\label{sec:architecture}
+
+Figure~\ref{fig:architecture} shows the architecture. It follows the ten components that the project framework asks for:
+
+\begin{enumerate}
+  \item a user and input interface: test cases loaded as Prolog facts, and queries such as \texttt{why/1};
+  \item observation and preprocessing predicates: noise estimation and graded symptoms;
+  \item engineering-calculation predicates for the equations of Section~\ref{sec:maths};
+  \item the knowledge base;
+  \item a deductive inference engine;
+  \item an abductive diagnosis module;
+  \item a consistency-based diagnosis module;
+  \item an explanation facility;
+  \item a corrective-maintenance planner;
+  \item an evaluation and reporting module.
+\end{enumerate}
+
+\begin{figure}[htbp]
+  \centering
+  \input{figures/fig_architecture.tex}
+  \caption{Architecture of the Prolog expert system.}
+  \label{fig:architecture}
+\end{figure}
+
+The knowledge base is kept separate from the engines that use it, which is the defining property of an expert system \parencite{jackson1998}. Table~\ref{tab:modules} lists the source files. The knowledge base and engines together are about 1{,}900 lines of Prolog, and the test and reporting code about 460 more. A single entry file, \texttt{main.pl}, loads everything.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Source modules.}
+  \label{tab:modules}
+  \begin{tabular}{L{4.8cm}L{9.2cm}}
+    \toprule
+    File & Role \\
+    \midrule
+    \texttt{kb/components.pl} & Components, topology, ratings and the variable dictionary \\
+    \texttt{kb/thresholds.pl}, \texttt{kb/sources.pl} & Reference values and their provenance \\
+    \texttt{kb/calculations.pl} & Engineering equations as predicates \\
+    \texttt{kb/rules.pl} & Diagnostic rules stored as \texttt{drule/4} facts \\
+    \texttt{kb/symptoms.pl} & Graded symptom definitions with noise models \\
+    \texttt{kb/causal.pl} & Causal signatures for abduction \\
+    \texttt{kb/arr.pl} & Redundancy relations and fault models \\
+    \texttt{kb/maintenance.pl} & Corrective-maintenance plans and plan interactions \\
+    \texttt{engine/prover.pl} & Proof-recording meta-interpreter \\
+    \texttt{engine/deductive.pl} & Deductive diagnosis and closed-world conclusions \\
+    \texttt{engine/evidence.pl} & Noise estimation and evidence grading \\
+    \texttt{engine/abductive.pl} & Parsimonious covering \\
+    \texttt{engine/consistency.pl} & Conflicts, minimal hitting sets and fault models \\
+    \texttt{engine/hybrid.pl} & The four reasoning configurations \\
+    \texttt{engine/explain.pl} & The explanation facility \\
+    \texttt{tests/*.pl} & Test runner, metrics, sensitivity and table export \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% ---------------------------------------------------------------------------
+\section{Knowledge-Base Design}
+\label{sec:kb-design}
+
+The knowledge base follows the seven layers of Table~\ref{tab:kr-layers}. Its contents are summarised in Table~\ref{tab:kb-size}.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Contents of the knowledge base.}
+  \label{tab:kb-size}
+  \begin{tabular}{L{7.0cm}L{2.0cm}L{5.0cm}}
+    \toprule
+    Element & Count & Representation \\
+    \midrule
+    Diagnostic rules deriving conditions & 29 & \texttt{drule/4} \\
+    Diagnostic rules deriving faults & 18 & \texttt{drule/4} \\
+    Closed-world conclusions & 2 & \texttt{engine/deductive.pl} \\
+    Thresholds & 24 & \texttt{threshold/4} \\
+    Sources: standard, literature, method, assumption & 3, 1, 3, 17 & \texttt{source/3} \\
+    Engineering-calculation predicates & 20 & \texttt{calc\_pred/1} \\
+    Graded, yes/no and composite symptoms & 20, 2, 2 & \texttt{sdef/7} and others \\
+    Causal evidence links & 31 & \texttt{evidence/3} \\
+    Required symptoms, masking links, extra explanations & 12, 2, 4 & \texttt{requires/2} and others \\
+    Analytical redundancy relations & 20 & \texttt{arr/3} \\
+    Fault models & 14 & \texttt{fm/2} \\
+    Maintenance plans & 12 & \texttt{maintenance/5} \\
+    Plan interactions & 4 & \texttt{plan\_interaction/3} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Facts}
+
+Structural knowledge is stated as ground facts, for example \texttt{component(crah\_1, crah)}, \texttt{serves(crah\_1, rack\_a04)} and \texttt{rated(crah\_1, fan\_power\_rated, 5.5, kw)}. Observations are facts \texttt{obs(Case, Variable, Entity, Value)}, so every case is a self-contained set of facts and the same knowledge base diagnoses all cases.
+
+\subsection{Thresholds and provenance}
+
+Each threshold is a fact with its value, unit and source, and each source has a type:
+\begin{lstlisting}
+threshold(t_inlet_rec_max, 27.0, degC, ashrae_tc99_2021).
+threshold(strat_out_max,    3.5, kelvin, a7_outlet_strat).
+source(a7_outlet_strat, assumption,
+       'Engineering assumption: a top-to-bottom outlet difference above 3.5 K
+        confirms recirculation. Normal racks stay below 3 K.').
+\end{lstlisting}
+Rules and symptoms refer to thresholds by name through \texttt{threshold/2}, never by value. A threshold can therefore be changed in one place, and the sensitivity analysis of Chapter~\ref{ch:dataset_and_evaluation} can perturb it without touching any rule. The complete threshold and provenance tables are generated from these facts (Tables~\ref{tab:thresholds} and~\ref{tab:provenance}).
+
+\subsection{Engineering calculations}
+
+Each equation of Section~\ref{sec:maths} that the reasoning needs is a Horn clause with arithmetic, commented with its equation tag. For example, the fan affinity law and the fan power ratio, Equations E23 and E24, are:
+\begin{lstlisting}
+%   Eq. 23  P_f,exp = P_f,rated * (N / N_rated)^3      fan affinity law
+expected_fan_power(C, U, P) :-
+    obs(C, fan_speed, U, N),
+    rated(U, fan_power_rated, Pr, _),
+    rated(U, fan_speed_rated, Nr, _),
+    P is Pr * (N / Nr) ** 3.
+
+%   Eq. 24  rho_f = P_f,measured / P_f,exp
+fan_power_ratio(C, U, Ratio) :-
+    obs(C, fan_power, U, Pm),
+    expected_fan_power(C, U, Pe),
+    Pe > 0,
+    Ratio is Pm / Pe.
+\end{lstlisting}
+A calculation fails when one of its inputs is missing, and a rule that uses it then cannot fire. This is how incomplete evidence is handled in the deductive mode.
+
+% ---------------------------------------------------------------------------
+\section{Predicates and Rules}
+\label{sec:predicates}
+
+Table~\ref{tab:predicates} lists the main predicates. The diagnostic rules are listed in full in Table~\ref{tab:rules}, which is generated from \texttt{kb/rules.pl}. Each rule is a Horn clause stored as data:
+\begin{lstlisting}
+%   R24  F4 from exhaust evidence alone, when the top inlet sensor is
+%        suspect because it reads low.
+drule(r24, fault(C, hot_air_recirculation(R)),
+      [ cond(C, outlet_stratified(R)), cond(C, inlet_not_stratified(R)),
+        serves(U, R), cond(C, supply_air_normal(U)) ],
+      eu_coc_dc).
+\end{lstlisting}
+It reads: rack $R$ has hot-air recirculation if its exhaust is stratified, its inlet reading is not, and its cooling unit supplies normal air. The rule exists because a low-reading top sensor can hide real recirculation (Table~\ref{tab:interactions}). The exhaust then carries the evidence that the inlet sensor does not.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Main predicates.}
+  \label{tab:predicates}
+  \begin{tabular}{L{4.6cm}L{9.4cm}}
+    \toprule
+    Predicate & Purpose \\
+    \midrule
+    \texttt{obs(C, V, E, X)} & Observation: variable $V$ of entity $E$ in case $C$ has value $X$ \\
+    \texttt{threshold(N, X)} & Value of threshold $N$, after any sensitivity perturbation \\
+    \texttt{drule(Id, H, B, S)} & Diagnostic rule $H \leftarrow B$ with identifier and source \\
+    \texttt{prove(G, P)} & Proves goal $G$ and returns its proof tree $P$ \\
+    \texttt{diagnose(C, Ds)} & Deductive diagnosis with proofs \\
+    \texttt{case\_symptoms(C, Ss)} & Graded symptoms with evidence and status \\
+    \texttt{abduce(C, R)} & Abductive candidates, minimal explanations and verdicts \\
+    \texttt{conflicts(Ss, Ks)} & Conflict sets from violated redundancy relations \\
+    \texttt{cbd\_diagnoses(Ss, Ds)} & Minimal consistent diagnoses \\
+    \texttt{diagnose\_mode(M, C, Ls)} & Diagnosis in configuration $M$ \\
+    \texttt{why(C)} & Full explanation of the complete system's diagnosis \\
+    \texttt{maintenance(K, Pr, As, R, S)} & Plan for fault class $K$: priority, actions, rationale, source \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\input{tables/rule_table.tex}
+
+% ---------------------------------------------------------------------------
+\section{Inference Mechanisms}
+\label{sec:inference}
+
+Figure~\ref{fig:diagnostic} shows how the three inference mechanisms work together on one case. The readings are first used to estimate measurement noise. Every symptom is then graded. Deductive rules, abduction and consistency checking run on the result, and the hybrid combiner chooses the final diagnosis.
+
+\begin{figure}[htbp]
+  \centering
+  \input{figures/fig_diagnostic_workflow.tex}
+  \caption{Diagnostic reasoning workflow of the complete system: abduction proposes, consistency disposes.}
+  \label{fig:diagnostic}
+\end{figure}
+
+\subsection{Graded, noise-adaptive evidence}
+
+For each symptom definition, \texttt{engine/evidence.pl} computes the feature value, compares it with its threshold and grades the evidence with Equation E55. The noise $\sigma_j$ of each feature is propagated from the datasheet accuracy of its sensors and scaled by the noise level estimated from the case. For temperature features this is the robust spread of the six middle inlets, and for electrical features the spread of the six rack power balances. A symptom is \emph{present} once its value is one standard deviation past the threshold, \emph{absent} once it is one standard deviation on the normal side, and \emph{uncertain} in between. If an input is missing the symptom is \emph{unknown}, which is never treated as absent. The graded symptoms of a case are computed once and cached, so that the abductive and consistency-based modules see exactly the same evidence.
+
+\subsection{The four configurations}
+
+The framework asks for four configurations to be compared, and \texttt{engine/hybrid.pl} provides them through \texttt{diagnose\_mode/3}:
+
+\begin{itemize}
+  \item \textbf{Deductive only:} the rules of Table~\ref{tab:rules}.
+  \item \textbf{Deductive and abductive:} the best parsimonious explanation, with a bonus of 0.1 to the confidence of hypotheses that the rules also prove.
+  \item \textbf{Deductive and consistency-based:} the deductive faults are kept if they form a consistent diagnosis, after dropping any fault whose component hits no conflict. Otherwise the minimal consistent diagnosis closest to them replaces them.
+  \item \textbf{Complete system:} abduction proposes and consistency disposes. The best-ranked abductive explanation that is also a consistent diagnosis is accepted. If none is consistent, the minimal consistent diagnosis closest to the top explanation is used.
+\end{itemize}
+When several consistent diagnoses tie, the one with fewer sensor components wins, because assuming a physical fault is the safer maintenance choice.
+
+% ---------------------------------------------------------------------------
+\section{Deductive Reasoning}
+\label{sec:deductive}
+
+Deductive diagnosis implements Equation~\eqref{eq:deductive}. Because rules are stored as data, a small meta-interpreter is needed to prove them \parencite{bratko2012}. It returns a proof tree for every conclusion:
+\begin{lstlisting}
+derived(cond(_, _)).
+derived(fault(_, _)).
+
+prove(\+ G, naf(G)) :-                 % negation as failure
+    !,
+    \+ prove(G, _).
+prove(G, by(Id, G, SubProofs)) :-      % a derived goal: try each rule
+    derived(G),
+    !,
+    drule(Id, G, Body, _),
+    prove_body(Body, SubProofs).
+prove(G, leaf(G)) :-                   % a fact, calculation or comparison
+    call(G).
+
+prove_body([], []).
+prove_body([G|Gs], [P|Ps]) :-
+    prove(G, P),
+    prove_body(Gs, Ps).
+\end{lstlisting}
+Conditions and faults are proved through the rules. Everything else, such as observations, thresholds, calculations and comparisons, is called directly and recorded as a leaf. \texttt{diagnose/2} collects every fault that can be proved, keeps the first proof of each, and applies the two closed-world conclusions: \texttt{normal} when no fault rule fires and every inlet is within the envelope, and \texttt{unexplained\_abnormality} when no fault rule fires but some inlet is not.
+
+Negation as failure is used in two ways. It guards rules against known confounders. Rule r22, for example, concludes recirculation only if it cannot prove that the top inlet sensor is suspect. It also expresses the closed-world conclusions. Both uses stay within the conditions under which negation as failure is sound \parencite{clark1978}: the negated goal is ground when it is called.
+
+Three groups of rules deserve comment:
+\begin{itemize}
+  \item \textbf{Backup rules} use independent evidence when the primary reading is missing. Rule r36 concludes a CRAH fan failure from row-wide overheating with unusually cold supply air, which does not need the fan power reading.
+  \item \textbf{Sensor-fault rules} test a sensor against sensors that see the same air. Rule r43 goes further and accepts a supply-air sensor fault only if replacing its reading with the median middle inlet closes the coil energy balance (Equation~\eqref{eq:e41b}).
+  \item \textbf{Physical-constraint rules} use the mixing model. Rule r46 flags a top inlet sensor that reads colder than the middle sensor, which Equation~\eqref{eq:mixing} rules out.
+\end{itemize}
+
+% ---------------------------------------------------------------------------
+\section{Abductive Reasoning}
+\label{sec:abductive}
+
+Abduction implements Equations~\eqref{eq:abductive} and~\eqref{eq:parsimony} by parsimonious covering \parencite{peng1990}. The causal knowledge for each hypothesis says which symptoms it predicts, with what weight, and which of them it requires. Recirculation, for example, is described as:
+\begin{lstlisting}
+evidence(hot_air_recirculation(R), outlet_stratified(R),  1.0).
+evidence(hot_air_recirculation(R), inlet_stratified(R),   0.8).
+evidence(hot_air_recirculation(R), mid_inlet_deviates(R), 0.3).
+requires(hot_air_recirculation(R), outlet_stratified(R)).
+requires(hot_air_recirculation(R), inlet_stratified(R)).
+masks(sensor_bias(t_inlet_top, R), inlet_stratified(R)).
+\end{lstlisting}
+\texttt{abduce/2} proceeds in four steps:
+\begin{enumerate}
+  \item It collects the clearly present symptoms that need explaining.
+  \item It generates candidate hypotheses that explain at least one of them, and discards any that require a clearly absent symptom that no other candidate could mask.
+  \item It searches subsets of the candidates in increasing size, up to four, and keeps every subset that covers all present symptoms and is consistent. A member may require a clearly absent symptom only if another member masks it. The first size that yields a solution gives the minimal explanations.
+  \item It ranks the minimal explanations by summed confidence (Equation E56) and records a verdict for every candidate: part of an explanation, not needed, or rejected together with the absent symptom that ruled it out.
+\end{enumerate}
+Uncertain and unknown symptoms never need explaining, so a reading near the noise level cannot force an extra fault into the answer. Masking lets the module find a hidden fault: when the top inlet reads low over a recirculating rack, the explanation \{recirculation, top-sensor bias\} is consistent although recirculation alone is not.
+
+% ---------------------------------------------------------------------------
+\section{Consistency-Based Reasoning}
+\label{sec:cbd}
+
+Consistency-based diagnosis implements Equation~\eqref{eq:reiter}. Each analytical redundancy relation names the symptom that signals its violation and the components that must be healthy for it to hold. Each fault model names a relation that must be violated if a component is abnormal:
+\begin{lstlisting}
+arr(a_out_strat(R), outlet_stratified(R),
+    [rack_seal(R), sensor(t_outlet_top, R), sensor(t_outlet, R)]).
+arr(a_rack_power(R), rack_power_mismatch(R), [sensor(p_rack, R) | Phases]) :-
+    component(R, rack),
+    findall(sensor(i_branch, B), phase_of_rack(R, B), Phases).
+
+fm(rack_seal(R), a_out_strat(R)).
+fm(sensor(i_branch, B), a_rack_power(R)) :- phase_of_rack(R, B).
+\end{lstlisting}
+Every clearly violated relation yields a conflict set. \texttt{cbd\_diagnoses/2} then searches for minimal hitting sets \parencite{reiter1987}. It picks a conflict that the current candidate does not yet hit and branches on its members. When a candidate hits every conflict but breaks a fault model, because a component's predicted violation clearly did not happen, it branches on adding a component that could mask the effect. Candidates are capped at four components, and supersets of other diagnoses are removed.
+
+Fault models are what let the module tell sensor faults from equipment faults \parencite{struss1989}. A branch overload produces the conflict \{branch, current sensor\}. A faulty current sensor would also break the rack power balance, so when that balance holds, the sensor is exonerated and only the overload remains. In the same way, a high top-inlet reading over a rack whose exhaust is not stratified exonerates the rack seal, so the diagnosis is a sensor fault.
+
+% ---------------------------------------------------------------------------
+\section{Explanation Facility}
+\label{sec:explanation}
+
+The explanation facility answers the question ``why was this diagnosis reached?''. \texttt{why/1} follows the workflow of Figure~\ref{fig:explanation}. For every reported fault that the rules prove, it reads the proof tree and reports the observed readings, the derived engineering quantities, the thresholds with their sources, the derived conditions, the rules fired with their provenance and the full reasoning trace. For a fault found only by abduction and consistency checking, it reports the graded supporting symptoms, each with its value, threshold, estimated noise, evidence strength and source. It then gives the maintenance plan and any plan interactions, the competing hypotheses with their confidence and the reason each was used, not needed or rejected, and the conflict sets from the consistency check.
+
+\begin{figure}[htbp]
+  \centering
+  \input{figures/fig_explanation_workflow.tex}
+  \caption{Explanation-generation workflow of the explanation facility.}
+  \label{fig:explanation}
+\end{figure}
+
+Listing~\ref{lst:why} shows the explanation of a held-out test case in which recirculation at rack A04 is hidden by a top inlet sensor that reads low. The output is reproduced unedited. It shows each of the eight elements that the framework requires of an explanation: observed evidence, derived conditions, rules activated, intermediate reasoning, the diagnosis, competing hypotheses, the reasons for rejecting weaker ones and the recommended action.
+
+\lstinputlisting[language={}, basicstyle=\ttfamily\scriptsize, caption={Unedited output of \texttt{why(h188)}: recirculation hidden by a low-reading sensor.}, label={lst:why}]{listings/why_h188.txt}
+
+% ---------------------------------------------------------------------------
+\section{Corrective-Maintenance Planner}
+\label{sec:planner}
+
+Every fault class has a plan in \texttt{kb/maintenance.pl}, with a priority, ordered actions, an engineering rationale and a source:
+\begin{lstlisting}
+maintenance(branch_overload, urgent,
+    [ 'Identify the servers on the overloaded phase from the rack power records',
+      'Rebalance server power supplies across the three phases',
+      'Check for equipment added without a capacity review',
+      'Confirm every phase is below 80% of its breaker rating' ],
+    'A phase above its continuous rating can trip its breaker and drop every
+     server on that circuit.',
+    nec_continuous).
+\end{lstlisting}
+Each plan ends with a verification step that confirms the repair worked, such as re-measuring a temperature or a current. Figure~\ref{fig:maintenance} shows how plans are assembled. A diagnosed label is split into its fault class and entity, and the plan for the class is instantiated for the entity.
+
+\begin{figure}[htbp]
+  \centering
+  \input{figures/fig_maintenance_workflow.tex}
+  \caption{Corrective-maintenance planning workflow.}
+  \label{fig:maintenance}
+\end{figure}
+
+Table~\ref{tab:maintenance} lists the plan issued for every diagnosis. It is generated from the knowledge base, like the rule table.
+
+\input{tables/maintenance_table.tex}
+
+\paragraph{Plan interactions.} When two diagnoses interact, their plans must be ordered. The verification step of the recirculation plan re-measures the rack's top inlet temperature. If the same rack's top inlet sensor is also diagnosed as biased, that step would rely on a faulty sensor. \texttt{plan\_interaction/3} records such dependencies, and the planner then says to repair the sensor first, as Listing~\ref{lst:why} shows. Similar interactions cover the supply-air sensor, whose reading the cooling-unit plans rely on, and stale telemetry, which leaves any plan for the affected equipment unverifiable.
+
+\paragraph{Plan validity.} Whether each issued plan addresses a fault that is really present is measured as PlanValidity in Chapter~\ref{ch:dataset_and_evaluation}. A plan for a fault that is not present wastes maintenance effort. A missing plan for a fault that is present leaves it unrepaired.
+
+\section*{Generated tables}
+\addcontentsline{toc}{section}{Generated tables}
+
+Tables~\ref{tab:thresholds} and~\ref{tab:provenance} are generated from the knowledge base by \texttt{tests/export\_latex.pl}, like Table~\ref{tab:rules}.
+
+\input{tables/threshold_table.tex}
+\input{tables/provenance_table.tex}

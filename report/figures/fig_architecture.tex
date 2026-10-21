@@ -1,0 +1,45 @@
+% Figure 2: expert-system architecture.
+\begin{tikzpicture}[x=1cm, y=1cm]
+  \node[data=5cm] (obs) at (4.5,0) {Observations and test cases\\ \footnotesize\texttt{obs/4} facts in \texttt{data/}};
+  \node[kb=5cm] (calc) at (4.5,-1.5) {Engineering calculations\\ \footnotesize Stage 4 equations, \texttt{kb/calculations.pl}};
+  \node[reason=5cm] (evid) at (4.5,-3.0) {Noise estimation and graded symptoms\\ \footnotesize \texttt{engine/evidence.pl}};
+
+  \node[kb=4.2cm, minimum height=3.4cm, align=left] (kb) at (12.1,-1.9)
+    {\textbf{Knowledge base}\\[2pt]
+     \footnotesize components and ratings\\
+     \footnotesize thresholds with provenance\\
+     \footnotesize 47 diagnostic rules\\
+     \footnotesize causal signatures\\
+     \footnotesize redundancy relations\\
+     \footnotesize \quad and fault models\\
+     \footnotesize maintenance plans};
+
+  \node[reason=3.1cm] (ded) at (0.9,-4.9) {Deductive\\ \footnotesize rules, proof trees};
+  \node[reason=3.1cm] (abd) at (4.5,-4.9) {Abductive\\ \footnotesize parsimonious covering};
+  \node[reason=3.1cm] (cbd) at (8.1,-4.9) {Consistency-based\\ \footnotesize minimal hitting sets};
+
+  \node[reason=5.4cm] (hyb) at (4.5,-6.6) {Hybrid combiner\\ \footnotesize abduction proposes, consistency disposes};
+  \node[out=5cm] (diag) at (4.5,-8.1) {Diagnosis\\ \footnotesize set of fault labels};
+  \node[out=3.6cm] (expl) at (2.3,-9.7) {Explanation facility\\ \footnotesize \texttt{why/1}};
+  \node[out=3.6cm] (maint) at (6.7,-9.7) {Corrective-maintenance planner};
+  \node[out=5cm] (eval) at (4.5,-11.3) {Evaluation and reporting\\ \footnotesize metrics, sensitivity, tables};
+
+  \draw[flow] (obs) -- (calc);
+  \draw[flow] (calc) -- (evid);
+  \draw[flow] (calc.west) -| (ded.north);
+  \draw[flow] (evid) -- (abd);
+  \draw[flow] (evid.east) -| (cbd.north);
+  \draw[flow] (ded.south) |- (hyb.west);
+  \draw[flow] (abd) -- (hyb);
+  \draw[flow] (cbd.south) |- (hyb.east);
+  \draw[flow] (hyb) -- (diag);
+  \draw[flow] (diag.south) -- ++(0,-0.35) -| (expl.north);
+  \draw[flow] (diag.south) -- ++(0,-0.35) -| (maint.north);
+  \draw[flow] (expl.south) -- (expl.south |- eval.north);
+  \draw[flow] (maint.south) -- (maint.south |- eval.north);
+
+  \draw[uses] (kb.west |- calc.east) -- (calc.east);
+  \draw[uses] (kb.west |- evid.east) -- (evid.east);
+  \draw[uses] (kb.south) |- (cbd.east);
+  \node[tag, anchor=south] at (9.0,-1.5) {uses};
+\end{tikzpicture}
