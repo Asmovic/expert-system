@@ -20,18 +20,18 @@ The framework lists twelve criteria. Table~\ref{tab:criteria} gives, for each, w
   Criterion & Evidence & What it shows \\
   \midrule
   \endhead
-  Engineering correctness & Sections~\ref{sec:engineering}, \ref{sec:maths}, \ref{sec:validation} & Physical model of the row with 60 tagged equations; simulator checked against hand calculations; three knowledge errors found and corrected against the physics \\
+  Engineering correctness & Sections~\ref{sec:engineering}, \ref{sec:maths}, \ref{sec:validation} & Physical model of the row with 60 tagged equations, 44 of them used by the code (Table~\ref{tab:equation-usage}); simulator checked against hand calculations; three knowledge errors found and corrected against the physics \\
   Depth of KRR treatment & Sections~\ref{sec:krr} to~\ref{sec:diagnosis-theory} & Horn clauses, negation as failure and the closed-world assumption; formal deductive, abductive and consistency-based diagnosis with fault models \\
   Quality of knowledge representation & Section~\ref{sec:kr-scheme}; Tables~\ref{tab:kr-layers}, \ref{tab:kb-size} & Seven layers; rules stored as data with identifiers and provenance; graded symptoms that treat missing data as unknown \\
-  Correctness of Prolog rules & Table~\ref{tab:rules}; Section~\ref{sec:validation} & Every rule run against the calibration split before acceptance; all single-label held-out cases diagnosed correctly \\
-  Diagnostic accuracy & Tables~\ref{tab:modes-holdout}, \ref{tab:classes} & 91.0\% to 94.5\% exact match on unseen data across the four configurations; macro F1 up to 0.958 \\
-  Multiple-fault capability & Tables~\ref{tab:categories-holdout}, \ref{tab:sens-multi} & 29 or 30 of 30 multiple-fault cases; precision near 1 for up to four simultaneous faults \\
-  Robustness to imperfect evidence & Tables~\ref{tab:sens-noise}, \ref{tab:sens-missing}, \ref{tab:sens-bias} & Graceful degradation under noise and missing data; sensor biases of 3\,K and more detected \\
-  Explanation quality & Section~\ref{sec:explanation}; Listing~\ref{lst:why} & ExplainabilityRate of 100\%; every element the framework requires shown in a real trace; not yet assessed by human users \\
-  Maintenance-plan validity & Table~\ref{tab:maintenance}; Section~\ref{sec:planner} & A sourced plan for every diagnosis; plan interactions ordered; PlanValidity 85\% to 94\% \\
-  Computational tractability & Tables~\ref{tab:modes-holdout}, \ref{tab:sens-multi} & About 1\,ms per case; a few milliseconds with four simultaneous faults \\
+  Correctness of Prolog rules & Table~\ref{tab:rules}; Section~\ref{sec:validation} & Every rule run against the calibration split before acceptance; all single-label cases of the held-out split diagnosed correctly, and 3 to 6 of 900 missed over five seeds \\
+  Diagnostic accuracy & Tables~\ref{tab:modes-holdout}, \ref{tab:classes} & 91.0\% to 94.5\% exact match on unseen data across the four configurations; macro F1 up to 0.958; over five held-out seeds, 90.8\% to 93.6\% with a standard deviation of 1.2 to 1.6 points (Table~\ref{tab:seeds}) \\
+  Multiple-fault capability & Tables~\ref{tab:categories-holdout}, \ref{tab:sens-multi} & 29 or 30 of 30 multiple-fault cases on the held-out split, a single sample of 30; precision near 1 for up to four simultaneous faults \\
+  Robustness to imperfect evidence & Tables~\ref{tab:sens-noise}, \ref{tab:sens-missing}, \ref{tab:sens-bias}, \ref{tab:mismatch} & Graceful degradation under noise and missing data; sensor biases of 3\,K and more detected; robust to mild model error, and to strong model error after re-baselining \\
+  Explanation quality & Section~\ref{sec:explanation}; Listing~\ref{lst:why} & ExplainabilityRate of 100\%, by construction; explanation fidelity of 96 to 100\% (Table~\ref{tab:fidelity}), a test that can fail; every element the framework requires shown in a real trace; not yet assessed by human users \\
+  Maintenance-plan validity & Table~\ref{tab:maintenance}; Section~\ref{sec:planner} & A sourced plan for every diagnosis; plan interactions ordered; PlanValidity 85\% to 94\% on the held-out split, which in effect measures label precision, not the plans' actions \\
+  Computational tractability & Tables~\ref{tab:modes-holdout}, \ref{tab:sens-multi} & About 1\,ms per case, and a few milliseconds with four simultaneous faults, as orders of magnitude on one machine \\
   Documentation quality & Chapters~\ref{ch:design_and_development} and~\ref{ch:software_and_reproducibility} & Design documents for every stage; rule, threshold, provenance, maintenance and result tables generated from the code \\
-  Reproducibility & Section~\ref{sec:reproducibility} & Datasets regenerate exactly from their seeds; a 14-check script reproduces every reported count \\
+  Reproducibility & Section~\ref{sec:reproducibility} & Datasets regenerate exactly from their seeds; a 35-check script reproduces every reported count \\
   \bottomrule
 \end{longtable}
 \end{small}
@@ -53,7 +53,7 @@ Table~\ref{tab:requirements} checks the minimum technical requirements of the fr
     \midrule
     Expert system in Prolog & Met & All reasoning in SWI-Prolog; Python only generates data and formats results \\
     Explicit mathematical model & Met & Section~\ref{sec:maths} \\
-    At least 40 equations & Met & 60 tagged engineering equations, plus the logical and evaluation formulas \\
+    At least 40 equations & Met & 60 tagged engineering equations, 44 of them computed by the reasoning or the simulator (Table~\ref{tab:equation-usage}), plus the logical and evaluation formulas \\
     Engineering-justified fault classes & Met & Table~\ref{tab:taxonomy} and Section~\ref{sec:faults} \\
     Deductive, abductive and consistency-based reasoning & Met & Sections~\ref{sec:deductive} to~\ref{sec:cbd} \\
     Explanation & Met & Section~\ref{sec:explanation} \\
@@ -67,7 +67,7 @@ Table~\ref{tab:requirements} checks the minimum technical requirements of the fr
     Reproducibility & Met & Section~\ref{sec:reproducibility} \\
     TikZ/LaTeX diagrams & Met & Eight TikZ diagrams and five pgfplots charts \\
     Complete Prolog source & Met & Included in full \\
-    70 to 90 scholarly sources & \textbf{Partly met} & 69 entries, 25 of them checked against publisher or library records during writing; all still to be verified by the author \\
+    70 to 90 scholarly sources & \textbf{Partly met} & 70 entries, the minimum of the range, 25 of them checked against publisher or library records during writing; all still to be verified by the author \\
     APA 7th edition via EndNote & \textbf{Partly met} & APA 7th edition style applied; the EndNote library and its export are still to be created \\
     \bottomrule
   \end{tabular}
@@ -83,7 +83,7 @@ The individual techniques used in this project are established in the literature
   \item \textbf{An explainable hybrid diagnostic system for data centre infrastructure.} The system combines deductive rules, parsimonious-covering abduction and consistency-based diagnosis with fault models, as ``abduction proposes, consistency disposes''. It diagnoses eight equipment faults and two instrumentation faults across the cooling and power path, and explains every conclusion.
   \item \textbf{Noise-adaptive graded evidence from in-case redundancy.} Symptom evidence is graded against measurement noise estimated from the case itself: from the robust spread of sensors that see the same air, and from the redundancy of the rack power balances. At four times the nominal noise, this lifts exact-match accuracy from 42\% to 73\% without any retuning.
   \item \textbf{Separating sensor faults from equipment faults.} Treating sensors as components with fault models, and accepting a sensor-fault hypothesis only when assuming it restores an energy balance (Equation~\eqref{eq:e41b}), separates sensor faults from equipment faults that produce similar symptoms. Every single sensor fault in the held-out split is diagnosed correctly.
-  \item \textbf{A quantified comparison of the three reasoning modes.} The four configurations required by the framework were compared on identical data and under controlled noise, missing data, multiple faults, sensor bias and threshold changes. The comparison shows where each mode helps and where it costs accuracy, including the fragility of consistency checking to a mis-set redundancy relation.
+  \item \textbf{A quantified comparison of the three reasoning modes.} The four configurations required by the framework were compared on identical data and under controlled noise, missing data, multiple faults, sensor bias and threshold changes. On one split, paired significance tests show only the gain from adding abduction to be significant. Pooled over five held-out seeds, every difference is significant, with deductive + abductive reasoning the most accurate configuration and consistency checking costing exact matches under heavy noise. The controlled experiments show where each mode helps and where it costs accuracy, including the fragility of consistency checking to a mis-set redundancy relation. A model-mismatch experiment shows that the reasoning transfers to a changed model, while fixed thresholds must be re-baselined from normal operating data. A comparison with standard classifiers shows that the knowledge-based system is more accurate on these data, needs no labelled faults and transfers better to a changed model.
   \item \textbf{A physics-based test methodology for knowledge validation.} Injecting faults into a physical model rather than into readings, with separate calibration and held-out splits, exposed errors in the knowledge that hand-made cases did not, and guards the reported results against tuning bias.
   \item \textbf{Documentation that cannot drift from the code.} Rule, threshold, provenance, maintenance and result tables are generated from the knowledge base and the test runs, and a reproduction script checks every reported count.
 \end{enumerate}
@@ -114,7 +114,7 @@ The framework lists the tables and figures a report should contain. Table~\ref{t
   Dataset and test-case table & Tables~\ref{tab:datasets} and~\ref{tab:test-categories} \\
   Confusion matrix & Table~\ref{tab:confusion} \\
   Performance metrics & Tables~\ref{tab:modes-holdout}, \ref{tab:modes-calibration} and~\ref{tab:classes} \\
-  Explanation-quality assessment & ExplainabilityRate in Table~\ref{tab:modes-holdout}; trace in Listing~\ref{lst:why} \\
+  Explanation-quality assessment & ExplainabilityRate in Table~\ref{tab:modes-holdout}; fidelity in Table~\ref{tab:fidelity}; trace in Listing~\ref{lst:why} \\
   Maintenance-action mapping & Table~\ref{tab:maintenance} \\
   Comparison of reasoning modes & Tables~\ref{tab:modes-holdout} and~\ref{tab:categories-holdout}; Section~\ref{sec:sensitivity} \\
   Industrial system schematic & Figure~\ref{fig:system} \\
@@ -164,15 +164,17 @@ Table~\ref{tab:deliverables} maps the ten deliverables of the framework to the s
 
 \paragraph{Data and validation.}
 \begin{itemize}
-  \item Every test case is synthetic. The knowledge base and the simulator rest on the same engineering model, so agreement between them shows internal consistency, not accuracy on a real data centre.
+  \item Every test case is synthetic. The knowledge base and the simulator rest on the same engineering model, so agreement between them shows internal consistency, not accuracy on a real data centre. The model-mismatch experiment measures sensitivity to model error, but only for the kinds of error it was given.
+  \item Fixed envelope thresholds encode the normal behaviour of the nominal model. Under strong model mismatch they fail until they are re-baselined from the site's normal operating data.
   \item The model is steady state. Real faults develop over time, and a chilled-water loss, for example, heats a room over minutes.
   \item The scope is one row with one cooling unit. Humidity, the chiller plant and the generator are outside the boundary.
+  \item The modelled row has no cooling redundancy. With one unit, a fan or chilled-water failure overheats the whole row, which makes $F_1$ and $F_2$ easy to detect. With N+1 units, as real rows normally have, the healthy units would partly mask the failure, and the row-level symptoms the rules rely on would be weaker and more local.
 \end{itemize}
 
 \paragraph{Knowledge.}
 \begin{itemize}
   \item 17 of the 24 sources in the knowledge base are engineering assumptions rather than citations, and 36 of the 47 rules rest on one. The sensitivity analysis shows that the results are robust to moderate changes in them, but each still needs a source or a written justification.
-  \item The confidence weights of the causal knowledge were set by engineering judgement and not fitted to data. Confidence is a ranking, not a probability.
+  \item The confidence weights of the causal knowledge were set by engineering judgement and not fitted to data. Confidence is a ranking, not a probability. Replacing the weights by uniform or randomly perturbed ones changes at most one case (Table~\ref{tab:param-sensitivity}).
   \item One physical interaction is not modelled: a failed server fan inside a recirculating rack reduces the exhaust stratification.
 \end{itemize}
 
@@ -180,28 +182,32 @@ Table~\ref{tab:deliverables} maps the ten deliverables of the framework to the s
 \begin{itemize}
   \item Under heavy noise, consistency checking can turn a chance violation of a balance into a reported sensor fault, which lowers sensor-fault precision to 0.656.
   \item A wrongly set redundancy-relation threshold acts as a hard constraint and can corrupt every diagnosis of the complete system.
-  \item The noise of the cooling-unit instruments is inferred from the temperature sensors, which assumes that they degrade together.
-  \item Explanations and diagnoses are capped at four simultaneous faults.
+  \item The noise of the cooling-unit instruments is inferred from the temperature sensors, which assumes that they degrade together. The assumption helps under heavy noise, but has not been checked against real instruments.
+  \item Explanations and diagnoses are capped at four simultaneous faults. The cap must be at least the largest fault combination expected: a cap of three loses every four-fault case.
+  \item The evidence cut-off of one standard deviation trades robustness to noise against sensitivity to small faults (Section~\ref{sec:param-sensitivity}). A site would have to choose it for its own noise level.
 \end{itemize}
 
 \paragraph{Evaluation and reporting.}
 \begin{itemize}
-  \item Explanation quality was assessed by criteria, not by maintenance engineers using the system.
+  \item Explanation quality was assessed by criteria and by a fidelity test, not by maintenance engineers using the system. The fidelity test shows that a deductive trace reports only the first proof of a label, and that no explanation cites the readings behind its noise estimate.
+  \item PlanValidity follows from the correctness of the label, so it does not test whether the actions in a plan are right. Their validity rests on their sources and has not been reviewed by a practitioner.
   \item Reasoning times were measured on one machine.
-  \item The bibliography has 69 entries, one short of the recommended range, and every entry still has to be verified by the author (Table~\ref{tab:requirements}).
+  \item The bibliography has 70 entries, the minimum of the recommended range, and every entry still has to be verified by the author (Table~\ref{tab:requirements}).
 \end{itemize}
 
 % ---------------------------------------------------------------------------
 \section{Future Improvements}
 \label{sec:future}
 
-The limitations suggest seven improvements, roughly in order of importance:
+The limitations suggest nine improvements, roughly in order of importance:
 \begin{enumerate}
   \item \textbf{Validation on measured data,} ideally logged telemetry from a real facility with recorded faults, to test the knowledge against behaviour outside the shared model.
   \item \textbf{Time-series reasoning.} Repeated readings with the noise filter of Equation E54 would reduce false findings under noise, and would let the system recognise faults by how they develop.
+  \item \textbf{Thresholds relative to a learned baseline.} The model-mismatch experiment shows that re-baselining three envelope thresholds from normal operating data restores most of the lost accuracy. Making every envelope threshold relative to a baseline learned on site would make this automatic.
   \item \textbf{Sources for every assumption,} or, where none exists, thresholds estimated from normal operating data with stated confidence.
   \item \textbf{Graded consistency checking,} in which a relation's violation counts in proportion to its evidence strength, so that one marginal violation cannot veto a well-supported explanation.
-  \item \textbf{A wider scope:} several rows and cooling units, humidity, and the chiller plant.
+  \item \textbf{More of the engineering model as evidence.} The heat and rack cooling indices (E14--E17), the first-law residual (E37) and phase imbalance (E44) are already part of the model and can be computed from the same readings, but no rule uses them yet (Table~\ref{tab:equation-usage}).
+  \item \textbf{A wider scope:} several rows, redundant cooling units, humidity, and the chiller plant. Redundant units need the airflow and heat-transfer share of each unit in the model, and an abductive choice of which unit has failed, with each unit's own fan power and valve readings as the discriminating evidence.
   \item \textbf{User evaluation of explanations} by data centre maintenance engineers.
   \item \textbf{Integration with live monitoring,} so that diagnoses and plans are produced as telemetry arrives.
 \end{enumerate}

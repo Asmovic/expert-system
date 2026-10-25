@@ -13,14 +13,19 @@ An explainable Prolog expert system that diagnoses faults in the cooling and pow
 | Abductive and consistency-based reasoning | Working, with noise-adaptive graded evidence. See `docs/09_reasoning_modules.md` |
 | Evaluation: metrics, confusion matrix, reasoning-mode comparison | Working. Results in `docs/08_evaluation_results.md` |
 | Sensitivity analysis: noise, missing data, multiple faults, sensor bias, thresholds | Working. Analysis in `docs/10_sensitivity_analysis.md` |
+| Model-mismatch experiment and threshold re-baselining | Working. `tests/mismatch.py`, results in `docs/12_model_mismatch.md` |
+| Explanation fidelity: remove cited evidence, rediagnose | Working. `tests/fidelity.pl`, results in `docs/13_explanation_fidelity.md` |
+| Sensitivity to the reasoning parameters set by judgement (`engine/params.pl`) | Working. `tests/param_sensitivity.py`, results in `docs/15_parameter_sensitivity.md` |
+| Variability over five held-out seeds, with pooled significance tests | Working. `tests/seeds.py`, results in `docs/16_seed_variability.md` |
 | Simulator for synthetic test cases | Working: a calibration split and a held-out split of 255 cases each |
-| LaTeX report | Complete draft, 79 pages: abstract and all seven chapters, 13 figures, generated tables. Bibliography is an unverified 26-entry starter file awaiting the EndNote export |
+| LaTeX report | Complete draft, 96 pages: abstract and all seven chapters, 13 figures, generated tables. Bibliography has 70 entries that the author still has to verify, then export from EndNote |
 
 ## Requirements
 
 - SWI-Prolog 10.0.2 or later. Tested on Windows 11.
 - No extra Prolog packages are needed.
 - Python 3 with the standard library only, to regenerate the dataset. Tested with Python 3.13.
+- Optional: scikit-learn 1.9 (with NumPy), only for the data-driven baseline `tests/baseline.py`. The expert system and every other script work without it.
 - MiKTeX with Strawberry Perl, to build the report. From `report/`: `pdflatex figures_preview.tex` checks every figure.
 
 ## Running
@@ -40,7 +45,7 @@ swipl main.pl
 To check that everything reproduces, about 20 seconds (regenerates both datasets and compares checksums, then reruns every mode on every split):
 
 ```
-python tests/reproduce.py            # 14 checks; exit code 0 if all pass
+python tests/reproduce.py            # 35 checks; exit code 0 if all pass
 python tests/reproduce.py --tables   # also regenerate every report table
 ```
 

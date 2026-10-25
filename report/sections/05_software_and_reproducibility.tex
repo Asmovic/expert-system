@@ -54,6 +54,7 @@ Table~\ref{tab:environment} lists the software used. The expert system needs onl
     Operating system & Windows 11 Pro, build 26200 & Development and testing \\
     SWI-Prolog & 10.0.2, 64-bit & All diagnostic reasoning; no extra packages \\
     Python & 3.13.1, standard library only & Simulator, sensitivity driver, reproduction check \\
+    scikit-learn & 1.9.1, with NumPy 2.5.4; optional & Data-driven baseline only (Section~\ref{sec:baseline}) \\
     MiKTeX & 25.12, pdfTeX 4.23 & Building the report \\
     Biber & 2.21 & Bibliography processing \\
     Strawberry Perl & 5.42.3 & Needed by the MiKTeX tool chain \\
@@ -162,6 +163,11 @@ swipl -g "evaluation_all('docs/08_evaluation_results.md', 'report/tables')" -t h
 swipl -g "export_latex_tables('report/tables')" -t halt main.pl tests/export_latex.pl
 python tests/sensitivity.py                 # full sensitivity analysis, about 12 minutes
 python tests/sensitivity.py --tables-only   # tables only, from the saved results
+swipl -g "fidelity_report('docs/13_explanation_fidelity.md', 'report/tables')" -t halt tests/fidelity.pl
+python tests/equation_usage.py              # equation-usage table, from the code's Eq. references
+python tests/param_sensitivity.py           # reasoning-parameter sweep, about a minute
+python tests/seeds.py                       # four extra held-out seeds, about a minute
+python tests/baseline.py                    # data-driven baseline; needs scikit-learn
 \end{lstlisting}
 
 \paragraph{Build the report.} From the \texttt{report} folder:
@@ -179,19 +185,19 @@ pdflatex main.tex
 The framework requires that another researcher can reproduce the system. Five elements make that possible:
 
 \begin{itemize}
-  \item \textbf{Software.} The versions are listed in Table~\ref{tab:environment}. No library outside SWI-Prolog and the Python standard library is required.
+  \item \textbf{Software.} The versions are listed in Table~\ref{tab:environment}. No library outside SWI-Prolog and the Python standard library is required, except scikit-learn for the optional baseline comparison.
   \item \textbf{Data.} The datasets, with their data dictionary (Table~\ref{tab:variables}), units, ranges, generation procedure (Section~\ref{sec:dataset}) and assumptions (Table~\ref{tab:sim-assumptions}), are included. They can also be regenerated from their seeds.
   \item \textbf{Execution.} Exact commands are given in Section~\ref{sec:execution}.
   \item \textbf{Expected output.} Table~\ref{tab:expected} gives the expected results.
   \item \textbf{Source code.} The complete Prolog source of the expert system, the simulator and the test code is included.
 \end{itemize}
 
-\paragraph{One-command reproduction check.} The script \texttt{tests/reproduce.py} checks reproducibility automatically. It regenerates both datasets from their seeds into a temporary folder and checks that they are identical to the included files, using recorded SHA-256 checksums. It then runs all four reasoning modes on every split and compares the exact-match counts with Table~\ref{tab:expected}. With \texttt{--tables} it also regenerates every generated table in the report.
+\paragraph{One-command reproduction check.} The script \texttt{tests/reproduce.py} checks reproducibility automatically. It regenerates both datasets from their seeds into a temporary folder and checks that they are identical to the included files, using recorded SHA-256 checksums. It then runs all four reasoning modes on every split, including the model-mismatch splits of Section~\ref{sec:mismatch} and the four extra held-out seeds of Section~\ref{sec:seeds}, and compares the exact-match counts with the recorded values. It also runs the explanation-fidelity test of Section~\ref{sec:fidelity} and checks its counts. With \texttt{--tables} it also regenerates every generated table in the report, and runs \texttt{tests/mismatch.py}, which regenerates the mismatch splits and re-baselines the thresholds, and \texttt{tests/param\_sensitivity.py}, which sweeps the reasoning parameters.
 \begin{lstlisting}[language={}]
-python tests/reproduce.py            # 14 checks; exit code 0 if all pass
+python tests/reproduce.py            # 35 checks; exit code 0 if all pass
 python tests/reproduce.py --tables   # also regenerate the report tables
 \end{lstlisting}
-On the development machine all 14 checks pass in about 20 seconds.
+On the development machine all 35 checks pass in about five minutes.
 
 \begin{table}[htbp]
   \centering

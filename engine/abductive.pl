@@ -23,7 +23,7 @@
     score, not a probability.
 */
 
-max_explanation_size(4).
+max_explanation_size(M) :- param(search_bound, M).
 
 abduce(C, abd(Syms, Present, Unexplained, Covers, Hyps)) :-
     case_symptoms(C, Syms),
@@ -84,11 +84,24 @@ subset_of_size(K, [_|Xs], Ys) :-
 
 %   hyp_conf(+Syms, +H, -Conf, -Support, -Against): Stage 4 Eq. 56.
 hyp_conf(Syms, H, Conf, Ep, En) :-
-    findall(V, ( evidence(H, S, W), sym_grade(Syms, S, E), V is W * E ), Vs),
+    findall(V, ( evidence_weight(H, S, W), sym_grade(Syms, S, E), V is W * E ), Vs),
     sum_list(Vs, Ep),
-    findall(V, ( requires(H, S), evidence(H, S, W), sym_grade(Syms, S, E), V is W * (1 - E) ), Ns),
+    findall(V, ( requires(H, S), evidence_weight(H, S, W), sym_grade(Syms, S, E), V is W * (1 - E) ), Ns),
     sum_list(Ns, En),
     Conf is Ep / (Ep + En + 0.01).
+
+%   evidence_weight(?H, ?S, -W): the causal weight in use (engine/params.pl).
+evidence_weight(H, S, W) :-
+    evidence(H, S, W0),
+    param(weight_mode, Mode),
+    weight_in_mode(Mode, H, S, W0, W).
+
+weight_in_mode(kb, _, _, W, W).
+weight_in_mode(uniform, _, _, _, 1.0).
+weight_in_mode(perturbed(Seed), H, S, W0, W) :-
+    functor(H, FH, _), functor(S, FS, _),
+    term_hash(w(Seed, FH, FS), Hash),
+    W is W0 * (0.5 + (Hash mod 1001) / 1000).
 
 hyp_verdicts(Syms, Cands, Covers, Hyps) :-
     findall(hyp(H, Conf, V),
@@ -110,8 +123,9 @@ hyp_verdicts(Syms, Cands, Covers, Hyps) :-
 %   cover_score(+Syms, +Bonus, +D, -Score): summed confidence, plus Bonus for
 %   each hypothesis that the deductive rules also prove.
 cover_score(Syms, BonusSet, D, Score) :-
+    param(deductive_bonus, B),
     findall(V, ( member(H, D), hyp_conf(Syms, H, Cf, _, _),
-                 ( memberchk(H, BonusSet) -> V is Cf + 0.1 ; V = Cf ) ), Vs),
+                 ( memberchk(H, BonusSet) -> V is Cf + B ; V = Cf ) ), Vs),
     sum_list(Vs, Score).
 
 rank_covers(Syms, BonusSet, Covers, Ranked) :-

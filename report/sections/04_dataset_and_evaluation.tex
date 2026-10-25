@@ -160,12 +160,12 @@ Verification asks whether the system implements its design correctly. Validation
 \begin{itemize}
   \item \textbf{Equations against physics.} The simulator's normal cases were checked against independent hand calculations. A 78\,kW row needs about 4.9\,m$^3$/s of air at a 13\,K rise, and the fan figures imply a plausible pressure rise of about 225\,Pa. The coil model was tuned so that normal operation gives the 5 to 7\,K water temperature rise of real chilled-water coils.
   \item \textbf{Rules against simulated physics.} Each new rule was first run against the calibration split. Rules that disagreed with the physics were revised rather than the data, which exposed the three errors of Section~\ref{sec:acquisition}.
-  \item \textbf{Generalisation.} The held-out split measures performance on cases that played no part in development. Held-out accuracy is slightly higher than calibration accuracy for every configuration (Tables~\ref{tab:modes-holdout} and~\ref{tab:modes-calibration}), which makes overfitting to the calibration split unlikely.
+  \item \textbf{Generalisation.} The held-out split measures performance on cases that played no part in development. Held-out accuracy is slightly higher than calibration accuracy for every configuration (Tables~\ref{tab:modes-holdout} and~\ref{tab:modes-calibration}), which makes overfitting to the calibration split unlikely. Both splits come from the same simulator, however, so this tests generalisation across cases of one model, not to a different system. Section~\ref{sec:mismatch} tests robustness to the model itself.
   \item \textbf{Explanations.} Explanation traces were inspected for representative cases of every category. The trace of Listing~\ref{lst:why} shows each element that the framework requires.
   \item \textbf{Regression.} The four smoke cases and both splits are rerun after every change to the knowledge base.
 \end{itemize}
 
-The main limitation of this validation is that both the knowledge base and the simulator rest on the same engineering model. Agreement between them shows that the reasoning is consistent with the model, not that the model is consistent with a real data centre. Validation on measured data remains future work (Chapter~\ref{ch:conclusion}).
+The main limitation of this validation is that both the knowledge base and the simulator rest on the same engineering model. Agreement between them shows that the reasoning is consistent with the model, not that the model is consistent with a real data centre. Section~\ref{sec:mismatch} measures how much the results depend on the model being exactly right, by regenerating the held-out cases with deliberately changed physics. Validation on measured data remains future work (Chapter~\ref{ch:conclusion}).
 
 % ---------------------------------------------------------------------------
 \section{Metrics}
@@ -178,8 +178,9 @@ The metrics follow Section~\ref{sec:maths}. Because a case can contain several f
   \item \textbf{Coverage} is the share of cases in which every true fault was predicted, whether or not extra faults were predicted too.
   \item \textbf{Precision, recall and F1-score} are computed for each fault class from label-level counts: a predicted label that matches a true label is a true positive. Macro averages are taken over the eleven classes.
   \item \textbf{Class accuracy} is the framework's Equation~\eqref{eq:metrics} at case level: for each class, the share of cases in which the presence or absence of that class was predicted correctly. Its mean over the classes is reported.
-  \item \textbf{ExplainabilityRate} is the share of cases in which every reported label has a justification, meaning a deductive proof, a clearly present supporting symptom or a hit conflict set, together with a maintenance plan and sourced thresholds.
-  \item \textbf{PlanValidity} is the share of issued maintenance plans that address a fault really present. A routine plan counts as valid only for a truly normal case.
+  \item \textbf{ExplainabilityRate} is the share of cases in which every reported label has a justification, meaning a deductive proof, a clearly present supporting symptom or a hit conflict set, together with a maintenance plan and sourced thresholds. The system only reports a label for one of these reasons, so this rate cannot fall below 100\%. It confirms that every output is traceable, not that the explanation is the real reason for the output. Explanation fidelity, below, tests that.
+  \item \textbf{Explanation fidelity} removes the observations an explanation cites and diagnoses the case again (Section~\ref{sec:fidelity}). Unlike ExplainabilityRate, it can fail.
+  \item \textbf{PlanValidity} is the share of issued maintenance plans that address a fault really present. A routine plan counts as valid only for a truly normal case. One plan is issued per label, and a plan counts as valid when its label is correct, so PlanValidity is in effect label-level precision. It does not test whether a plan's actions are the right ones. That rests on the plans' sources and verification steps (Section~\ref{sec:planner}), and ideally on review by a practitioner.
   \item \textbf{Reasoning time} is the mean and maximum wall-clock time per case.
 \end{itemize}
 
@@ -191,25 +192,39 @@ Confidence scores are used only to rank hypotheses. No probability is claimed, s
 
 \subsection{Overall performance}
 
-Table~\ref{tab:modes-holdout} gives the held-out results of the four configurations, and Table~\ref{tab:modes-calibration} the calibration results for comparison.
+Table~\ref{tab:modes-holdout} gives the held-out results of the four configurations, and Table~\ref{tab:modes-calibration} the calibration results for comparison. Each exact-match rate is given with its Wilson 95\% confidence interval. Because all four configurations diagnose the same cases, they are compared pairwise with an exact McNemar test on the cases where they disagree (Table~\ref{tab:significance-holdout}).
 
 \input{tables/eval_modes_holdout.tex}
 \input{tables/eval_modes_calibration.tex}
+\input{tables/eval_significance_holdout.tex}
 
 Four findings stand out.
 
 \begin{enumerate}
-  \item \textbf{Every configuration is accurate on the core categories.} All four diagnose every normal, single-fault and instrumentation case of the held-out split correctly (Table~\ref{tab:categories-holdout}).
-  \item \textbf{Abduction gives the largest gain.} Adding abduction raises exact-match accuracy from 91.0\% to 94.5\% and PlanValidity from 85.1\% to 94.2\%. The gain comes almost entirely from the imperfect-evidence categories, where parsimony removes spurious findings.
-  \item \textbf{The complete system is not the most accurate configuration.} It reaches 93.7\%, between the two partial configurations. Consistency checking is the only mode that catches the smallest supply-sensor bias in the calibration split, and it refuses explanations that leave a violated relation unexplained. Under heavy noise, however, it occasionally takes a chance violation of the power balance at face value and reports a meter fault.
-  \item \textbf{Every output is explained.} ExplainabilityRate is 100\% in every configuration, and reasoning takes about 1\,ms per case.
+  \item \textbf{Every configuration is accurate on the core categories.} All four diagnose every normal, single-fault and instrumentation case of the held-out split correctly (Table~\ref{tab:categories-holdout}). Over five held-out seeds, they miss 3 to 6 of the 900 such cases (Section~\ref{sec:seeds}).
+  \item \textbf{Abduction gives the largest gain.} Adding abduction raises exact-match accuracy from 91.0\% to 94.5\%. It corrects 11 cases that deduction gets wrong and loses 2, a significant difference ($p = 0.022$). The gain comes almost entirely from the imperfect-evidence categories, where parsimony removes spurious findings. On this split, the complete system's gain over deduction is not significant ($p = 0.092$), although it is on the calibration split ($p = 0.039$) and over five seeds.
+  \item \textbf{One split cannot separate the model-based configurations; five seeds can.} On the held-out split their exact-match rates differ by two to five cases, their confidence intervals overlap, and no pairwise difference between them approaches significance ($p \ge 0.45$). Pooled over five held-out seeds, every pairwise difference is significant, and deductive + abductive reasoning is the most accurate configuration (Section~\ref{sec:seeds}). Consistency checking is the only mode that catches the smallest supply-sensor bias in the calibration split, and it refuses explanations that leave a violated relation unexplained. Under heavy noise, however, it occasionally takes a chance violation of the power balance at face value and reports a meter fault.
+  \item \textbf{Every output is traceable, and the explanations are faithful.} ExplainabilityRate is 100\% in every configuration, as it must be by construction. The fidelity test, which can fail, finds that removing the evidence an explanation cites removes the diagnosis in 96 to 100\% of cases (Section~\ref{sec:fidelity}). Reasoning takes about 1\,ms per case.
 \end{enumerate}
 
 \input{tables/eval_categories_holdout.tex}
 
+\subsection{Variability across seeds}
+\label{sec:seeds}
+
+The held-out split is one random draw of 255 cases. To measure how much the results depend on that draw, four more held-out splits were generated with the same design and the seeds 1001, 2002, 3003 and 4004. None of them was used to choose anything. Table~\ref{tab:seeds} gives the exact match of each configuration on each seed, and pooled over all 1275 cases. They are generated by \texttt{tests/seeds.py}.
+
+\input{tables/eval_seeds.tex}
+
+The standard deviation across seeds is 1.2 to 1.6 percentage points. That is the same size as the differences between the model-based configurations on any one split, which is why one split cannot separate them. The order is stable where it matters most. On every seed, deductive + abductive reasoning is ahead of the complete system, and the complete system is ahead of deductive + consistency-based reasoning. Deduction alone is last on four seeds, but on seed 3003 it is narrowly first, which shows how much a single split can mislead.
+
+Pooling the paired cases gives the statistical power that one split lacks (Table~\ref{tab:seeds-significance}). Every pairwise difference is then significant. Deductive + abductive reasoning is the most accurate configuration, at 93.6\%. The complete system is never right where deductive + abductive reasoning is wrong, and is wrong in 9 cases where it is right. In each of the 9, it keeps the correct fault and adds a false sensor fault, and 8 of them are high-noise cases. On these data, the consistency check therefore costs more exact matches under noise than it gains. Its benefits show in the controlled experiments, such as detecting the smallest sensor biases (Section~\ref{sec:sensitivity}). Graded consistency checking (Section~\ref{sec:future}) is the change most likely to remove its cost.
+
+The core categories are not perfect on every seed either. Over the five seeds, 3 to 6 of the 900 normal, single-fault and instrumentation cases are misdiagnosed, depending on the configuration. The perfect score on seed 777 is therefore partly the luck of one draw.
+
 \subsection{Results by fault class}
 
-Table~\ref{tab:classes} gives the per-class results of the complete system and Table~\ref{tab:confusion} its confusion matrix. Every single-label case of the held-out split is diagnosed correctly: the confusion matrix is diagonal. The errors that remain occur in the multiple-fault and imperfect-evidence categories, and show in two classes. Sensor bias has a precision of 0.656, because 11 sensor faults were reported that were not present, mostly in high-noise cases. Normal has a precision of 0.829, because seven faulty cases were reported as normal, mostly borderline faults injected below the detection thresholds.
+Table~\ref{tab:classes} gives the per-class results of the complete system and Table~\ref{tab:confusion} its confusion matrix. Every single-label case of the held-out split is diagnosed correctly: the confusion matrix is diagonal. The errors that remain occur in the multiple-fault and imperfect-evidence categories, and show in two classes. Sensor bias has a precision of 0.656, because 11 sensor faults were reported that were not present, mostly in high-noise cases. Normal has a precision of 0.829, because seven faulty cases were reported as normal, mostly borderline faults injected below the detection thresholds. The class-accuracy column should be read with care. Each class is absent from most cases, so true negatives dominate it: sensor bias still has a class accuracy of 96.5\% despite its precision of 0.656. Precision, recall and F1-score are the informative measures.
 
 \input{tables/eval_classes.tex}
 \input{tables/eval_confusion.tex}
@@ -222,6 +237,29 @@ Table~\ref{tab:classes} gives the per-class results of the complete system and T
   \item \textbf{Missing key readings.} When the only reading that reveals a fault is missing, such as the cell resistance for battery degradation, no mode can detect it.
   \item \textbf{One physical interaction is not modelled.} A failed server fan inside a recirculating rack reduces the exhaust stratification. One such case in the held-out split is reported as a sensor fault rather than recirculation.
 \end{itemize}
+
+\subsection{Explanation fidelity}
+\label{sec:fidelity}
+
+ExplainabilityRate shows that every output can be traced, but not that the trace is the reason for the output. An explanation could cite evidence the diagnosis does not depend on. Explanation fidelity tests this directly, in the spirit of deletion tests for explanations in machine learning. For every fault label a configuration reports on the held-out split, the observations its explanation cites are removed and the case is diagnosed again. A removed observation is missing, which the system treats as unknown, as it would a failed sensor. The cited observations are those the explanation facility reports for the label: the observed evidence of its deductive proof, the readings behind every clearly present symptom it predicts, and the readings behind every violated redundancy relation that involves its component. Two outcomes are measured:
+
+\begin{itemize}
+  \item \textbf{Necessity:} the label disappears when its cited observations are removed;
+  \item \textbf{Control:} the label survives when the same number of uncited observations, chosen at random, are removed instead. This shows that the label does not vanish whenever any readings go missing.
+\end{itemize}
+
+\input{tables/eval_fidelity.tex}
+
+Table~\ref{tab:fidelity} gives the results. An explanation cites about six of the roughly 460 readings in a case. In the three model-based configurations, removing them removes the label every time, while removing six other readings leaves it in place in all but one case. Most labels are then replaced by a normal diagnosis, and the rest by a different label, such as the real fault that a false sensor alarm had been hiding.
+
+The test also found two weaknesses, both reportable rather than fatal:
+
+\begin{itemize}
+  \item \textbf{Single-proof explanations can be incomplete.} In 12 cases, deduction alone kept its UPS-bypass diagnosis after the cited reading, the UPS mode, was removed. Rule R35 then inferred bypass from the UPS efficiency, which is its purpose when the mode reading is missing. The diagnosis had two sufficient reasons, and the deductive trace showed only the first proof found. The model-based configurations cite the efficiency evidence as well, so they do not have this gap. Reporting every proof of a label, not only the first, would close it.
+  \item \textbf{Noise estimates are not cited.} The one control failure is a false meter-fault label in a high-noise case of the complete system. The random removal took out one phase current of another rack, so that rack's power balance could not be computed. That changed the electrical noise estimate, which is a median over the racks, and the meter fault fell below the presence threshold. The explanation cites the readings a symptom is computed from, but not those that set its noise scale.
+\end{itemize}
+
+Fidelity is measured against the system's own decision, not against the truth: it shows that the explanations are faithful to the reasoning, not that the reasoning is right. Whether the explanations are useful to a maintenance engineer still has to be assessed with users (Section~\ref{sec:limitations}).
 
 % ---------------------------------------------------------------------------
 \section{Sensitivity and Ablation Analysis}
@@ -266,7 +304,7 @@ The lead of the three model-based configurations over deduction widens with the 
 
 \input{tables/sens_multi_table.tex}
 
-Exact-match accuracy falls as faults are combined (Figure~\ref{fig:sens-multi}). Precision stays close to 1, so the system rarely reports a fault that is not present, while recall falls as interacting faults share symptoms. Two cooling faults together, such as a fan failure and a chilled-water loss, overlap in what they show, and parsimony then prefers one fault to two. The consistency-based configuration handles four faults best, because a fault model forces it to keep a second fault whose own relation was violated. Reasoning remains fast at every fault count (Figure~\ref{fig:sens-multi-time}). The timing curves are wall-clock measurements and include some noise from other processes on the test machine, such as the dip at two faults.
+Exact-match accuracy falls as faults are combined (Figure~\ref{fig:sens-multi}). Precision stays close to 1, so the system rarely reports a fault that is not present, while recall falls as interacting faults share symptoms. Two cooling faults together, such as a fan failure and a chilled-water loss, overlap in what they show, and parsimony then prefers one fault to two. The consistency-based configuration handles four faults best, because a fault model forces it to keep a second fault whose own relation was violated. Reasoning remains fast at every fault count (Figure~\ref{fig:sens-multi-time}). The timing curves are wall-clock measurements and include some noise from other processes on the test machine, such as the dip at two faults. They should therefore be read only as an order of magnitude: a few milliseconds per case at every fault count, far below the sampling interval of data centre monitoring. Differences of a fraction of a millisecond between configurations or fault counts are not meaningful.
 
 \begin{figure}[htbp]
   \centering
@@ -298,7 +336,26 @@ The large drops share one cause: each occurs when the perturbed threshold moves 
 
 One result is a warning about consistency checking. Scaling the UPS-efficiency threshold to 0.88 puts every healthy double-conversion UPS, which runs near 0.955, above it. Deduction loses only 1.2 points, because its UPS rule relies on the mode flag. The complete system loses 84 points, because the mis-set relation produces a conflict in every case and the consistency module then rejects every correct explanation. A redundancy relation acts as a hard constraint, so a wrong relation threshold corrupts every diagnosis. Relation thresholds should therefore be derived from sensor uncertainty (Equation~\eqref{eq:uncertainty}) and validated on normal data before deployment.
 
+\subsection{Reasoning parameters}
+\label{sec:param-sensitivity}
+
+The threshold study does not cover the five reasoning parameters set by judgement (Table~\ref{tab:design-params}). Each was changed on its own, and the three model-based configurations were run on both splits and on four stress sets from this section: four times the nominal noise, 20\% of readings missing, four simultaneous faults, and a 2\,K sensor bias, which lies in the transition between missed and detected biases. Table~\ref{tab:param-sensitivity} gives the results. Deduction uses none of these parameters and is the reference. The study is generated by \texttt{tests/param\_sensitivity.py}.
+
+\input{tables/param_sensitivity.tex}
+
+\begin{itemize}
+  \item \textbf{Causal weights hardly matter.} Setting every weight to 1, or multiplying each by a random factor between 0.5 and 1.5 in five independent draws, changes at most one case on any set. Parsimony, not the weights, decides most explanations, and the weights only rank explanations of the same size.
+  \item \textbf{The deductive bonus hardly matters up to 0.2.} At 0.5 it gains two held-out cases and six 2\,K-bias cases, because abduction then defers to the rules, which detect small biases better (Section~\ref{sec:sensitivity}). It leaves the calibration split unchanged.
+  \item \textbf{The evidence cut-off is a real trade-off.} A looser cut-off, $k = 0.5$, catches four to nine more 2\,K biases but loses seven to nine cases under heavy noise. A stricter one, $k = 2$, gains three to six noisy cases and loses two to five small biases. The default $k = 1$ lies between them: on the held-out split it is at most two cases behind the stricter cut-off and three or four ahead of the looser one.
+  \item \textbf{The search bound must cover the largest fault combination.} A bound of 2 or 3 loses every four-fault case of the abductive configurations, and 12 of the consistency-based one. A bound of 5 changes nothing, except that consistency-based search then accepts larger, wrong diagnoses in four of the four-fault cases.
+  \item \textbf{Tying the noise of unredundant features to the temperature sensors helps under noise.} With fixed nominal noise instead, the model-based configurations lose one to four cases at four times the noise, and gain one calibration case.
+\end{itemize}
+
+The defaults were set before this study and were not changed after it. The held-out split must not be used to tune them, and on the calibration split no variant except the search bound and the loosest cut-off moves any configuration by more than one case, so the calibration data give no reason to change them either. The results support the claim that the conclusions of this chapter do not depend on the exact values chosen by judgement, except for the evidence cut-off, which sets the balance between robustness to noise and sensitivity to small faults.
+
 \subsection{Summary}
+
+Table~\ref{tab:sens-summary} summarises the findings of the sensitivity and ablation analysis.
 
 \begin{table}[htbp]
   \centering
@@ -314,7 +371,73 @@ One result is a warning about consistency checking. Scaling the UPS-efficiency t
     Contradictory evidence & Sensor biases of 3\,K and more are reliably found; consistency checking is best at the detection limit. \\
     Noisy data & Abduction with noise-adaptive evidence is the most robust configuration. \\
     Multiple faults & Precision stays near 1; recall falls with the number of faults because interacting faults share symptoms. \\
+    Reasoning parameters & Causal weights and the deductive bonus hardly matter. The evidence cut-off trades robustness to noise against sensitivity to small faults. The search bound must cover the largest fault combination. \\
     Reasoning time & A few milliseconds per case in every sweep. \\
     \bottomrule
   \end{tabular}
 \end{table}
+
+% ---------------------------------------------------------------------------
+\section{Robustness to Model Mismatch}
+\label{sec:mismatch}
+
+Every result so far was obtained on cases generated by the same engineering model that the knowledge base encodes. This section asks how much the diagnosis depends on that model being exactly right.
+
+\paragraph{Method.} The 255 held-out cases were regenerated with the same seed, and so with the same faults, severities and random draws, but with deliberately changed simulator physics. Table~\ref{tab:mismatch-profiles} lists the two profiles. They change the coil heat transfer, server power and airflow, CPU thermal behaviour, the share of airflow shortfall drawn from the hot aisle, natural recirculation, room temperature, fan-control margin and sensor noise. Equipment ratings that a real knowledge base would take from nameplates, such as the fan's rated power and the valve characteristic, were left unchanged. The knowledge base was not modified. Because each case keeps its faults and draws, the results are compared with the nominal split case by case.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Simulator physics in the two model-mismatch profiles.}
+  \label{tab:mismatch-profiles}
+  \begin{tabular}{L{6.8cm}rrr}
+    \toprule
+    Parameter & Nominal & Mild & Strong \\
+    \midrule
+    Coil air-side conductance (kW/K) & 15 & 12 & 10 \\
+    Coil water-side conductance at design flow (kW/K) & 10 & 12 & 14 \\
+    Server idle and full-load power (kW) & 0.40, 0.90 & 0.35, 0.95 & 0.30, 1.05 \\
+    Server airflow at nominal fan speed (kg/s) & 0.055 & 0.050 & 0.045 \\
+    CPU share of server power & 0.55 & 0.50 & 0.60 \\
+    CPU thermal resistance (K/kW) & 90 & 90 & 110 \\
+    Share of airflow shortfall from the hot aisle & 0.4 & 0.5 & 0.6 \\
+    Natural recirculation at the top of a sealed rack & 0.10 & 0.12 & 0.15 \\
+    Fan-control airflow margin & 1.10 & 1.15 & 1.25 \\
+    Room air temperature (\textdegree C) & 25 & 26 & 27 \\
+    Sensor noise, multiple of nominal & 1.0 & 1.25 & 1.5 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\input{tables/eval_mismatch.tex}
+\input{tables/eval_mismatch_categories.tex}
+
+\paragraph{Mild mismatch.} With the physics changed by about 10 to 25\%, the configurations with abduction lose about four points of exact-match accuracy, keeping 90 to 91\%, while deduction alone falls from 91.0\% to 80.8\% (Table~\ref{tab:mismatch}). Every configuration loses significantly, but graded, noise-adaptive evidence makes the model-based configurations markedly less sensitive to model error than crisp rules.
+
+\paragraph{Strong mismatch.} With changes of about 25 to 50\%, every configuration collapses, to between 26\% and 40\%. Even 17 of the 30 normal cases are misdiagnosed (Table~\ref{tab:mismatch-categories}). Inspection of the failures shows that the reasoning is intact and that three envelope thresholds are to blame. With less airflow per server and more natural recirculation, healthy racks stratify by 3 to 4\,K, above the 3\,K and 3.5\,K stratification thresholds. With hotter-running CPUs, healthy servers exceed the 85\,\textdegree C CPU threshold. The system then sees recirculation where there is none, or symptoms that no hypothesis explains. The thresholds encode the normal envelope of the nominal model, and the strong profile moves that envelope.
+
+\paragraph{Re-baselining from normal operating data.} A real site has plenty of data from normal operation, even when it has no fault data. To test whether that is enough, normal-only cases were generated under the strong physics with a different seed (20261020). Each of the three envelope thresholds was shifted by how far the largest normal value moved, which keeps its original margin above normal operation. No fault labels were used. The shifts were $+2.3$\,K and $+2.2$\,K for the inlet and outlet stratification thresholds and $+26.7$\,K for the CPU threshold. Re-baselining restores the complete system to 82.4\% and the other model-based configurations to about 83\%, against 75.3\% for deduction. Normal and instrumentation cases are again almost all correct. Multiple faults, at 17 of 30, and high-noise cases recover only partly. The re-baselined CPU threshold also lies above the throttling limit, so CPU temperature no longer helps to detect a failed server fan.
+
+\paragraph{Implication.} The diagnostic reasoning transfers across models, but fixed absolute thresholds do not. A deployment would therefore need its envelope thresholds calibrated against the site's own normal operation before use. Defining those thresholds relative to a learned baseline, rather than as fixed values, is the most direct improvement this experiment suggests (Section~\ref{sec:future}).
+
+% ---------------------------------------------------------------------------
+\section{Comparison with a Data-Driven Baseline}
+\label{sec:baseline}
+
+Fault diagnosis in data centres has mostly been data-driven (Chapter~\ref{ch:theory_and_kr}), and this project offers explainability instead. That trade-off should be shown, not asserted. Standard classifiers were therefore trained on the raw readings, with no engineering knowledge, and tested on the same cases as the expert system. The framework forbids replacing the symbolic system with machine learning, not comparing against it, so the classifiers are a baseline only and play no part in the expert system.
+
+\paragraph{Method.} Each case becomes one vector of every reading, with a missing reading left missing. The labels are the fault labels seen in training, such as chw\_supply\_loss(crah\_1), learned as one binary output each. A case with no predicted fault is predicted normal. A random forest of 300 trees and a single decision tree were trained with the standard settings of scikit-learn \parencite{pedregosa2011}, without tuning, in two regimes: on the calibration split, the 255 cases against which the knowledge base was checked, and on 2550 further simulated cases, far more labelled fault data than a real site would have. The second regime favours the classifiers in two ways: they see labelled examples of nearly every fault at every location, and they are trained and tested on the same simulator. The script is \texttt{tests/baseline.py}.
+
+\input{tables/eval_baseline.tex}
+
+Table~\ref{tab:baseline} gives the results. Four findings stand out.
+
+\begin{itemize}
+  \item \textbf{With the data the knowledge base was checked against, the classifiers fail.} Trained on the 255 calibration cases, they reach 52 to 58\% exact match. A fault label names its location, so there are dozens of labels with a few examples each, and 23 held-out cases contain a label never seen in training. No instrumentation case and only 2 of the 30 multiple-fault cases are diagnosed correctly.
+  \item \textbf{With ten times as much labelled data, they come closer but stay significantly behind.} Trained on 2550 cases, the decision tree reaches 89.4\% on the held-out split and 87.1\% over five seeds, against 94.5\% and 93.6\% for deductive + abductive reasoning. The random forest, at 82.0\%, does worse than the single tree with these untuned settings. The classifiers do better than the expert system on borderline and high-noise cases: the forest gets 12 and 13 of 15 right against 9 and 9. Boundaries learned from labelled data fit the simulator's noise better than thresholds set by engineering judgement, and that is the price of sourced, explainable thresholds.
+  \item \textbf{Under model mismatch, the classifiers collapse first.} With the physics changed by 10 to 25\%, the classifiers trained on 2550 cases fall to about 50\%, while deductive + abductive reasoning keeps 91.0\%. The classifiers have learned the exact envelope of the nominal simulator, not the physics behind it. Under strong mismatch every system fails, and the best classifier, at 38.0\%, is not significantly different from the expert system, at 40.0\%.
+  \item \textbf{The classifiers explain nothing.} They give no proof, no competing hypotheses and no maintenance plan, they need labelled examples of every fault at every location, and they cannot diagnose a fault at a location absent from their training data.
+\end{itemize}
+
+On these data, then, the knowledge-based system is more accurate than standard classifiers, needs no labelled fault data, and transfers far better to a changed model, while also explaining every diagnosis. The classifiers' advantage on borderline and noisy cases is the strongest argument for learning thresholds from data within the symbolic system, as Section~\ref{sec:future} proposes, rather than for replacing it.
+

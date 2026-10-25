@@ -10,6 +10,8 @@
 \setlength{\LTcapwidth}{\textwidth}
 \setlength{\emergencystretch}{2em}
 \usepackage{graphicx}
+\usepackage{caption}
+\captionsetup[table]{position=top,skip=6pt}
 \usepackage{microtype}
 \usepackage[raggedright]{titlesec}
 \usepackage{tikz}
@@ -33,17 +35,37 @@
 \date{\today}
 
 \begin{document}
-\maketitle
+\begin{titlepage}
+  \centering
+  {\large University of Lagos\par}
+  \vspace{3cm}
+  {\LARGE\bfseries An Explainable Prolog Expert System for Fault Diagnosis and Corrective Maintenance of Data Centre Cooling and Power Infrastructure\par}
+  \vspace{2.5cm}
+  {\large Ibrahim Asogba\par}
+  \vspace{0.3cm}
+  Student number: 259047013\par
+  \vspace{2cm}
+  A capstone project report submitted in partial fulfilment of the requirements of the degree of MSc Systems Engineering\par
+  \vspace{1.5cm}
+  Supervisor: Dr.\ J.\,A.\ Ogbemhe\par
+  \vfill
+  {\large \today\par}
+\end{titlepage}
+
+\input{sections/00_declaration}
 
 \begin{abstract}
 Faults in the cooling and power infrastructure of a data centre can throttle or shut down the servers it supports, yet monitoring data rarely say directly what has failed: different faults share symptoms, sensors can be wrong, and readings are noisy or missing. This project asks whether engineering knowledge can be represented formally and reasoned over in Prolog to produce explainable, defensible diagnoses and appropriate corrective-maintenance decisions.
 
-An expert system was developed for one row of a data centre, covering eight equipment faults and two instrumentation faults across the cooling unit, racks, servers, power distribution, UPS and battery. Its knowledge base holds a 60-equation engineering model, 47 diagnostic rules with sourced thresholds, causal signatures and 20 analytical redundancy relations with fault models. Deductive, abductive and consistency-based reasoning are combined, and every diagnosis is explained and linked to a corrective plan. Because no measured fault data were available, the system was tested on synthetic cases from a physics simulator, with separate calibration and held-out datasets.
+An expert system was developed for one row of a data centre, covering eight equipment faults and two instrumentation faults across the cooling unit, racks, servers, power distribution, uninterruptible power supply (UPS) and battery. Its knowledge base holds a 60-equation engineering model, 47 diagnostic rules with sourced thresholds, causal signatures and 20 analytical redundancy relations with fault models. Deductive, abductive and consistency-based reasoning are combined, and every diagnosis is explained and linked to a corrective plan. Because no measured fault data were available, the system was tested on synthetic cases from a physics simulator, with separate calibration and held-out datasets.
 
-On 255 held-out cases, exact-match accuracy was 91.0\% to 94.5\% across four reasoning configurations, every normal, single-fault and instrumentation case was diagnosed correctly, and every diagnosis was explained, at about a millisecond per case. Abduction with noise-adaptive evidence was the most robust configuration: at four times the nominal sensor noise it kept 73\% exact match against 42\% for deduction alone. Consistency checking separated sensor faults from equipment faults, but was fragile under heavy noise and to mis-set relation thresholds. The results support a qualified yes to the research question, qualified because validation on measured data remains to be done.
+On 255 held-out cases, exact-match accuracy was 91.0\% to 94.5\% across four reasoning configurations, every normal, single-fault and instrumentation case was diagnosed correctly, and every diagnosis was explained, at about a millisecond per case. Over five held-out seeds (1275 cases), deductive plus abductive reasoning was the most accurate configuration at 93.6\%, ahead of the complete system (92.9\%), deductive plus consistency-based reasoning (91.9\%) and deduction alone (90.8\%), with every difference significant. The complete system fell behind deductive plus abductive reasoning only in cases where consistency checking added a false sensor alarm, mostly under heavy noise. Abduction with noise-adaptive evidence was the most robust configuration: at four times the nominal sensor noise it kept 73\% exact match against 42\% for deduction alone. Consistency checking separated sensor faults from equipment faults, but was fragile under heavy noise and to mis-set relation thresholds. When the simulator's physics was changed by 10 to 25\%, the abductive configurations lost about four points while deduction lost ten. Larger changes made every configuration fail, because fixed thresholds encode the nominal normal envelope, until three thresholds were re-baselined from normal operating data, which restored about 83\%. Standard classifiers trained on the raw readings reached at most 89\% even with ten times the labelled data, and about 50\% under mild model mismatch, without explaining anything. The results support a qualified yes to the research question, qualified because validation on measured data remains to be done and thresholds must be calibrated to each site.
 \end{abstract}
 
 \tableofcontents
+\listoffigures
+\listoftables
+\input{sections/00_abbreviations}
 
 \input{sections/01_introduction}
 \input{sections/02_theory_and_kr}

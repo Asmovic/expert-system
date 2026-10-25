@@ -9,11 +9,15 @@
 evaluation_all(MdFile, Dir) :-
     modes(Ms),
     findall(Sp-M-Rs, ( member(Sp, [calibration, holdout]), member(M, Ms), run_mode(M, Sp, Rs) ), All),
-    setup_call_cleanup(open(MdFile, write, S0, [encoding(utf8)]), write_report(S0, All), close(S0)),
+    setup_call_cleanup(open(MdFile, write, S0, [encoding(utf8)]),
+                       ( write_report(S0, All), md_significance(S0, All) ),
+                       close(S0)),
     make_directory_path(Dir),
     forall(member(Sp, [holdout, calibration]),
            ( atom_concat('eval_modes_', Sp, B1), atom_concat(B1, '.tex', F1),
              tex_file(Dir, F1, [S]>>tex_mode_table(S, All, Sp)),
+             atom_concat('eval_significance_', Sp, B3), atom_concat(B3, '.tex', F3),
+             tex_file(Dir, F3, [S]>>tex_significance_table(S, All, Sp)),
              atom_concat('eval_categories_', Sp, B2), atom_concat(B2, '.tex', F2),
              tex_file(Dir, F2, [S]>>tex_category_table(S, All, Sp)) )),
     member(holdout-full-RsF, All), !,
@@ -37,16 +41,105 @@ pct(X, A) :- format(atom(A), "~1f\\%", [X * 100]).
 tex_mode_table(S, All, Sp) :-
     split_name(Sp, SpN),
     format(S, "\\begin{table}[htbp]~n  \\centering~n  \\footnotesize~n  \\setlength{\\tabcolsep}{4pt}~n", []),
-    format(S, "  \\caption{Comparison of reasoning modes, ~w split (255 cases). Class acc.: mean class accuracy. Explain.: ExplainabilityRate. Plan val.: PlanValidity.}~n  \\label{tab:modes-~w}~n", [SpN, Sp]),
+    format(S, "  \\caption{Comparison of reasoning modes, ~w split (255 cases). 95\\% CI: Wilson confidence interval of the exact-match rate. Explain.: ExplainabilityRate. Plan val.: PlanValidity.}~n  \\label{tab:modes-~w}~n", [SpN, Sp]),
     format(S, "  \\begin{tabular}{L{3.4cm}rrrrrrr}~n  \\toprule~n", []),
-    format(S, "  Mode & Exact & Coverage & Macro F1 & Class acc. & Mean ms & Explain. & Plan val. \\\\~n  \\midrule~n", []),
+    format(S, "  Mode & Exact & 95\\% CI & Coverage & Macro F1 & Mean ms & Explain. & Plan val. \\\\~n  \\midrule~n", []),
     forall(member(Sp-M-Rs, All),
            ( mode_name(M, Name),
-             emr(Rs, E), coverage(Rs, Cv), macro_prf(Rs, _, _, F), mean_class_accuracy(Rs, A),
+             emr(Rs, E), coverage(Rs, Cv), macro_prf(Rs, _, _, F),
              times(Rs, Tm, _), explainability_rate(Rs, X), plan_validity(Rs, PV),
-             maplist(pct, [E, Cv, A, X, PV], [Ep, Cvp, Ap, Xp, PVp]),
-             format(S, "  ~w & ~w & ~w & ~3f & ~w & ~2f & ~w & ~w \\\\~n", [Name, Ep, Cvp, F, Ap, Tm, Xp, PVp]) )),
+             exact_counts(Rs, K, N), wilson(K, N, Lo, Hi),
+             format(atom(CI), "~1f--~1f", [Lo * 100, Hi * 100]),
+             maplist(pct, [E, Cv, X, PV], [Ep, Cvp, Xp, PVp]),
+             format(S, "  ~w & ~w & ~w & ~w & ~3f & ~2f & ~w & ~w \\\\~n", [Name, Ep, CI, Cvp, F, Tm, Xp, PVp]) )),
     format(S, "  \\bottomrule~n  \\end{tabular}~n\\end{table}~n", []).
+
+%   ---- significance -------------------------------------------------------
+
+exact_counts(Rs, K, N) :-
+    include([r(_, _, E, G, _)]>>(E == G), Rs, Ok),
+    length(Ok, K), length(Rs, N).
+
+%   wilson(+K, +N, -Lo, -Hi): Wilson score 95% interval for a proportion K/N.
+wilson(K, N, Lo, Hi) :-
+    Z = 1.96,
+    P is K / N,
+    D is 1 + Z * Z / N,
+    C is (P + Z * Z / (2 * N)) / D,
+    H is Z * sqrt(P * (1 - P) / N + Z * Z / (4 * N * N)) / D,
+    Lo is C - H, Hi is C + H.
+
+%   mcnemar(+RsA, +RsB, -OnlyA, -OnlyB, -P): exact two-sided McNemar test on
+%   paired results. OnlyA counts cases that A gets right and B wrong.
+mcnemar(RsA, RsB, B01, B10, P) :-
+    findall(C-1, ( member(r(C, _, E, G, _), RsA), E == G ), A0), list_to_assoc_ok(A0, OkA),
+    findall(C-1, ( member(r(C, _, E, G, _), RsB), E == G ), B0), list_to_assoc_ok(B0, OkB),
+    findall(C, member(r(C, _, _, _, _), RsA), Cs),
+    aggregate_all(count, ( member(C, Cs), get_assoc(C, OkA, _), \+ get_assoc(C, OkB, _) ), B01),
+    aggregate_all(count, ( member(C, Cs), \+ get_assoc(C, OkA, _), get_assoc(C, OkB, _) ), B10),
+    Nd is B01 + B10,
+    (   Nd =:= 0
+    ->  P = 1.0
+    ;   Kmin is min(B01, B10),
+        aggregate_all(sum(X), ( between(0, Kmin, I), comb(Nd, I, X) ), Tail),
+        P is min(1.0, 2 * Tail / 2 ** Nd)
+    ).
+
+list_to_assoc_ok(Pairs, Assoc) :-
+    sort(Pairs, Sorted),
+    list_to_assoc(Sorted, Assoc).
+
+comb(N, K, C) :-
+    K1 is min(K, N - K),
+    numlist_product(N, K1, Num),
+    factorial(K1, Den),
+    C is Num // Den.
+
+numlist_product(_, 0, 1) :- !.
+numlist_product(N, K, P) :- K1 is K - 1, N1 is N - 1, numlist_product(N1, K1, P1), P is N * P1.
+
+factorial(0, 1) :- !.
+factorial(N, F) :- N1 is N - 1, factorial(N1, F1), F is N * F1.
+
+mode_pairs([deductive-ded_abd, deductive-ded_cbd, deductive-full, ded_abd-ded_cbd, ded_abd-full, ded_cbd-full]).
+
+tex_significance_table(S, All, Sp) :-
+    split_name(Sp, SpN),
+    format(S, "\\begin{table}[htbp]~n  \\centering~n  \\small~n", []),
+    format(S, "  \\caption{Paired comparison of reasoning modes, ~w split: exact two-sided McNemar test on the cases where the two modes disagree. Only A: cases the first mode gets right and the second wrong.}~n  \\label{tab:significance-~w}~n", [SpN, Sp]),
+    format(S, "  \\begin{tabular}{L{3.6cm}L{3.6cm}rrr}~n  \\toprule~n", []),
+    format(S, "  Mode A & Mode B & Only A & Only B & $p$ \\\\~n  \\midrule~n", []),
+    mode_pairs(Ps),
+    forall(member(A-B, Ps),
+           ( member(Sp-A-RA, All), member(Sp-B-RB, All),
+             mcnemar(RA, RB, OA, OB, P),
+             mode_name(A, NA), mode_name(B, NB),
+             p_text(tex, P, P0),
+             ( P < 0.05 -> format(atom(PT), "\\textbf{~w}", [P0]) ; PT = P0 ),
+             format(S, "  ~w & ~w & ~d & ~d & ~w \\\\~n", [NA, NB, OA, OB, PT]) )),
+    format(S, "  \\bottomrule~n  \\end{tabular}~n\\end{table}~n", []).
+
+md_significance(S, All) :-
+    forall(member(Sp, [holdout, calibration]),
+           ( format(S, "~n## Paired significance: ~w split~n~n", [Sp]),
+             format(S, "Exact two-sided McNemar test on the cases where two modes disagree. Exact-match rates are given with Wilson 95%% confidence intervals.~n~n", []),
+             format(S, "| Mode | Exact match | 95% CI |~n|---|---|---|~n", []),
+             forall(member(Sp-M-Rs, All),
+                    ( mode_name(M, N), exact_counts(Rs, K, T), wilson(K, T, Lo, Hi),
+                      format(S, "| ~w | ~d of ~d | ~1f to ~1f% |~n", [N, K, T, Lo * 100, Hi * 100]) )),
+             format(S, "~n| Mode A | Mode B | Only A right | Only B right | p |~n|---|---|---|---|---|~n", []),
+             mode_pairs(Ps),
+             forall(member(A-B, Ps),
+                    ( member(Sp-A-RA, All), member(Sp-B-RB, All), mcnemar(RA, RB, OA, OB, P),
+                      mode_name(A, NA), mode_name(B, NB),
+                      p_text(md, P, PT),
+                      format(S, "| ~w | ~w | ~d | ~d | ~w |~n", [NA, NB, OA, OB, PT]) )) )).
+
+%   p_text(+Format, +P, -Text): three decimals, or "< 0.001" when the value
+%   would print as 0.000.
+p_text(tex, P, '\\textless\\,0.001') :- P < 0.0005, !.
+p_text(md, P, '< 0.001') :- P < 0.0005, !.
+p_text(_, P, T) :- format(atom(T), "~3f", [P]).
 
 tex_category_table(S, All, Sp) :-
     split_name(Sp, SpN),
@@ -75,7 +168,7 @@ category_info(borderline,      'Borderline',         'G').
 
 tex_class_table(S, Rs) :-
     format(S, "\\begin{table}[htbp]~n  \\centering~n  \\small~n", []),
-    format(S, "  \\caption{Per-class results of the complete system, held-out split. Counts are of fault labels; class accuracy is at case level (Equation~~\\eqref{eq:metrics}).}~n  \\label{tab:classes}~n", []),
+    format(S, "  \\caption{Per-class results of the complete system, held-out split. Counts are of fault labels; class accuracy is at case level (Equation~~\\eqref{eq:metrics}). Because each class is absent from most cases, class accuracy is dominated by true negatives and is high even for a weak class; precision, recall and F1 are the informative measures.}~n  \\label{tab:classes}~n", []),
     format(S, "  \\begin{tabular}{L{4.2cm}rrrrrrr}~n  \\toprule~n", []),
     format(S, "  Class & TP & FP & FN & Precision & Recall & F1 & Class acc. \\\\~n  \\midrule~n", []),
     true_classes(Ks),

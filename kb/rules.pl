@@ -36,7 +36,7 @@ drule(r04, cond(C, inlet_stratified(R)),
       [ inlet_stratification(C, R, D), threshold(strat_max, Th), D > Th ],
       a5_stratification).
 
-%   R05  CRAH supply air is above setpoint plus tolerance band.
+%   R05  CRAH supply air is above setpoint plus tolerance band (Eq. 28).
 drule(r05, cond(C, supply_air_hot(U)),
       [ component(U, crah), obs(C, t_supply_air, U, T),
         threshold(t_supply_setpoint, Sp), threshold(t_supply_band, B),
@@ -204,7 +204,8 @@ drule(r47, cond(C, supply_air_cold(U)),
         T < Sp - B ],
       a1_supply_setpoint).
 
-%   R44  A telemetry group has stopped reporting fresh samples.
+%   R44  A telemetry group has stopped reporting fresh samples: its sample
+%        age, Eq. 52, is above the limit.
 drule(r44, cond(C, telemetry_stale(G)),
       [ obs(C, sample_age, G, A), threshold(sample_age_max, Th), A > Th ],
       a14_telemetry).

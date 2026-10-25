@@ -16,6 +16,7 @@
 :- ensure_loaded('kb/symptoms.pl').
 :- ensure_loaded('kb/causal.pl').
 :- ensure_loaded('kb/arr.pl').
+:- ensure_loaded('engine/params.pl').
 :- ensure_loaded('engine/prover.pl').
 :- ensure_loaded('engine/deductive.pl').
 :- ensure_loaded('engine/evidence.pl').

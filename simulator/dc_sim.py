@@ -191,14 +191,14 @@ def solve_state(util, faults, rng_servers):
                 t_cpu = t_in + r_th * p_cpu_eff
                 t_out = t_in + p_s_eff / (m_s * CP_AIR)                    # Eq. 6
                 servers[sid] = dict(u=u, omega=omega, t_cpu=t_cpu,
-                                    f_cpu=F_NOM * kappa ** (1 / 3), p=p_s_eff)
-                p_rack += p_s_eff
+                                    f_cpu=F_NOM * kappa ** (1 / 3), p=p_s_eff)   # Eq. 9, phi_f = kappa^(1/3)
+                p_rack += p_s_eff                                           # Eq. 2
                 m_rack += m_s
                 h_rack += m_s * t_out
                 if j > SERVERS_PER_RACK // 2:
                     h_top += m_s * t_out
                     m_top += m_s
-            t_out_rack = h_rack / m_rack
+            t_out_rack = h_rack / m_rack                                    # Eq. 7, as the mixed server outlets
             rack_info[r] = dict(p=p_rack, m=m_rack, t_out=t_out_rack, t_out_top=h_top / m_top)
             demand += m_rack
             hot_enthalpy += h_rack
@@ -207,9 +207,9 @@ def solve_state(util, faults, rng_servers):
 
         # CRAH fan: speed set from airflow demand, Eqs. 21 and 23.
         n_fan = clamp(100.0 * demand * AIRFLOW_MARGIN / (RHO_AIR * V_RATED * filt_factor), FAN_MIN, FAN_MAX)
-        m_air = RHO_AIR * V_RATED * (n_fan / 100.0) * flow_factor
+        m_air = RHO_AIR * V_RATED * (n_fan / 100.0) * flow_factor          # Eq. 5
         p_fan_exp = P_FAN_RATED * (n_fan / 100.0) ** 3
-        p_fan = p_fan_exp * faults["fan_power_ratio"]
+        p_fan = p_fan_exp * faults["fan_power_ratio"]                      # Eq. 24, F1 injects the ratio
 
         # Inlet temperatures. A shortfall is drawn partly from the hot aisle
         # and partly from the room. Top inlets add local recirculation, Eq. 18.
@@ -246,7 +246,7 @@ def solve_state(util, faults, rng_servers):
         m_w = valve_flow(theta, avail)
         q = coil_heat(m_air, m_w, t_coil_in)
         t_sa_new = t_coil_in - q / (max(m_air, 1e-6) * CP_AIR)
-        t_wr = T_CHW_SUPPLY + q / (m_w * CP_WATER)
+        t_wr = T_CHW_SUPPLY + q / (m_w * CP_WATER)                          # Eqs. 29 and 30
 
         change = abs(t_sa_new - t_sa) + max(abs(new_mid[r] - t_mid[r]) + abs(new_top[r] - t_top[r]) for r in RACKS)
         t_sa = 0.5 * t_sa + 0.5 * t_sa_new
@@ -256,7 +256,7 @@ def solve_state(util, faults, rng_servers):
         if change < 1e-5:
             break
 
-    p_it = sum(info["p"] for info in rack_info.values())
+    p_it = sum(info["p"] for info in rack_info.values())                  # Eq. 3
     v_air = m_air / RHO_AIR
     return dict(
         t_sa=t_sa, t_ra=t_ra, n_fan=n_fan, p_fan=p_fan, theta=theta, m_w=m_w, t_wr=t_wr,
@@ -590,6 +590,42 @@ def write_truth(cases, path, seed):
         json.dump(data, fh, indent=1, default=list)
 
 
+# ---------------------------------------------------------------------------
+# Model-mismatch profiles. Each one changes the simulator's physics while the
+# knowledge base stays as it is, to measure how much the diagnosis depends on
+# the model being exactly right. Equipment ratings that the knowledge base
+# reads from nameplates (fan rated power, rated airflow, valve and filter
+# data, battery baseline) are deliberately left unchanged.
+# ---------------------------------------------------------------------------
+PHYSICS = {
+    "nominal": {},
+    "mild": {      # changes of about 10 to 25 percent
+        "HA_AIR": 12.0, "HA_WATER_DESIGN": 12.0, "DEFICIT_HOT_SHARE": 0.5,
+        "P_IDLE": 0.35, "P_MAX": 0.95, "M_SERVER_NOM": 0.05, "AIRFLOW_MARGIN": 1.15,
+        "T_ROOM": 26.0, "BETA_TOP_BASE": 0.12, "CPU_SHARE": 0.5, "NOISE_SCALE": 1.25,
+    },
+    "strong": {    # changes of about 25 to 50 percent
+        "HA_AIR": 10.0, "HA_WATER_DESIGN": 14.0, "DEFICIT_HOT_SHARE": 0.6,
+        "P_IDLE": 0.30, "P_MAX": 1.05, "M_SERVER_NOM": 0.045, "AIRFLOW_MARGIN": 1.25,
+        "T_ROOM": 27.0, "BETA_TOP_BASE": 0.15, "CPU_SHARE": 0.6, "R_TH_NOM": 110.0,
+        "NOISE_SCALE": 1.5,
+    },
+}
+
+
+def set_physics(name):
+    """Apply a model-mismatch profile by overriding the module constants."""
+    profile = dict(PHYSICS[name])
+    scale = profile.pop("NOISE_SCALE", 1.0)
+    for key, value in profile.items():
+        if key not in globals():
+            raise KeyError(key)
+        globals()[key] = value
+    if scale != 1.0:
+        for var, (kind, sigma) in list(NOISE.items()):
+            NOISE[var] = (kind, sigma * scale)
+
+
 SWEEPS = {
     # kind: (levels, description of the level)
     "noise":   ([1, 2, 3, 4, 5, 6, 8], "sensor noise as a multiple of nominal"),
@@ -634,6 +670,8 @@ def generate_sweep(kind, level, seed, n=60, prefix="s"):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("--physics", choices=sorted(PHYSICS), default="nominal",
+                    help="model-mismatch profile for the simulator physics")
     ap.add_argument("--sweep", choices=sorted(SWEEPS), help="generate one sensitivity-sweep dataset")
     ap.add_argument("--level", type=float, help="sweep level, see SWEEPS")
     ap.add_argument("--n", type=int, default=60, help="cases per sweep dataset")
@@ -644,6 +682,7 @@ def main():
     ap.add_argument("--prefix", default="g", help="case id prefix")
     ap.add_argument("--split", default="calibration", help="calibration or holdout")
     args = ap.parse_args()
+    set_physics(args.physics)
     if args.sweep:
         cases = generate_sweep(args.sweep, args.level, args.seed, args.n, args.prefix)
         write_prolog(cases, args.out, args.seed, "sweep")

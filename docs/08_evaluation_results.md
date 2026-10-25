@@ -8,19 +8,19 @@ The calibration split (seed 20261020) was used to check thresholds. The held-out
 
 | Mode | Exact match | Coverage | Macro precision | Macro recall | Macro F1 | Mean class accuracy | Mean time (ms) | Max time (ms) | ExplainabilityRate | PlanValidity |
 |---|---|---|---|---|---|---|---|---|---|---|
-| Deductive only | 91.0% | 95.7% | 0.910 | 0.961 | 0.924 | 98.6% | 0.221 | 0.583 | 100.0% | 85.1% |
-| Deductive + abductive | 94.5% | 96.1% | 0.954 | 0.968 | 0.958 | 99.0% | 1.087 | 2.489 | 100.0% | 94.2% |
-| Deductive + consistency-based | 93.3% | 97.3% | 0.937 | 0.976 | 0.950 | 99.0% | 1.028 | 7.025 | 100.0% | 91.4% |
-| Complete system | 93.7% | 96.5% | 0.945 | 0.971 | 0.954 | 99.0% | 1.158 | 8.371 | 100.0% | 92.9% |
+| Deductive only | 91.0% | 95.7% | 0.910 | 0.961 | 0.924 | 98.6% | 0.185 | 1.131 | 100.0% | 85.1% |
+| Deductive + abductive | 94.5% | 96.1% | 0.954 | 0.968 | 0.958 | 99.0% | 0.910 | 2.032 | 100.0% | 94.2% |
+| Deductive + consistency-based | 93.3% | 97.3% | 0.937 | 0.976 | 0.950 | 99.0% | 0.885 | 5.339 | 100.0% | 91.4% |
+| Complete system | 93.7% | 96.5% | 0.945 | 0.971 | 0.954 | 99.0% | 1.034 | 10.000 | 100.0% | 92.9% |
 
 ## Reasoning-mode comparison: calibration split
 
 | Mode | Exact match | Coverage | Macro precision | Macro recall | Macro F1 | Mean class accuracy | Mean time (ms) | Max time (ms) | ExplainabilityRate | PlanValidity |
 |---|---|---|---|---|---|---|---|---|---|---|
-| Deductive only | 90.2% | 95.3% | 0.914 | 0.955 | 0.925 | 98.5% | 0.206 | 0.382 | 100.0% | 86.7% |
-| Deductive + abductive | 93.3% | 94.5% | 0.966 | 0.948 | 0.954 | 99.0% | 1.074 | 1.972 | 100.0% | 94.4% |
-| Deductive + consistency-based | 91.8% | 95.3% | 0.940 | 0.957 | 0.942 | 98.8% | 1.172 | 3.387 | 100.0% | 91.6% |
-| Complete system | 93.3% | 95.3% | 0.955 | 0.957 | 0.952 | 99.0% | 1.175 | 2.870 | 100.0% | 93.8% |
+| Deductive only | 90.2% | 95.3% | 0.914 | 0.955 | 0.925 | 98.5% | 0.176 | 0.684 | 100.0% | 86.7% |
+| Deductive + abductive | 93.3% | 94.5% | 0.966 | 0.948 | 0.954 | 99.0% | 0.947 | 2.519 | 100.0% | 94.4% |
+| Deductive + consistency-based | 91.8% | 95.3% | 0.940 | 0.957 | 0.942 | 98.8% | 0.841 | 2.480 | 100.0% | 91.6% |
+| Complete system | 93.3% | 95.3% | 0.955 | 0.957 | 0.952 | 99.0% | 0.959 | 3.202 | 100.0% | 93.8% |
 
 ## Exact match by test category: holdout split
 
@@ -79,3 +79,43 @@ Single-label cases only (normal, single-fault and instrumentation categories). R
 | F8 bypass | . | . | . | . | . | . | . | . | 15 | . | . | . | . |
 | S1 sensor | . | . | . | . | . | . | . | . | . | 15 | . | . | . |
 | S2 telemetry | . | . | . | . | . | . | . | . | . | . | 15 | . | . |
+
+## Paired significance: holdout split
+
+Exact two-sided McNemar test on the cases where two modes disagree. Exact-match rates are given with Wilson 95%% confidence intervals.
+
+| Mode | Exact match | 95% CI |
+|---|---|---|
+| Deductive only | 232 of 255 | 86.8 to 93.9% |
+| Deductive + abductive | 241 of 255 | 91.0 to 96.7% |
+| Deductive + consistency-based | 238 of 255 | 89.6 to 95.8% |
+| Complete system | 239 of 255 | 90.1 to 96.1% |
+
+| Mode A | Mode B | Only A right | Only B right | p |
+|---|---|---|---|---|
+| Deductive only | Deductive + abductive | 2 | 11 | 0.022 |
+| Deductive only | Deductive + consistency-based | 2 | 8 | 0.109 |
+| Deductive only | Complete system | 3 | 10 | 0.092 |
+| Deductive + abductive | Deductive + consistency-based | 5 | 2 | 0.453 |
+| Deductive + abductive | Complete system | 2 | 0 | 0.500 |
+| Deductive + consistency-based | Complete system | 2 | 3 | 1.000 |
+
+## Paired significance: calibration split
+
+Exact two-sided McNemar test on the cases where two modes disagree. Exact-match rates are given with Wilson 95%% confidence intervals.
+
+| Mode | Exact match | 95% CI |
+|---|---|---|
+| Deductive only | 230 of 255 | 85.9 to 93.3% |
+| Deductive + abductive | 238 of 255 | 89.6 to 95.8% |
+| Deductive + consistency-based | 234 of 255 | 87.7 to 94.6% |
+| Complete system | 238 of 255 | 89.6 to 95.8% |
+
+| Mode A | Mode B | Only A right | Only B right | p |
+|---|---|---|---|---|
+| Deductive only | Deductive + abductive | 2 | 10 | 0.039 |
+| Deductive only | Deductive + consistency-based | 2 | 6 | 0.289 |
+| Deductive only | Complete system | 2 | 10 | 0.039 |
+| Deductive + abductive | Deductive + consistency-based | 5 | 1 | 0.219 |
+| Deductive + abductive | Complete system | 1 | 1 | 1.000 |
+| Deductive + consistency-based | Complete system | 0 | 4 | 0.125 |

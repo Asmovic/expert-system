@@ -42,7 +42,7 @@ clear_symptom_cache(C) :-
 compute_symptoms(C, Syms) :-
     sigma_temp(C, ST),
     threshold(sensor_noise_floor, Floor),
-    Kappa is ST / Floor,
+    (   param(scaled_noise, fixed) -> Kappa = 1.0 ; Kappa is ST / Floor ),
     kappa_power(C, KP),
     findall(sym(S, E, St, graded(X, ThN, Th, Sig)),
             ( sdef(S, C, X, ThN, Goal, Dir, Noise),
@@ -109,9 +109,14 @@ clip_grade(D, Sig0, E) :-
     E0 is 0.5 + D / (4 * Sig),
     E is max(0.0, min(1.0, E0)).
 
-grade_status(E, present)   :- E >= 0.75, !.
-grade_status(E, absent)    :- E =< 0.25, !.
-grade_status(_, uncertain).
+%   The cut-offs sit k noise standard deviations either side of the
+%   threshold, k = 1 by default (engine/params.pl).
+grade_status(E, St) :-
+    param(present_sigma, K),
+    (   E >= 0.5 + K / 4 -> St = present
+    ;   E =< 0.5 - K / 4 -> St = absent
+    ;   St = uncertain
+    ).
 
 %   Lookups on a symptom list. The symptom must be ground.
 sym_status(Syms, S, St) :- memberchk(sym(S, _, St, _), Syms).

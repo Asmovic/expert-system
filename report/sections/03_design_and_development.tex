@@ -203,6 +203,29 @@ The framework asks for four configurations to be compared, and \texttt{engine/hy
 \end{itemize}
 When several consistent diagnoses tie, the one with fewer sensor components wins, because assuming a physical fault is the safer maintenance choice.
 
+\subsection{Design parameters set by judgement}
+\label{sec:design-params}
+
+Besides the thresholds, five parameters of the reasoning were set by engineering judgement rather than derived from a source. They are collected in \texttt{engine/params.pl}, so that each can be changed in one place. Table~\ref{tab:design-params} states each one with its rationale. Section~\ref{sec:param-sensitivity} measures how much the results depend on them.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Reasoning parameters set by judgement, with their rationale. Their effect is measured in Table~\ref{tab:param-sensitivity}.}
+  \label{tab:design-params}
+  \begin{tabular}{L{3.0cm}L{2.4cm}L{8.7cm}}
+  \toprule
+  Parameter & Default & Rationale \\
+  \midrule
+  Deductive bonus & 0.1 & A hypothesis that a sourced rule also proves deserves a small preference. It is kept well below the typical gap between competing confidences, so that it only breaks near-ties. \\
+  Evidence cut-offs & $k = 1$: $e \ge 0.75$, $e \le 0.25$ & A symptom is present one noise standard deviation past its threshold, and absent one standard deviation before it. One standard deviation is the usual compromise between reacting to noise and missing small faults. \\
+  Search bound & 4 faults & The largest combination in the test design has four faults (Table~\ref{tab:test-categories}). Larger sets cost exponentially more search and are implausible in one snapshot. \\
+  Causal weights & \texttt{kb/causal.pl} & 1.0 for the symptom that defines a fault, 0.4 to 0.8 for strong secondary effects and 0.2 to 0.3 for weak or shared ones, following the fault signatures of Table~\ref{tab:taxonomy}. \\
+  Noise of features without redundancy & tied to $\sigma_T$ & Cooling-unit and server features have no redundant sensor from which to estimate their noise. They are scaled with the temperature-sensor noise, on the assumption that instruments degrade together. \\
+  \bottomrule
+  \end{tabular}
+\end{table}
+
 % ---------------------------------------------------------------------------
 \section{Deductive Reasoning}
 \label{sec:deductive}

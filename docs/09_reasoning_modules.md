@@ -107,7 +107,7 @@ When several consistent diagnoses tie, the one with fewer sensor components wins
 
 Every configuration gets all normal, single-fault and instrumentation cases right on the held-out split, and explains 100% of its outputs.
 
-**The complete system is not the most accurate configuration.** That is a finding to report honestly:
+**One held-out split cannot separate the model-based configurations; five seeds can.** On the held-out split, only abduction's gain over deduction is significant (exact McNemar, p = 0.022), and every difference between the model-based configurations has p ≥ 0.45 (see [08](08_evaluation_results.md)). Pooled over five held-out seeds (1275 cases, [16](16_seed_variability.md)), every pairwise difference is significant. Deductive + abductive is the most accurate configuration at 93.6%, followed by the complete system (92.9%), deductive + consistency-based (91.9%) and deduction alone (90.8%). The complete system loses to deductive + abductive in 9 cases and wins in none: each time it adds a false sensor fault, and 8 of the 9 are high-noise cases. The controlled conditions show the remaining differences:
 
 - **What consistency checking adds.** It is the only mode that finds the smallest supply-sensor bias. It also refuses explanations that leave a violated relation unexplained.
 - **What it costs under heavy noise.** At five times normal noise, it occasionally takes a chance violation of the power balance at face value and reports a meter fault. That lowers sensor-fault precision to 0.66.

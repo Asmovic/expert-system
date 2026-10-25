@@ -227,7 +227,7 @@ top_inlet_deviation(C, R, D) :-
     median(Xs, M),
     D is T - M.
 
-%   Eq. 38 recomputed under the hypothesis that the supply-air sensor is
+%   Eq. 41b: Eq. 38 recomputed under the hypothesis that the supply-air sensor is
 %   wrong: the median middle inlet stands in for the supply-air temperature.
 %   If the hypothesis is right, this residual closes.
 coil_balance_residual_corrected(C, U, R) :-
@@ -250,7 +250,7 @@ median_inlet_max(C, M) :-
     N >= 4,
     median(Ts, M).
 
-%   Rack power balance, Eq. 42 per phase:
+%   Rack power balance, Eq. 4 with Eq. 42 per phase:
 %   r_P = (sum of V_LN I_p cos(phi) over six phases - P_rack) / P_rack.
 %   Only computed when every phase current is present.
 rack_power_residual(C, R, Res) :-

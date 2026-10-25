@@ -19,7 +19,7 @@
       Checks whether one candidate set of abnormal components is a diagnosis.
 */
 
-max_diagnosis_size(4).
+max_diagnosis_size(M) :- param(search_bound, M).
 
 conflicts(Syms, Ks) :-
     findall(Sup, ( member(sym(S, _, present, _), Syms), arr(_, S, Sup) ), K0),
