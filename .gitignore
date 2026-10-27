@@ -20,3 +20,7 @@ data/mismatch_*
 data/recal_strong.*
 data/seeds/
 data/baseline/
+
+# EndNote working library; the compressed report/dc-expert-system.enlx is kept
+*.enl
+*.Data/

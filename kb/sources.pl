@@ -9,9 +9,9 @@
 source(ashrae_tc99_2021, standard,
        'ASHRAE TC 9.9 (2021). Thermal guidelines for data processing environments (5th ed.). ASHRAE.').
 source(ashrae_hb_fans, literature,
-       'ASHRAE Handbook - HVAC Systems and Equipment, fans chapter (edition to confirm). Fan affinity laws.').
+       'ASHRAE (2020). 2020 ASHRAE Handbook - HVAC Systems and Equipment, fans chapter. Fan affinity laws.').
 source(eu_coc_dc, standard,
-       'European Commission JRC. European Code of Conduct on Data Centre Energy Efficiency: Best Practice Guidelines (edition to confirm).').
+       'Acton et al. (2018). 2018 Best Practice Guidelines for the EU Code of Conduct on Data Centre Energy Efficiency, v9.1.0 (European Commission JRC), practice 5.1.4.').
 source(a1_supply_setpoint, assumption,
        'Design assumption: CRAH supply-air setpoint 20 C with a 2 K tolerance band.').
 source(a2_row_fraction, assumption,
@@ -27,7 +27,7 @@ source(a6_fan_ratio, assumption,
 source(closed_world, method,
        'Closed-world assumption: normal operation is concluded when no fault rule fires and all inlets are within the envelope.').
 source(nec_continuous, standard,
-       'NFPA 70 National Electrical Code, continuous-load rule: 80% of breaker rating (article and edition to confirm; check the local code).').
+       'NFPA (2023). NFPA 70 National Electrical Code, continuous-load rule: 80% of breaker rating. Local codes may differ.').
 source(a7_outlet_strat, assumption,
        'Engineering assumption: a top-to-bottom outlet difference above 3.5 K confirms recirculation. Normal racks stay below 3 K.').
 source(a8_filter, assumption,

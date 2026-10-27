@@ -63,14 +63,14 @@ Because faults act on the physics, their symptoms arise as consequences rather t
     \toprule
     Assumption & Value & Reason \\
     \midrule
-    Server power & 0.40\,kW idle, 0.90\,kW at full load, 55\% in the CPU & Equation E1; a typical two-socket server (to verify) \\
+    Server power & 0.40\,kW idle, 0.90\,kW at full load, 55\% in the CPU & Equation E1; idle power about half of peak \parencite{barroso2007} \\
     Server airflow & 0.055\,kg/s at nominal fan speed & Gives a 13 to 16\,K rise across a server \\
-    CPU throttling & Clock reduced to keep the CPU at or below 95\,\textdegree C & Vendor limits vary (to verify) \\
+    CPU throttling & Clock reduced to keep the CPU at or below 95\,\textdegree C & Below the 102\,\textdegree C maximum of a server processor \parencite{intel2024xeon} \\
     Cooling-unit fan control & Supplies 10\% more air than the servers demand & Common practice to limit recirculation \\
     Coil heat transfer & 15\,kW/K air side; 10\,kW/K water side at 3.2\,kg/s, scaling with flow to the power 0.8 & Gives a 5 to 7\,K water temperature rise in normal operation \\
     Airflow shortfall & 40\% drawn from the hot aisle, 60\% from room air at 25\,\textdegree C & Without it a fan failure has no steady state \\
     Power distribution & Two feeds per rack sharing the load equally & Standard 2N practice \\
-    Measurement noise & 0.15\,K on air temperatures; 1\% on power and current & Typical sensor accuracy (to verify) \\
+    Measurement noise & 0.15\,K on air temperatures; 1\% on power and current & Within class A tolerance \parencite{iec60751} and accuracy class 1 \parencite{iec62053} \\
     Time & Steady state only & A limitation: transients are not modelled \\
     \bottomrule
   \end{tabular}

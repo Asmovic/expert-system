@@ -92,8 +92,8 @@ Rules r30 and r31 are the closed-world conclusions in `engine/deductive.pl`. r30
 | Id | Type | Citation |
 |---|---|---|
 | ashrae_tc99_2021 | standard | ASHRAE TC 9.9 (2021). Thermal guidelines for data processing environments (5th ed.). ASHRAE. |
-| ashrae_hb_fans | literature | ASHRAE Handbook - HVAC Systems and Equipment, fans chapter (edition to confirm). Fan affinity laws. |
-| eu_coc_dc | standard | European Commission JRC. European Code of Conduct on Data Centre Energy Efficiency: Best Practice Guidelines (edition to confirm). |
+| ashrae_hb_fans | literature | ASHRAE (2020). 2020 ASHRAE Handbook - HVAC Systems and Equipment, fans chapter. Fan affinity laws. |
+| eu_coc_dc | standard | Acton et al. (2018). 2018 Best Practice Guidelines for the EU Code of Conduct on Data Centre Energy Efficiency, v9.1.0 (European Commission JRC), practice 5.1.4. |
 | a1_supply_setpoint | assumption | Design assumption: CRAH supply-air setpoint 20 C with a 2 K tolerance band. |
 | a2_row_fraction | assumption | Engineering assumption: overheating at half or more of the racks indicates a row-level cause. |
 | a3_valve_open | assumption | Engineering assumption: a valve open 50% or more should produce a measurable water temperature rise. |
@@ -101,7 +101,7 @@ Rules r30 and r31 are the closed-world conclusions in `engine/deductive.pl`. r30
 | a5_stratification | assumption | Engineering assumption: a top-to-middle inlet difference above 3 K indicates hot-air recirculation. |
 | a6_fan_ratio | assumption | Engineering assumption: fan power below 50% of the affinity-law prediction means the fan is not moving air. |
 | closed_world | method | Closed-world assumption: normal operation is concluded when no fault rule fires and all inlets are within the envelope. |
-| nec_continuous | standard | NFPA 70 National Electrical Code, continuous-load rule: 80% of breaker rating (article and edition to confirm; check the local code). |
+| nec_continuous | standard | NFPA (2023). NFPA 70 National Electrical Code, continuous-load rule: 80% of breaker rating. Local codes may differ. |
 | a7_outlet_strat | assumption | Engineering assumption: a top-to-bottom outlet difference above 3.5 K confirms recirculation. Normal racks stay below 3 K. |
 | a8_filter | assumption | Engineering assumption: filter resistance 1.7 times its clean value calls for replacement (check against manufacturer final-resistance data). |
 | a9_server_fan | assumption | Engineering assumption: a server fan below 1000 rpm has failed. The controller never runs it below about 5400 rpm. |

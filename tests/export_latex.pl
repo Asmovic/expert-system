@@ -52,7 +52,7 @@ write_threshold_table(S) :-
 
 write_provenance_table(S) :-
     format(S, "\\begin{small}~n\\begin{longtable}{L{3.4cm}L{2.4cm}L{8.2cm}}~n", []),
-    format(S, "  \\caption{Provenance of rules and thresholds, generated from \\texttt{kb/sources.pl}. Citations marked ``to confirm'' must be verified before submission.}\\label{tab:provenance}\\\\~n", []),
+    format(S, "  \\caption{Provenance of rules and thresholds, generated from \\texttt{kb/sources.pl}.}\\label{tab:provenance}\\\\~n", []),
     table_head(S, "Source & Type & Citation or justification"),
     forall(source(Id, Type, Cit),
            ( code_escape(Id, IE), tex_escape(Cit, CE),

@@ -1,0 +1,1037 @@
+TY  - BOOK
+AU  - ASHRAE Technical Committee 9.9
+TI  - Thermal Guidelines for Data Processing Environments
+PY  - 2021
+ET  - 5
+PB  - ASHRAE
+CY  - Atlanta, GA
+N1  - auto-checked against online records, 2026-10-25; author still to verify
+LB  - ashrae2021
+ER  - 
+
+TY  - CPAPER
+AU  - Fan, Xiaobo
+AU  - Weber, Wolf-Dietrich
+AU  - Barroso, Luiz André
+TI  - Power Provisioning for a Warehouse-Sized Computer
+T2  - Proceedings of the 34th Annual International Symposium on Computer Architecture
+PY  - 2007
+PB  - ACM
+DO  - 10.1145/1250662.1250665
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 13
+EP  - 23
+LB  - fan2007
+ER  - 
+
+TY  - BOOK
+AU  - Barroso, Luiz André
+AU  - Hölzle, Urs
+AU  - Ranganathan, Parthasarathy
+TI  - The Datacenter as a Computer: Designing Warehouse-Scale Machines
+PY  - 2018
+ET  - 3
+PB  - Morgan & Claypool
+N1  - auto-checked against online records, 2026-10-25; author still to verify
+LB  - barroso2018
+ER  - 
+
+TY  - CPAPER
+AU  - Sharma, Ratnesh K.
+AU  - Bash, Cullen E.
+AU  - Patel, Chandrakant D.
+TI  - Dimensionless Parameters for Evaluation of Thermal Design and Performance of Large-Scale Data Centers
+T2  - 8th AIAA/ASME Joint Thermophysics and Heat Transfer Conference
+PY  - 2002
+IS  - AIAA 2002-3091
+DO  - 10.2514/6.2002-3091
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+LB  - sharma2002
+ER  - 
+
+TY  - JOUR
+AU  - Herrlin, Magnus K.
+TI  - Rack Cooling Effectiveness in Data Centers and Telecom Central Offices: The Rack Cooling Index (RCI)
+T2  - ASHRAE Transactions
+PY  - 2005
+VL  - 111
+IS  - 2
+N1  - pages 725–731 confirmed by the ProQuest record, 2026-10-25; author still to verify
+SP  - 725
+EP  - 731
+LB  - herrlin2005
+ER  - 
+
+TY  - BOOK
+AU  - Bergman, Theodore L.
+AU  - Lavine, Adrienne S.
+AU  - Incropera, Frank P.
+AU  - DeWitt, David P.
+TI  - Fundamentals of Heat and Mass Transfer
+PY  - 2011
+ET  - 7
+PB  - Wiley
+N1  - edition, year and publisher auto-checked 2026-10-25; confirm the author order on the title page
+LB  - incropera2011
+ER  - 
+
+TY  - BOOK
+AU  - ASHRAE
+TI  - 2020 ASHRAE Handbook: HVAC Systems and Equipment
+PY  - 2020
+PB  - ASHRAE
+CY  - Atlanta, GA
+N1  - edition confirmed 2026-10-25; confirm the number of the Fans chapter (TC 5.1) used for the affinity laws
+LB  - ashraehvac2020
+ER  - 
+
+TY  - BOOK
+AU  - National Fire Protection Association
+TI  - NFPA 70: National Electrical Code
+PY  - 2023
+PB  - NFPA
+CY  - Quincy, MA
+N1  - edition confirmed; the 80 percent continuous-load limit corresponds to NEC 210.20(A); confirm against the 2023 text
+LB  - nfpa702023
+ER  - 
+
+TY  - STAND
+AU  - IEEE
+TI  - IEEE Recommended Practice for Maintenance, Testing, and Replacement of Valve-Regulated Lead-Acid (VRLA) Batteries for Stationary Applications
+PY  - 2005
+IS  - IEEE Std 1188
+N1  - auto-checked against online records, 2026-10-23; author still to verify
+PB  - IEEE
+LB  - ieee1188
+ER  - 
+
+TY  - BOOK
+AU  - Brachman, Ronald J.
+AU  - Levesque, Hector J.
+TI  - Knowledge Representation and Reasoning
+PY  - 2004
+PB  - Morgan Kaufmann
+N1  - auto-checked against online records, 2026-10-25; author still to verify
+LB  - brachman2004
+ER  - 
+
+TY  - BOOK
+AU  - Russell, Stuart
+AU  - Norvig, Peter
+TI  - Artificial Intelligence: A Modern Approach
+PY  - 2021
+ET  - 4
+PB  - Pearson
+N1  - auto-checked against online records, 2026-10-25; author still to verify
+LB  - russell2021
+ER  - 
+
+TY  - BOOK
+AU  - Kowalski, Robert
+TI  - Logic for Problem Solving
+PY  - 1979
+PB  - North-Holland
+N1  - auto-checked against online records, 2026-10-25; author still to verify
+LB  - kowalski1979
+ER  - 
+
+TY  - BOOK
+AU  - Lloyd, John W.
+TI  - Foundations of Logic Programming
+PY  - 1987
+ET  - 2
+PB  - Springer
+N1  - auto-checked against online records, 2026-10-25; author still to verify
+LB  - lloyd1987
+ER  - 
+
+TY  - CHAP
+AU  - Clark, Keith L.
+ED  - Gallaire, Hervé
+ED  - Minker, Jack
+TI  - Negation as Failure
+T2  - Logic and Data Bases
+PY  - 1978
+PB  - Plenum Press
+DO  - 10.1007/978-1-4684-3384-5_11
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 293
+EP  - 322
+LB  - clark1978
+ER  - 
+
+TY  - BOOK
+AU  - Bratko, Ivan
+TI  - Prolog Programming for Artificial Intelligence
+PY  - 2012
+ET  - 4
+PB  - Pearson
+N1  - auto-checked against online records, 2026-10-25; author still to verify
+LB  - bratko2012
+ER  - 
+
+TY  - BOOK
+AU  - Jackson, Peter
+TI  - Introduction to Expert Systems
+PY  - 1999
+ET  - 3
+PB  - Addison-Wesley
+N1  - year corrected to 1999 (3rd edition) on 2026-10-25; author still to verify
+LB  - jackson1998
+ER  - 
+
+TY  - JOUR
+AU  - Reiter, Raymond
+TI  - A Theory of Diagnosis from First Principles
+T2  - Artificial Intelligence
+PY  - 1987
+VL  - 32
+IS  - 1
+DO  - 10.1016/0004-3702(87)90062-2
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 57
+EP  - 95
+LB  - reiter1987
+ER  - 
+
+TY  - JOUR
+AU  - de Kleer, Johan
+AU  - Williams, Brian C.
+TI  - Diagnosing Multiple Faults
+T2  - Artificial Intelligence
+PY  - 1987
+VL  - 32
+IS  - 1
+DO  - 10.1016/0004-3702(87)90063-4
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 97
+EP  - 130
+LB  - dekleer1987
+ER  - 
+
+TY  - JOUR
+AU  - Poole, David
+TI  - Explanation and Prediction: An Architecture for Default and Abductive Reasoning
+T2  - Computational Intelligence
+PY  - 1989
+VL  - 5
+IS  - 2
+DO  - 10.1111/j.1467-8640.1989.tb00319.x
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 97
+EP  - 110
+LB  - poole1989
+ER  - 
+
+TY  - JOUR
+AU  - Console, Luca
+AU  - Torasso, Pietro
+TI  - A Spectrum of Logical Definitions of Model-Based Diagnosis
+T2  - Computational Intelligence
+PY  - 1991
+VL  - 7
+IS  - 3
+DO  - 10.1111/j.1467-8640.1991.tb00388.x
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 133
+EP  - 141
+LB  - console1991
+ER  - 
+
+TY  - BOOK
+AU  - Peng, Yun
+AU  - Reggia, James A.
+TI  - Abductive Inference Models for Diagnostic Problem-Solving
+PY  - 1990
+PB  - Springer
+N1  - auto-checked against online records, 2026-10-25; author still to verify
+LB  - peng1990
+ER  - 
+
+TY  - CPAPER
+AU  - Struss, Peter
+AU  - Dressler, Oskar
+TI  - ``Physical Negation'': Integrating Fault Models into the General Diagnostic Engine
+T2  - Proceedings of the 11th International Joint Conference on Artificial Intelligence
+PY  - 1989
+N1  - auto-checked against online records, 2026-10-23; author still to verify
+SP  - 1318
+EP  - 1323
+LB  - struss1989
+ER  - 
+
+TY  - JOUR
+AU  - Cordier, Marie-Odile
+AU  - Dague, Philippe
+AU  - Lévy, François
+AU  - Montmain, Jacky
+AU  - Staroswiecki, Marcel
+AU  - Travé-Massuyès, Louise
+TI  - Conflicts versus Analytical Redundancy Relations: A Comparative Analysis of the Model Based Diagnosis Approach from the Artificial Intelligence and Automatic Control Perspectives
+T2  - IEEE Transactions on Systems, Man, and Cybernetics, Part B
+PY  - 2004
+VL  - 34
+IS  - 5
+DO  - 10.1109/TSMCB.2004.835010
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 2163
+EP  - 2177
+LB  - cordier2004
+ER  - 
+
+TY  - BOOK
+AU  - Isermann, Rolf
+TI  - Fault-Diagnosis Systems: An Introduction from Fault Detection to Fault Tolerance
+PY  - 2006
+PB  - Springer
+DO  - 10.1007/3-540-30368-5
+N1  - auto-checked against online records, 2026-10-25; author still to verify
+LB  - isermann2006
+ER  - 
+
+TY  - JOUR
+AU  - Venkatasubramanian, Venkat
+AU  - Rengaswamy, Raghunathan
+AU  - Yin, Kewen
+AU  - Kavuri, Surya N.
+TI  - A Review of Process Fault Detection and Diagnosis. Part I: Quantitative Model-Based Methods
+T2  - Computers & Chemical Engineering
+PY  - 2003
+VL  - 27
+IS  - 3
+N1  - auto-checked against online records, 2026-10-23; author still to verify
+SP  - 293
+EP  - 311
+LB  - venkat2003
+ER  - 
+
+TY  - JOUR
+AU  - Rousseeuw, Peter J.
+AU  - Croux, Christophe
+TI  - Alternatives to the Median Absolute Deviation
+T2  - Journal of the American Statistical Association
+PY  - 1993
+VL  - 88
+IS  - 424
+DO  - 10.1080/01621459.1993.10476408
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 1273
+EP  - 1283
+LB  - rousseeuw1993
+ER  - 
+
+TY  - JOUR
+AU  - House, John M.
+AU  - Vaezi-Nejad, Hossein
+AU  - Whitcomb, J. Michael
+TI  - An Expert Rule Set for Fault Detection in Air-Handling Units
+T2  - ASHRAE Transactions
+PY  - 2001
+VL  - 107
+IS  - 1
+N1  - volume 107, part 1 confirmed; pages not in any primary record found online (secondary sources give 858–871); check the printed volume
+LB  - house2001
+ER  - 
+
+TY  - JOUR
+AU  - Schein, Jeffrey
+AU  - Bushby, Steven T.
+AU  - Castro, Natascha S.
+AU  - House, John M.
+TI  - A Rule-Based Fault Detection Method for Air Handling Units
+T2  - Energy and Buildings
+PY  - 2006
+VL  - 38
+IS  - 12
+DO  - 10.1016/j.enbuild.2006.04.014
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 1485
+EP  - 1492
+LB  - schein2006
+ER  - 
+
+TY  - JOUR
+AU  - Katipamula, Srinivas
+AU  - Brambley, Michael R.
+TI  - Methods for Fault Detection, Diagnostics, and Prognostics for Building Systems: A Review, Part I
+T2  - HVAC&R Research
+PY  - 2005
+VL  - 11
+IS  - 1
+DO  - 10.1080/10789669.2005.10391123
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 3
+EP  - 25
+LB  - katipamula2005a
+ER  - 
+
+TY  - JOUR
+AU  - Katipamula, Srinivas
+AU  - Brambley, Michael R.
+TI  - Methods for Fault Detection, Diagnostics, and Prognostics for Building Systems: A Review, Part II
+T2  - HVAC&R Research
+PY  - 2005
+VL  - 11
+IS  - 2
+DO  - 10.1080/10789669.2005.10391133
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 169
+EP  - 187
+LB  - katipamula2005b
+ER  - 
+
+TY  - JOUR
+AU  - Kim, Woohyun
+AU  - Katipamula, Srinivas
+TI  - A Review of Fault Detection and Diagnostics Methods for Building Systems
+T2  - Science and Technology for the Built Environment
+PY  - 2018
+VL  - 24
+IS  - 1
+DO  - 10.1080/23744731.2017.1318008
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 3
+EP  - 21
+LB  - kim2018
+ER  - 
+
+TY  - JOUR
+AU  - Ebrahimi, Khosrow
+AU  - Jones, Gerard F.
+AU  - Fleischer, Amy S.
+TI  - A Review of Data Center Cooling Technology, Operating Conditions and the Corresponding Low-Grade Waste Heat Recovery Opportunities
+T2  - Renewable and Sustainable Energy Reviews
+PY  - 2014
+VL  - 31
+DO  - 10.1016/j.rser.2013.12.007
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 622
+EP  - 638
+LB  - ebrahimi2014
+ER  - 
+
+TY  - JOUR
+AU  - Patankar, Suhas V.
+TI  - Airflow and Cooling in a Data Center
+T2  - Journal of Heat Transfer
+PY  - 2010
+VL  - 132
+IS  - 7
+DO  - 10.1115/1.4000703
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 073001
+LB  - patankar2010
+ER  - 
+
+TY  - JOUR
+AU  - Schmidt, Roger R.
+AU  - Cruz, Ethan E.
+AU  - Iyengar, Madhusudan K.
+TI  - Challenges of Data Center Thermal Management
+T2  - IBM Journal of Research and Development
+PY  - 2005
+VL  - 49
+IS  - 4/5
+DO  - 10.1147/rd.494.0709
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 709
+EP  - 723
+LB  - schmidt2005
+ER  - 
+
+TY  - JOUR
+AU  - Capozzoli, Alfonso
+AU  - Primiceri, Giulio
+TI  - Cooling Systems in Data Centers: State of Art and Emerging Technologies
+T2  - Energy Procedia
+PY  - 2015
+VL  - 83
+DO  - 10.1016/j.egypro.2015.12.168
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 484
+EP  - 493
+LB  - capozzoli2015
+ER  - 
+
+TY  - JOUR
+AU  - Masanet, Eric
+AU  - Shehabi, Arman
+AU  - Lei, Nuoa
+AU  - Smith, Sarah
+AU  - Koomey, Jonathan
+TI  - Recalibrating Global Data Center Energy-Use Estimates
+T2  - Science
+PY  - 2020
+VL  - 367
+IS  - 6481
+DO  - 10.1126/science.aba3758
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 984
+EP  - 986
+LB  - masanet2020
+ER  - 
+
+TY  - CPAPER
+AU  - Vishwanath, Kashi Venkatesh
+AU  - Nagappan, Nachiappan
+TI  - Characterizing Cloud Computing Hardware Reliability
+T2  - Proceedings of the 1st ACM Symposium on Cloud Computing
+PY  - 2010
+PB  - ACM
+DO  - 10.1145/1807128.1807161
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 193
+EP  - 204
+LB  - vishwanath2010
+ER  - 
+
+TY  - JOUR
+AU  - Jardine, Andrew K. S.
+AU  - Lin, Daming
+AU  - Banjevic, Dragan
+TI  - A Review on Machinery Diagnostics and Prognostics Implementing Condition-Based Maintenance
+T2  - Mechanical Systems and Signal Processing
+PY  - 2006
+VL  - 20
+IS  - 7
+DO  - 10.1016/j.ymssp.2005.09.012
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 1483
+EP  - 1510
+LB  - jardine2006
+ER  - 
+
+TY  - JOUR
+AU  - Gao, Zhiwei
+AU  - Cecati, Carlo
+AU  - Ding, Steven X.
+TI  - A Survey of Fault Diagnosis and Fault-Tolerant Techniques, Part I: Fault Diagnosis with Model-Based and Signal-Based Approaches
+T2  - IEEE Transactions on Industrial Electronics
+PY  - 2015
+VL  - 62
+IS  - 6
+DO  - 10.1109/TIE.2015.2417501
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 3757
+EP  - 3767
+LB  - gao2015
+ER  - 
+
+TY  - JOUR
+AU  - Asgari, Sahar
+AU  - Gupta, Rohit
+AU  - Puri, Ishwar K.
+AU  - Zheng, Rong
+TI  - A Data-Driven Approach to Simultaneous Fault Detection and Diagnosis in Data Centers
+T2  - Applied Soft Computing
+PY  - 2021
+VL  - 110
+DO  - 10.1016/j.asoc.2021.107638
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 107638
+LB  - asgari2021
+ER  - 
+
+TY  - JOUR
+AU  - Wang, Jiaqiang
+AU  - Tian, Yaoyue
+AU  - Qi, Zhaohui
+AU  - Zeng, Liping
+AU  - Wang, Peng
+AU  - Yoon, Sungmin
+TI  - Sensor Fault Diagnosis and Correction for Data Center Cooling System Using Hybrid Multi-Label Random Forest and Bayesian Inference
+T2  - Building and Environment
+PY  - 2024
+VL  - 249
+DO  - 10.1016/j.buildenv.2023.111124
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 111124
+LB  - wang2024
+ER  - 
+
+TY  - JOUR
+AU  - Greiner, Russell
+AU  - Smith, Barbara A.
+AU  - Wilkerson, Ralph W.
+TI  - A Correction to the Algorithm in Reiter's Theory of Diagnosis
+T2  - Artificial Intelligence
+PY  - 1989
+VL  - 41
+IS  - 1
+DO  - 10.1016/0004-3702(89)90079-9
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 79
+EP  - 88
+LB  - greiner1989
+ER  - 
+
+TY  - JOUR
+AU  - de Kleer, Johan
+AU  - Mackworth, Alan K.
+AU  - Reiter, Raymond
+TI  - Characterizing Diagnoses and Systems
+T2  - Artificial Intelligence
+PY  - 1992
+VL  - 56
+IS  - 2–3
+DO  - 10.1016/0004-3702(92)90027-U
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 197
+EP  - 222
+LB  - dekleer1992
+ER  - 
+
+TY  - JOUR
+AU  - Kakas, Antonis C.
+AU  - Kowalski, Robert A.
+AU  - Toni, Francesca
+TI  - Abductive Logic Programming
+T2  - Journal of Logic and Computation
+PY  - 1992
+VL  - 2
+IS  - 6
+DO  - 10.1093/logcom/2.6.719
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 719
+EP  - 770
+LB  - kakas1992
+ER  - 
+
+TY  - JOUR
+AU  - Wielemaker, Jan
+AU  - Schrijvers, Tom
+AU  - Triska, Markus
+AU  - Lager, Torbjörn
+TI  - SWI-Prolog
+T2  - Theory and Practice of Logic Programming
+PY  - 2012
+VL  - 12
+IS  - 1–2
+DO  - 10.1017/S1471068411000494
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 67
+EP  - 96
+LB  - wielemaker2012
+ER  - 
+
+TY  - JOUR
+AU  - Liao, Shu-Hsien
+TI  - Expert System Methodologies and Applications: A Decade Review from 1995 to 2004
+T2  - Expert Systems with Applications
+PY  - 2005
+VL  - 28
+IS  - 1
+DO  - 10.1016/j.eswa.2004.08.003
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 93
+EP  - 103
+LB  - liao2005
+ER  - 
+
+TY  - JOUR
+AU  - Davis, Randall
+AU  - Shrobe, Howard
+AU  - Szolovits, Peter
+TI  - What Is a Knowledge Representation?
+T2  - AI Magazine
+PY  - 1993
+VL  - 14
+IS  - 1
+DO  - 10.1609/aimag.v14i1.1029
+N1  - auto-checked against online records, 2026-10-23; author still to verify
+SP  - 17
+EP  - 33
+LB  - davis1993
+ER  - 
+
+TY  - JOUR
+AU  - Miller, Tim
+TI  - Explanation in Artificial Intelligence: Insights from the Social Sciences
+T2  - Artificial Intelligence
+PY  - 2019
+VL  - 267
+DO  - 10.1016/j.artint.2018.07.007
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 1
+EP  - 38
+LB  - miller2019
+ER  - 
+
+TY  - JOUR
+AU  - Rudin, Cynthia
+TI  - Stop Explaining Black Box Machine Learning Models for High Stakes Decisions and Use Interpretable Models Instead
+T2  - Nature Machine Intelligence
+PY  - 2019
+VL  - 1
+IS  - 5
+DO  - 10.1038/s42256-019-0048-x
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 206
+EP  - 215
+LB  - rudin2019
+ER  - 
+
+TY  - JOUR
+AU  - Swartout, William R.
+TI  - XPLAIN: A System for Creating and Explaining Expert Consulting Programs
+T2  - Artificial Intelligence
+PY  - 1983
+VL  - 21
+IS  - 3
+DO  - 10.1016/S0004-3702(83)80014-9
+N1  - auto-checked against online records, 2026-10-23; author still to verify
+SP  - 285
+EP  - 325
+LB  - swartout1983
+ER  - 
+
+TY  - JOUR
+AU  - Adadi, Amina
+AU  - Berrada, Mohammed
+TI  - Peeking Inside the Black-Box: A Survey on Explainable Artificial Intelligence (XAI)
+T2  - IEEE Access
+PY  - 2018
+VL  - 6
+DO  - 10.1109/ACCESS.2018.2870052
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 52138
+EP  - 52160
+LB  - adadi2018
+ER  - 
+
+TY  - STAND
+AU  - Joint Committee for Guides in Metrology
+TI  - Evaluation of Measurement Data: Guide to the Expression of Uncertainty in Measurement
+PY  - 2008
+IS  - JCGM 100:2008
+DO  - 10.59161/JCGM100-2008E
+N1  - auto-checked against online records, 2026-10-25; author still to verify
+PB  - BIPM
+LB  - jcgm2008
+ER  - 
+
+TY  - JOUR
+AU  - Robinson, John Alan
+TI  - A Machine-Oriented Logic Based on the Resolution Principle
+T2  - Journal of the ACM
+PY  - 1965
+VL  - 12
+IS  - 1
+N1  - auto-checked against online records, 2026-10-23; author still to verify
+SP  - 23
+EP  - 41
+LB  - robinson1965
+ER  - 
+
+TY  - JOUR
+AU  - Apt, Krzysztof R.
+AU  - van Emden, Maarten H.
+TI  - Contributions to the Theory of Logic Programming
+T2  - Journal of the ACM
+PY  - 1982
+VL  - 29
+IS  - 3
+DO  - 10.1145/322326.322339
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 841
+EP  - 862
+LB  - apt1982
+ER  - 
+
+TY  - CPAPER
+AU  - Colmerauer, Alain
+AU  - Roussel, Philippe
+TI  - The Birth of Prolog
+T2  - The Second ACM SIGPLAN Conference on History of Programming Languages
+PY  - 1993
+PB  - ACM
+DO  - 10.1145/154766.155362
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 37
+EP  - 52
+LB  - colmerauer1993
+ER  - 
+
+TY  - BOOK
+AU  - Sterling, Leon
+AU  - Shapiro, Ehud
+TI  - The Art of Prolog
+PY  - 1994
+ET  - 2
+PB  - MIT Press
+N1  - auto-checked against online records, 2026-10-23; author still to verify
+LB  - sterling1994
+ER  - 
+
+TY  - EDBOOK
+AU  - Buchanan, Bruce G.
+AU  - Shortliffe, Edward H.
+TI  - Rule-Based Expert Systems: The MYCIN Experiments of the Stanford Heuristic Programming Project
+PY  - 1984
+PB  - Addison-Wesley
+N1  - auto-checked against online records, 2026-10-23; author still to verify
+LB  - buchanan1984
+ER  - 
+
+TY  - BOOK
+AU  - Giarratano, Joseph C.
+AU  - Riley, Gary D.
+TI  - Expert Systems: Principles and Programming
+PY  - 2005
+ET  - 4
+PB  - Thomson Course Technology
+N1  - auto-checked against online records, 2026-10-23; author still to verify
+LB  - giarratano2005
+ER  - 
+
+TY  - BOOK
+AU  - Josephson, John R.
+AU  - Josephson, Susan G.
+TI  - Abductive Inference: Computation, Philosophy, Technology
+PY  - 1994
+PB  - Cambridge University Press
+N1  - auto-checked against online records, 2026-10-23; author still to verify
+LB  - josephson1994
+ER  - 
+
+TY  - EDBOOK
+AU  - Hamscher, Walter
+AU  - Console, Luca
+AU  - de Kleer, Johan
+TI  - Readings in Model-Based Diagnosis
+PY  - 1992
+PB  - Morgan Kaufmann
+N1  - not found in the online records checked; confirm editors, publisher and year
+LB  - hamscher1992
+ER  - 
+
+TY  - EDBOOK
+AU  - van Harmelen, Frank
+AU  - Lifschitz, Vladimir
+AU  - Porter, Bruce
+TI  - Handbook of Knowledge Representation
+PY  - 2008
+PB  - Elsevier
+N1  - auto-checked against online records, 2026-10-23; author still to verify
+LB  - vanharmelen2008
+ER  - 
+
+TY  - JOUR
+AU  - Venkatasubramanian, Venkat
+AU  - Rengaswamy, Raghunathan
+AU  - Kavuri, Surya N.
+TI  - A Review of Process Fault Detection and Diagnosis. Part II: Qualitative Models and Search Strategies
+T2  - Computers & Chemical Engineering
+PY  - 2003
+VL  - 27
+IS  - 3
+N1  - auto-checked against online records, 2026-10-23; author still to verify
+SP  - 313
+EP  - 326
+LB  - venkat2003b
+ER  - 
+
+TY  - JOUR
+AU  - Venkatasubramanian, Venkat
+AU  - Rengaswamy, Raghunathan
+AU  - Kavuri, Surya N.
+AU  - Yin, Kewen
+TI  - A Review of Process Fault Detection and Diagnosis. Part III: Process History Based Methods
+T2  - Computers & Chemical Engineering
+PY  - 2003
+VL  - 27
+IS  - 3
+N1  - auto-checked against online records, 2026-10-23; author still to verify
+SP  - 327
+EP  - 346
+LB  - venkat2003c
+ER  - 
+
+TY  - JOUR
+AU  - Isermann, Rolf
+TI  - Model-Based Fault-Detection and Diagnosis: Status and Applications
+T2  - Annual Reviews in Control
+PY  - 2005
+VL  - 29
+IS  - 1
+DO  - 10.1016/j.arcontrol.2004.12.002
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 71
+EP  - 85
+LB  - isermann2005
+ER  - 
+
+TY  - JOUR
+AU  - Chandola, Varun
+AU  - Banerjee, Arindam
+AU  - Kumar, Vipin
+TI  - Anomaly Detection: A Survey
+T2  - ACM Computing Surveys
+PY  - 2009
+VL  - 41
+IS  - 3
+DO  - 10.1145/1541880.1541882
+N1  - auto-checked against Crossref, 2026-10-23; author still to verify
+SP  - 15:1
+EP  - 15:58
+LB  - chandola2009
+ER  - 
+
+TY  - GEN
+AU  - Doshi-Velez, Finale
+AU  - Kim, Been
+TI  - Towards a Rigorous Science of Interpretable Machine Learning
+PY  - 2017
+N1  - auto-checked against online records, 2026-10-23; author still to verify
+UR  - https://arxiv.org/abs/1702.08608
+LB  - doshivelez2017
+ER  - 
+
+TY  - BOOK
+AU  - Moubray, John
+TI  - Reliability-Centered Maintenance
+PY  - 1997
+ET  - 2
+PB  - Industrial Press
+N1  - auto-checked against online records, 2026-10-23; author still to verify
+LB  - moubray1997
+ER  - 
+
+TY  - CPAPER
+AU  - Schroeder, Bianca
+AU  - Gibson, Garth A.
+TI  - Disk Failures in the Real World: What Does an MTTF of 1,000,000 Hours Mean to You?
+T2  - Proceedings of the 5th USENIX Conference on File and Storage Technologies
+PY  - 2007
+PB  - USENIX
+N1  - auto-checked against online records, 2026-10-23; author still to verify
+SP  - 1
+EP  - 16
+LB  - schroeder2007
+ER  - 
+
+TY  - RPRT
+AU  - Shehabi, Arman
+AU  - Smith, Sarah
+AU  - Sartor, Dale
+AU  - Brown, Richard
+AU  - Herrlin, Magnus
+AU  - Koomey, Jonathan
+AU  - Masanet, Eric
+AU  - Horner, Nathaniel
+AU  - Azevedo, Inês Lima
+AU  - Lintner, William
+TI  - United States Data Center Energy Usage Report
+PY  - 2016
+IS  - LBNL-1005775
+N1  - auto-checked against online records, 2026-10-23; author still to verify
+PB  - Lawrence Berkeley National Laboratory
+LB  - shehabi2016
+ER  - 
+
+TY  - JOUR
+AU  - Pedregosa, Fabian
+AU  - Varoquaux, Gaël
+AU  - Gramfort, Alexandre
+AU  - Michel, Vincent
+AU  - Thirion, Bertrand
+AU  - Grisel, Olivier
+AU  - Blondel, Mathieu
+AU  - Prettenhofer, Peter
+AU  - Weiss, Ron
+AU  - Dubourg, Vincent
+AU  - Vanderplas, Jake
+AU  - Passos, Alexandre
+AU  - Cournapeau, David
+AU  - Brucher, Matthieu
+AU  - Perrot, Matthieu
+AU  - Duchesnay, Édouard
+TI  - Scikit-learn: Machine Learning in Python
+T2  - Journal of Machine Learning Research
+PY  - 2011
+VL  - 12
+N1  - auto-checked against online records, 2026-10-23; author still to verify
+SP  - 2825
+EP  - 2830
+LB  - pedregosa2011
+ER  - 
+
+TY  - JOUR
+AU  - Barroso, Luiz André
+AU  - Hölzle, Urs
+TI  - The Case for Energy-Proportional Computing
+T2  - Computer
+PY  - 2007
+VL  - 40
+IS  - 12
+DO  - 10.1109/MC.2007.443
+N1  - checked against Crossref and the article text, 2026-10-25
+SP  - 33
+EP  - 37
+LB  - barroso2007
+ER  - 
+
+TY  - ELEC
+AU  - U.S. Environmental Protection Agency
+TI  - Key Product Criteria: Uninterruptible Power Supplies (ENERGY STAR Version 2.0)
+UR  - https://www.energystar.gov/products/uninterruptible_power_supplies/key_product_criteria
+N1  - VFI minimum efficiency above 10 kW: 0.0058 ln(P) + 0.886; checked 2026-10-25
+Y2  - 2026-10-25
+LB  - energystarups
+ER  - 
+
+TY  - STAND
+AU  - CSB Energy Technology
+TI  - HRL12150WG Datasheet: HRL Series 12 V VRLA-AGM Battery
+PY  - 2026
+UR  - https://csb-battery.com/wp-content/uploads/2026/01/CSB-Datasheet-HRL12150WG-012026.pdf
+N1  - float charging voltage 13.5–13.8 V per battery at 25 C; checked 2026-10-25
+PB  - CSB Energy Technology
+LB  - csb2026
+ER  - 
+
+TY  - RPRT
+AU  - Acton, Mark
+AU  - Bertoldi, Paolo
+AU  - Booth, John
+AU  - Newcombe, Liam
+AU  - Rouyer, Andre
+AU  - Tozer, Robert
+TI  - 2018 Best Practice Guidelines for the EU Code of Conduct on Data Centre Energy Efficiency
+PY  - 2018
+DO  - 10.2760/703236
+N1  - practice 5.1.4, blanking plates; checked against the report, 2026-10-25
+M3  - Version 9.1.0, EUR 29103 EN
+PB  - Publications Office of the European Union
+LB  - acton2018
+ER  - 
+
+TY  - ELEC
+AU  - Intel Corporation
+TI  - What Is the Maximum Supported Temperature for Intel Xeon Gold 6244 Processor? (Article ID 000057788)
+PY  - 2024
+UR  - https://www.intel.com/content/www/us/en/support/articles/000057788.html
+N1  - maximum temperature 102 C (DTS max); checked 2026-10-25
+Y2  - 2026-10-25
+LB  - intel2024xeon
+ER  - 
+
+TY  - STAND
+AU  - International Electrotechnical Commission
+TI  - Industrial Platinum Resistance Thermometers and Platinum Temperature Sensors
+PY  - 2022
+IS  - IEC 60751:2022
+N1  - class A tolerance (0.15 + 0.002|t|) C; checked 2026-10-25
+PB  - IEC
+LB  - iec60751
+ER  - 
+
+TY  - STAND
+AU  - International Electrotechnical Commission
+TI  - Electricity Metering Equipment: Particular Requirements. Part 21: Static Meters for AC Active Energy (Classes 0,5, 1 and 2)
+PY  - 2020
+IS  - IEC 62053-21:2020
+N1  - accuracy class 1; checked 2026-10-25
+PB  - IEC
+LB  - iec62053
+ER  - 

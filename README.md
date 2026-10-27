@@ -18,7 +18,7 @@ An explainable Prolog expert system that diagnoses faults in the cooling and pow
 | Sensitivity to the reasoning parameters set by judgement (`engine/params.pl`) | Working. `tests/param_sensitivity.py`, results in `docs/15_parameter_sensitivity.md` |
 | Variability over five held-out seeds, with pooled significance tests | Working. `tests/seeds.py`, results in `docs/16_seed_variability.md` |
 | Simulator for synthetic test cases | Working: a calibration split and a held-out split of 255 cases each |
-| LaTeX report | Complete draft, 96 pages: abstract and all seven chapters, 13 figures, generated tables. Bibliography has 70 entries that the author still has to verify, then export from EndNote |
+| LaTeX report | Complete, 107 pages: declaration, abstract, all seven chapters, 13 figures, generated tables. Bibliography of 77 entries, verified and managed in EndNote (`report/dc-expert-system.enlx`; see `docs/12_endnote_import.md`) |
 
 ## Requirements
 

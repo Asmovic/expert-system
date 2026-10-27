@@ -199,8 +199,8 @@ Table~\ref{tab:envelope} defines the normal operating envelope. Abnormal operati
     Chilled-water temperature rise & about 5 to 7\,K & Design value \\
     Fan power over affinity-law prediction & 0.95 to 1.05 & Assumption \\
     Branch current & at most 80\% of breaker rating & \textcite{nfpa702023} \\
-    UPS efficiency, double conversion & about 0.95 & Manufacturer data (to verify) \\
-    VRLA float voltage & 2.25 to 2.30\,V per cell at 25\,\textdegree C & Manufacturer data (to verify) \\
+    UPS efficiency, double conversion & about 0.95 & ENERGY STAR minimum for a 50 to 100\,kW unit \parencite{energystarups} \\
+    VRLA float voltage & 2.25 to 2.30\,V per cell at 25\,\textdegree C & 13.5 to 13.8\,V per 12\,V battery \parencite{csb2026} \\
     Cell internal resistance & within 15\% of commissioning baseline & Assumption, after \textcite{ieee1188} \\
     Telemetry sample age & below 60\,s & Assumption \\
     \bottomrule
@@ -676,7 +676,7 @@ The knowledge in the system came from four kinds of source: engineering standard
     Fan power scales with speed cubed & \textcite{ashraehvac2020} & Equation E23; rules r07, r08, r48, r49 \\
     Continuous load at most 80\% of rating & \textcite{nfpa702023} & Threshold fact; rule r17 \\
     Rising resistance indicates capacity fade & \textcite{ieee1188} & Equation E49; rule r18 \\
-    Blanking panels prevent recirculation & Industry best practice (to verify) & Maintenance plan for $F_4$ \\
+    Blanking panels prevent recirculation & \textcite{acton2018}, practice 5.1.4 & Maintenance plan for $F_4$ \\
     Server power linear in utilisation & \textcite{fan2007} & Equation E1 \\
     Minimal diagnoses are minimal hitting sets & \textcite{reiter1987} & Consistency-based module \\
     Parsimonious covering & \textcite{peng1990} & Abductive module \\
