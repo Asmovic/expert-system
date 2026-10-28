@@ -128,7 +128,12 @@ cover_score(Syms, BonusSet, D, Score) :-
                  ( memberchk(H, BonusSet) -> V is Cf + B ; V = Cf ) ), Vs),
     sum_list(Vs, Score).
 
+%   Equal scores go to the cover with fewer sensor faults, the safer
+%   maintenance assumption, as in best_diagnosis/3 (engine/consistency.pl).
 rank_covers(Syms, BonusSet, Covers, Ranked) :-
-    findall(Neg-D, ( member(D, Covers), cover_score(Syms, BonusSet, D, Sc), Neg is -Sc ), Pairs),
+    findall(k(Neg, NS)-D,
+            ( member(D, Covers), cover_score(Syms, BonusSet, D, Sc), Neg is -Sc,
+              include([H]>>(H = sensor_bias(_, _)), D, Sn), length(Sn, NS) ),
+            Pairs),
     keysort(Pairs, Sorted),
     pairs_values(Sorted, Ranked).

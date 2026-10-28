@@ -280,7 +280,7 @@ masks(sensor_bias(t_inlet_top, R), inlet_stratified(R)).
   \item It collects the clearly present symptoms that need explaining.
   \item It generates candidate hypotheses that explain at least one of them, and discards any that require a clearly absent symptom that no other candidate could mask.
   \item It searches subsets of the candidates in increasing size, up to four, and keeps every subset that covers all present symptoms and is consistent. A member may require a clearly absent symptom only if another member masks it. The first size that yields a solution gives the minimal explanations.
-  \item It ranks the minimal explanations by summed confidence (Equation E56) and records a verdict for every candidate: part of an explanation, not needed, or rejected together with the absent symptom that ruled it out.
+  \item It ranks the minimal explanations by summed confidence (Equation E56). Explanations with equal scores are ordered by their number of sensor faults, fewest first, the same rule the consistency-based mode uses. It records a verdict for every candidate: part of an explanation, not needed, or rejected together with the absent symptom that ruled it out.
 \end{enumerate}
 Uncertain and unknown symptoms never need explaining, so a reading near the noise level cannot force an extra fault into the answer. Masking lets the module find a hidden fault: when the top inlet reads low over a recirculating rack, the explanation \{recirculation, top-sensor bias\} is consistent although recirculation alone is not.
 
