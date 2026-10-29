@@ -42,16 +42,16 @@ tex_mode_table(S, All, Sp) :-
     split_name(Sp, SpN),
     format(S, "\\begin{table}[htbp]~n  \\centering~n  \\footnotesize~n  \\setlength{\\tabcolsep}{4pt}~n", []),
     format(S, "  \\caption{Comparison of reasoning modes, ~w split (255 cases). 95\\% CI: Wilson confidence interval of the exact-match rate. Explain.: ExplainabilityRate. Plan val.: PlanValidity.}~n  \\label{tab:modes-~w}~n", [SpN, Sp]),
-    format(S, "  \\begin{tabular}{L{3.4cm}rrrrrrr}~n  \\toprule~n", []),
-    format(S, "  Mode & Exact & 95\\% CI & Coverage & Macro F1 & Mean ms & Explain. & Plan val. \\\\~n  \\midrule~n", []),
+    format(S, "  \\begin{tabular}{L{2.9cm}rrrrrrrr}~n  \\toprule~n", []),
+    format(S, "  Mode & Exact & 95\\% CI & Coverage & Macro F1 & Mean ms & Max ms & Explain. & Plan val. \\\\~n  \\midrule~n", []),
     forall(member(Sp-M-Rs, All),
            ( mode_name(M, Name),
              emr(Rs, E), coverage(Rs, Cv), macro_prf(Rs, _, _, F),
-             times(Rs, Tm, _), explainability_rate(Rs, X), plan_validity(Rs, PV),
+             times(Rs, Tm, Tx), explainability_rate(Rs, X), plan_validity(Rs, PV),
              exact_counts(Rs, K, N), wilson(K, N, Lo, Hi),
              format(atom(CI), "~1f--~1f", [Lo * 100, Hi * 100]),
              maplist(pct, [E, Cv, X, PV], [Ep, Cvp, Xp, PVp]),
-             format(S, "  ~w & ~w & ~w & ~w & ~3f & ~2f & ~w & ~w \\\\~n", [Name, Ep, CI, Cvp, F, Tm, Xp, PVp]) )),
+             format(S, "  ~w & ~w & ~w & ~w & ~3f & ~2f & ~2f & ~w & ~w \\\\~n", [Name, Ep, CI, Cvp, F, Tm, Tx, Xp, PVp]) )),
     format(S, "  \\bottomrule~n  \\end{tabular}~n\\end{table}~n", []).
 
 %   ---- significance -------------------------------------------------------

@@ -5,14 +5,14 @@
   \setlength{\tabcolsep}{4pt}
   \caption{Comparison of reasoning modes, calibration split (255 cases). 95\% CI: Wilson confidence interval of the exact-match rate. Explain.: ExplainabilityRate. Plan val.: PlanValidity.}
   \label{tab:modes-calibration}
-  \begin{tabular}{L{3.4cm}rrrrrrr}
+  \begin{tabular}{L{2.9cm}rrrrrrrr}
   \toprule
-  Mode & Exact & 95\% CI & Coverage & Macro F1 & Mean ms & Explain. & Plan val. \\
+  Mode & Exact & 95\% CI & Coverage & Macro F1 & Mean ms & Max ms & Explain. & Plan val. \\
   \midrule
-  Deductive only & 90.2\% & 85.9--93.3 & 95.3\% & 0.925 & 0.18 & 100.0\% & 86.7\% \\
-  Deductive + abductive & 93.3\% & 89.6--95.8 & 94.5\% & 0.954 & 0.95 & 100.0\% & 94.4\% \\
-  Deductive + consistency-based & 91.8\% & 87.7--94.6 & 95.3\% & 0.942 & 0.84 & 100.0\% & 91.6\% \\
-  Complete system & 93.3\% & 89.6--95.8 & 95.3\% & 0.952 & 0.96 & 100.0\% & 93.8\% \\
+  Deductive only & 90.2\% & 85.9--93.3 & 95.3\% & 0.925 & 0.18 & 0.68 & 100.0\% & 86.7\% \\
+  Deductive + abductive & 93.3\% & 89.6--95.8 & 94.5\% & 0.954 & 0.95 & 2.52 & 100.0\% & 94.4\% \\
+  Deductive + consistency-based & 91.8\% & 87.7--94.6 & 95.3\% & 0.942 & 0.84 & 2.48 & 100.0\% & 91.6\% \\
+  Complete system & 93.3\% & 89.6--95.8 & 95.3\% & 0.952 & 0.96 & 3.20 & 100.0\% & 93.8\% \\
   \bottomrule
   \end{tabular}
 \end{table}
