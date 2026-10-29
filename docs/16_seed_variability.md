@@ -15,13 +15,13 @@ Five held-out splits of 255 cases with the same design: seed 777 (the reported h
 
 ## Paired comparison, pooled over 1275 cases
 
-Exact two-sided McNemar test on the cases where two modes disagree.
+Exact two-sided McNemar test on the cases where two modes disagree. p (Holm): adjusted for the six comparisons by Holm's method.
 
-| Mode A | Mode B | Only A right | Only B right | p |
-|---|---|---|---|---|
-| Deductive only | Deductive + abductive | 17 | 52 | < 0.001 |
-| Deductive only | Deductive + consistency-based | 14 | 28 | 0.044 |
-| Deductive only | Complete system | 21 | 47 | 0.002 |
-| Deductive + abductive | Deductive + consistency-based | 29 | 8 | 0.001 |
-| Deductive + abductive | Complete system | 9 | 0 | 0.004 |
-| Deductive + consistency-based | Complete system | 8 | 20 | 0.036 |
+| Mode A | Mode B | Only A right | Only B right | p | p (Holm) |
+|---|---|---|---|---|---|
+| Deductive only | Deductive + abductive | 17 | 52 | < 0.001 | < 0.001 |
+| Deductive only | Deductive + consistency-based | 14 | 28 | 0.044 | 0.071 |
+| Deductive only | Complete system | 21 | 47 | 0.002 | 0.009 |
+| Deductive + abductive | Deductive + consistency-based | 29 | 8 | 0.001 | 0.004 |
+| Deductive + abductive | Complete system | 9 | 0 | 0.004 | 0.012 |
+| Deductive + consistency-based | Complete system | 8 | 20 | 0.036 | 0.071 |

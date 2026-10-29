@@ -24,7 +24,7 @@ import subprocess
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from mismatch import MODES, MODE_NAMES, BS, swipl, wilson, mcnemar, p_text  # noqa: E402
+from mismatch import MODES, MODE_NAMES, BS, swipl, wilson, mcnemar, holm, p_text  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 NEW_SEEDS = [(1001, "ra"), (2002, "rb"), (3003, "rc"), (4004, "rd")]
@@ -106,22 +106,28 @@ def write_outputs(per, n, paired):
     tex += [f"  {BS}bottomrule", f"  {BS}end{{tabular}}", f"{BS}end{{table}}", ""]
 
     md += ["", f"## Paired comparison, pooled over {total} cases", "",
-           "Exact two-sided McNemar test on the cases where two modes disagree.", "",
-           "| Mode A | Mode B | Only A right | Only B right | p |", "|---|---|---|---|---|"]
+           "Exact two-sided McNemar test on the cases where two modes disagree. "
+           "p (Holm): adjusted for the six comparisons by Holm's method.", "",
+           "| Mode A | Mode B | Only A right | Only B right | p | p (Holm) |", "|---|---|---|---|---|---|"]
     tex += [f"{BS}begin{{table}}[htbp]", f"  {BS}centering", f"  {BS}small",
             f"  {BS}caption{{Paired comparison of reasoning modes pooled over the five held-out seeds ({total} cases): "
-            f"exact two-sided McNemar test on the cases where the two modes disagree.}}",
+            f"exact two-sided McNemar test on the cases where the two modes disagree. "
+            f"Holm: $p$ adjusted for the six comparisons by Holm's method. Bold: below 0.05.}}",
             f"  {BS}label{{tab:seeds-significance}}",
-            f"  {BS}begin{{tabular}}{{L{{4.85cm}}L{{4.85cm}}rrr}}", f"  {BS}toprule",
-            f"  Mode A & Mode B & Only A & Only B & $p$ {BS}{BS}", f"  {BS}midrule"]
-    pvals = {}
-    for a, b in PAIRS:
-        oa, ob, p = mcnemar(paired[a], paired[b])
-        pvals[f"{a}|{b}"] = (oa, ob, p)
-        md.append(f"| {MODE_NAMES[a]} | {MODE_NAMES[b]} | {oa} | {ob} | {p_text(p)} |")
+            f"  {BS}begin{{tabular}}{{L{{3.9cm}}L{{3.9cm}}rrrr}}", f"  {BS}toprule",
+            f"  Mode A & Mode B & Only A & Only B & $p$ & Holm {BS}{BS}", f"  {BS}midrule"]
+
+    def bold(p):
         pt = p_text(p, True)
-        tex.append(f"  {MODE_NAMES[a]} & {MODE_NAMES[b]} & {oa} & {ob} & "
-                   + (f"{BS}textbf{{{pt}}}" if p < 0.05 else pt) + f" {BS}{BS}")
+        return f"{BS}textbf{{{pt}}}" if p < 0.05 else pt
+
+    tests = [(a, b) + mcnemar(paired[a], paired[b]) for a, b in PAIRS]
+    adj = holm([t[4] for t in tests])
+    pvals = {}
+    for (a, b, oa, ob, p), ph in zip(tests, adj):
+        pvals[f"{a}|{b}"] = (oa, ob, p, ph)
+        md.append(f"| {MODE_NAMES[a]} | {MODE_NAMES[b]} | {oa} | {ob} | {p_text(p)} | {p_text(ph)} |")
+        tex.append(f"  {MODE_NAMES[a]} & {MODE_NAMES[b]} & {oa} & {ob} & {bold(p)} & {bold(ph)} {BS}{BS}")
     tex += [f"  {BS}bottomrule", f"  {BS}end{{tabular}}", f"{BS}end{{table}}", ""]
 
     with open(os.path.join(ROOT, "docs", "16_seed_variability.md"), "w", encoding="utf-8", newline="\n") as fh:
@@ -140,8 +146,8 @@ def main():
     for m in MODES:
         mean, sd, lo, hi, k = summary[m]
         print(f"{m:9}  mean {mean:.1f}%  sd {sd:.1f}  range {lo:.1f}-{hi:.1f}  pooled {k}/{len(paired[m])}")
-    for pair, (oa, ob, p) in pvals.items():
-        print(f"{pair:20} {oa:3} {ob:3}  p = {p_text(p)}")
+    for pair, (oa, ob, p, ph) in pvals.items():
+        print(f"{pair:20} {oa:3} {ob:3}  p = {p_text(p)}  Holm {p_text(ph)}")
 
 
 if __name__ == "__main__":

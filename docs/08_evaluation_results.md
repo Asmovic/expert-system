@@ -91,14 +91,14 @@ Exact two-sided McNemar test on the cases where two modes disagree. Exact-match 
 | Deductive + consistency-based | 238 of 255 | 89.6 to 95.8% |
 | Complete system | 239 of 255 | 90.1 to 96.1% |
 
-| Mode A | Mode B | Only A right | Only B right | p |
-|---|---|---|---|---|
-| Deductive only | Deductive + abductive | 2 | 11 | 0.022 |
-| Deductive only | Deductive + consistency-based | 2 | 8 | 0.109 |
-| Deductive only | Complete system | 3 | 10 | 0.092 |
-| Deductive + abductive | Deductive + consistency-based | 5 | 2 | 0.453 |
-| Deductive + abductive | Complete system | 2 | 0 | 0.500 |
-| Deductive + consistency-based | Complete system | 2 | 3 | 1.000 |
+| Mode A | Mode B | Only A right | Only B right | p | p (Holm) |
+|---|---|---|---|---|---|
+| Deductive only | Deductive + abductive | 2 | 11 | 0.022 | 0.135 |
+| Deductive only | Deductive + consistency-based | 2 | 8 | 0.109 | 0.461 |
+| Deductive only | Complete system | 3 | 10 | 0.092 | 0.461 |
+| Deductive + abductive | Deductive + consistency-based | 5 | 2 | 0.453 | 1.000 |
+| Deductive + abductive | Complete system | 2 | 0 | 0.500 | 1.000 |
+| Deductive + consistency-based | Complete system | 2 | 3 | 1.000 | 1.000 |
 
 ## Paired significance: calibration split
 
@@ -111,11 +111,11 @@ Exact two-sided McNemar test on the cases where two modes disagree. Exact-match 
 | Deductive + consistency-based | 234 of 255 | 87.7 to 94.6% |
 | Complete system | 238 of 255 | 89.6 to 95.8% |
 
-| Mode A | Mode B | Only A right | Only B right | p |
-|---|---|---|---|---|
-| Deductive only | Deductive + abductive | 2 | 10 | 0.039 |
-| Deductive only | Deductive + consistency-based | 2 | 6 | 0.289 |
-| Deductive only | Complete system | 2 | 10 | 0.039 |
-| Deductive + abductive | Deductive + consistency-based | 5 | 1 | 0.219 |
-| Deductive + abductive | Complete system | 1 | 1 | 1.000 |
-| Deductive + consistency-based | Complete system | 0 | 4 | 0.125 |
+| Mode A | Mode B | Only A right | Only B right | p | p (Holm) |
+|---|---|---|---|---|---|
+| Deductive only | Deductive + abductive | 2 | 10 | 0.039 | 0.231 |
+| Deductive only | Deductive + consistency-based | 2 | 6 | 0.289 | 0.656 |
+| Deductive only | Complete system | 2 | 10 | 0.039 | 0.231 |
+| Deductive + abductive | Deductive + consistency-based | 5 | 1 | 0.219 | 0.656 |
+| Deductive + abductive | Complete system | 1 | 1 | 1.000 | 1.000 |
+| Deductive + consistency-based | Complete system | 0 | 4 | 0.125 | 0.500 |

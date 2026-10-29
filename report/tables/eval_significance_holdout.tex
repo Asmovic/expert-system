@@ -2,18 +2,18 @@
 \begin{table}[htbp]
   \centering
   \small
-  \caption{Paired comparison of reasoning modes, held-out split: exact two-sided McNemar test on the cases where the two modes disagree. Only A: cases the first mode gets right and the second wrong.}
+  \caption{Paired comparison of reasoning modes, held-out split: exact two-sided McNemar test on the cases where the two modes disagree. Only A: cases the first mode gets right and the second wrong. Holm: $p$ adjusted for the six comparisons by Holm's method. Bold: below 0.05.}
   \label{tab:significance-holdout}
-  \begin{tabular}{L{3.6cm}L{3.6cm}rrr}
+  \begin{tabular}{L{3.6cm}L{3.6cm}rrrr}
   \toprule
-  Mode A & Mode B & Only A & Only B & $p$ \\
+  Mode A & Mode B & Only A & Only B & $p$ & Holm \\
   \midrule
-  Deductive only & Deductive + abductive & 2 & 11 & \textbf{0.022} \\
-  Deductive only & Deductive + consistency-based & 2 & 8 & 0.109 \\
-  Deductive only & Complete system & 3 & 10 & 0.092 \\
-  Deductive + abductive & Deductive + consistency-based & 5 & 2 & 0.453 \\
-  Deductive + abductive & Complete system & 2 & 0 & 0.500 \\
-  Deductive + consistency-based & Complete system & 2 & 3 & 1.000 \\
+  Deductive only & Deductive + abductive & 2 & 11 & \textbf{0.022} & 0.135 \\
+  Deductive only & Deductive + consistency-based & 2 & 8 & 0.109 & 0.461 \\
+  Deductive only & Complete system & 3 & 10 & 0.092 & 0.461 \\
+  Deductive + abductive & Deductive + consistency-based & 5 & 2 & 0.453 & 1.000 \\
+  Deductive + abductive & Complete system & 2 & 0 & 0.500 & 1.000 \\
+  Deductive + consistency-based & Complete system & 2 & 3 & 1.000 & 1.000 \\
   \bottomrule
   \end{tabular}
 \end{table}

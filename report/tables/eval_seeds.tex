@@ -20,18 +20,18 @@
 \begin{table}[htbp]
   \centering
   \small
-  \caption{Paired comparison of reasoning modes pooled over the five held-out seeds (1275 cases): exact two-sided McNemar test on the cases where the two modes disagree.}
+  \caption{Paired comparison of reasoning modes pooled over the five held-out seeds (1275 cases): exact two-sided McNemar test on the cases where the two modes disagree. Holm: $p$ adjusted for the six comparisons by Holm's method. Bold: below 0.05.}
   \label{tab:seeds-significance}
-  \begin{tabular}{L{4.85cm}L{4.85cm}rrr}
+  \begin{tabular}{L{3.9cm}L{3.9cm}rrrr}
   \toprule
-  Mode A & Mode B & Only A & Only B & $p$ \\
+  Mode A & Mode B & Only A & Only B & $p$ & Holm \\
   \midrule
-  Deductive only & Deductive + abductive & 17 & 52 & \textbf{\textless\,0.001} \\
-  Deductive only & Deductive + consistency-based & 14 & 28 & \textbf{0.044} \\
-  Deductive only & Complete system & 21 & 47 & \textbf{0.002} \\
-  Deductive + abductive & Deductive + consistency-based & 29 & 8 & \textbf{0.001} \\
-  Deductive + abductive & Complete system & 9 & 0 & \textbf{0.004} \\
-  Deductive + consistency-based & Complete system & 8 & 20 & \textbf{0.036} \\
+  Deductive only & Deductive + abductive & 17 & 52 & \textbf{\textless\,0.001} & \textbf{\textless\,0.001} \\
+  Deductive only & Deductive + consistency-based & 14 & 28 & \textbf{0.044} & 0.071 \\
+  Deductive only & Complete system & 21 & 47 & \textbf{0.002} & \textbf{0.009} \\
+  Deductive + abductive & Deductive + consistency-based & 29 & 8 & \textbf{0.001} & \textbf{0.004} \\
+  Deductive + abductive & Complete system & 9 & 0 & \textbf{0.004} & \textbf{0.012} \\
+  Deductive + consistency-based & Complete system & 8 & 20 & \textbf{0.036} & 0.071 \\
   \bottomrule
   \end{tabular}
 \end{table}

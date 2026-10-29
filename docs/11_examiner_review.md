@@ -112,6 +112,7 @@ The threshold sensitivity study covers the thresholds but none of these. **What 
 ### B5. Only one seed per split
 
 **Status: done.** `tests/seeds.py` adds held-out seeds 1001, 2002, 3003 and 4004 (`data/seeds/`), giving Tables `tab:seeds` and `tab:seeds-significance` and [16](16_seed_variability.md). SD is 1.2–1.6 points. Pooled, every pairwise difference is significant: D+A 93.6% > Full 92.9% > D+C 91.9% > D 90.8%. This **changed a conclusion**: the model-based configurations are separable, and the complete system ranks below D+A because of false sensor alarms under noise. Also, 3–6 of the 900 core cases are missed over the five seeds.
+- **Holm correction added (2026-10-29):** the six pairwise McNemar tests per split are now also reported with Holm-adjusted p (`holm/2` in `tests/metrics_latex.pl`, `holm()` in `tests/mismatch.py`). On a single split nothing survives; pooled over five seeds, 4 of 6 do (D+A over all three others, Full over D). D+C vs D and D+C vs Full become Holm p = 0.071. Abstract and Chapters 4, 6 and 7 reworded.
 
 The reported numbers come from one calibration seed and one held-out seed. **What to do.** Report mean and spread over several held-out seeds, for example five. **[I can do]** That takes a few minutes and gives an honest measure of variability.
 

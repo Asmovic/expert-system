@@ -2,18 +2,18 @@
 \begin{table}[htbp]
   \centering
   \small
-  \caption{Paired comparison of reasoning modes, calibration split: exact two-sided McNemar test on the cases where the two modes disagree. Only A: cases the first mode gets right and the second wrong.}
+  \caption{Paired comparison of reasoning modes, calibration split: exact two-sided McNemar test on the cases where the two modes disagree. Only A: cases the first mode gets right and the second wrong. Holm: $p$ adjusted for the six comparisons by Holm's method. Bold: below 0.05.}
   \label{tab:significance-calibration}
-  \begin{tabular}{L{3.6cm}L{3.6cm}rrr}
+  \begin{tabular}{L{3.6cm}L{3.6cm}rrrr}
   \toprule
-  Mode A & Mode B & Only A & Only B & $p$ \\
+  Mode A & Mode B & Only A & Only B & $p$ & Holm \\
   \midrule
-  Deductive only & Deductive + abductive & 2 & 10 & \textbf{0.039} \\
-  Deductive only & Deductive + consistency-based & 2 & 6 & 0.289 \\
-  Deductive only & Complete system & 2 & 10 & \textbf{0.039} \\
-  Deductive + abductive & Deductive + consistency-based & 5 & 1 & 0.219 \\
-  Deductive + abductive & Complete system & 1 & 1 & 1.000 \\
-  Deductive + consistency-based & Complete system & 0 & 4 & 0.125 \\
+  Deductive only & Deductive + abductive & 2 & 10 & \textbf{0.039} & 0.231 \\
+  Deductive only & Deductive + consistency-based & 2 & 6 & 0.289 & 0.656 \\
+  Deductive only & Complete system & 2 & 10 & \textbf{0.039} & 0.231 \\
+  Deductive + abductive & Deductive + consistency-based & 5 & 1 & 0.219 & 0.656 \\
+  Deductive + abductive & Complete system & 1 & 1 & 1.000 & 1.000 \\
+  Deductive + consistency-based & Complete system & 0 & 4 & 0.125 & 0.500 \\
   \bottomrule
   \end{tabular}
 \end{table}

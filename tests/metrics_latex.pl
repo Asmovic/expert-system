@@ -103,20 +103,51 @@ factorial(N, F) :- N1 is N - 1, factorial(N1, F1), F is N * F1.
 
 mode_pairs([deductive-ded_abd, deductive-ded_cbd, deductive-full, ded_abd-ded_cbd, ded_abd-full, ded_cbd-full]).
 
+%   pair_tests(+Sp, +All, -Rows): McNemar test of every mode pair on one
+%   split, as row(NameA, NameB, OnlyA, OnlyB, P, PHolm).
+pair_tests(Sp, All, Rows) :-
+    mode_pairs(Ps),
+    findall(t(NA, NB, OA, OB, P),
+            ( member(A-B, Ps), member(Sp-A-RA, All), member(Sp-B-RB, All),
+              mcnemar(RA, RB, OA, OB, P), mode_name(A, NA), mode_name(B, NB) ),
+            Ts),
+    findall(P, member(t(_, _, _, _, P), Ts), Raw),
+    holm(Raw, Adj),
+    findall(row(NA, NB, OA, OB, P, PH),
+            ( nth1(I, Ts, t(NA, NB, OA, OB, P)), nth1(I, Adj, PH) ),
+            Rows).
+
+%   holm(+Ps, -Adjusted): Holm step-down adjusted p-values, in input order.
+%   The k-th smallest of m values is multiplied by m - k + 1, and the
+%   adjusted values are made non-decreasing in that order.
+holm(Ps, Adj) :-
+    length(Ps, M),
+    findall(P-I, nth1(I, Ps, P), Pairs),
+    msort(Pairs, Sorted),
+    holm_steps(Sorted, M, 0.0, Steps),
+    msort(Steps, ByIndex),
+    pairs_values(ByIndex, Adj).
+
+holm_steps([], _, _, []).
+holm_steps([P-I|Rest], K, Prev, [I-A|As]) :-
+    A is min(1.0, max(Prev, K * P)),
+    K1 is K - 1,
+    holm_steps(Rest, K1, A, As).
+
+bold_p(P, Text) :-
+    p_text(tex, P, P0),
+    ( P < 0.05 -> format(atom(Text), "\\textbf{~w}", [P0]) ; Text = P0 ).
+
 tex_significance_table(S, All, Sp) :-
     split_name(Sp, SpN),
     format(S, "\\begin{table}[htbp]~n  \\centering~n  \\small~n", []),
-    format(S, "  \\caption{Paired comparison of reasoning modes, ~w split: exact two-sided McNemar test on the cases where the two modes disagree. Only A: cases the first mode gets right and the second wrong.}~n  \\label{tab:significance-~w}~n", [SpN, Sp]),
-    format(S, "  \\begin{tabular}{L{3.6cm}L{3.6cm}rrr}~n  \\toprule~n", []),
-    format(S, "  Mode A & Mode B & Only A & Only B & $p$ \\\\~n  \\midrule~n", []),
-    mode_pairs(Ps),
-    forall(member(A-B, Ps),
-           ( member(Sp-A-RA, All), member(Sp-B-RB, All),
-             mcnemar(RA, RB, OA, OB, P),
-             mode_name(A, NA), mode_name(B, NB),
-             p_text(tex, P, P0),
-             ( P < 0.05 -> format(atom(PT), "\\textbf{~w}", [P0]) ; PT = P0 ),
-             format(S, "  ~w & ~w & ~d & ~d & ~w \\\\~n", [NA, NB, OA, OB, PT]) )),
+    format(S, "  \\caption{Paired comparison of reasoning modes, ~w split: exact two-sided McNemar test on the cases where the two modes disagree. Only A: cases the first mode gets right and the second wrong. Holm: $p$ adjusted for the six comparisons by Holm's method. Bold: below 0.05.}~n  \\label{tab:significance-~w}~n", [SpN, Sp]),
+    format(S, "  \\begin{tabular}{L{3.6cm}L{3.6cm}rrrr}~n  \\toprule~n", []),
+    format(S, "  Mode A & Mode B & Only A & Only B & $p$ & Holm \\\\~n  \\midrule~n", []),
+    pair_tests(Sp, All, Rows),
+    forall(member(row(NA, NB, OA, OB, P, PH), Rows),
+           ( bold_p(P, PT), bold_p(PH, PHT),
+             format(S, "  ~w & ~w & ~d & ~d & ~w & ~w \\\\~n", [NA, NB, OA, OB, PT, PHT]) )),
     format(S, "  \\bottomrule~n  \\end{tabular}~n\\end{table}~n", []).
 
 md_significance(S, All) :-
@@ -127,13 +158,11 @@ md_significance(S, All) :-
              forall(member(Sp-M-Rs, All),
                     ( mode_name(M, N), exact_counts(Rs, K, T), wilson(K, T, Lo, Hi),
                       format(S, "| ~w | ~d of ~d | ~1f to ~1f% |~n", [N, K, T, Lo * 100, Hi * 100]) )),
-             format(S, "~n| Mode A | Mode B | Only A right | Only B right | p |~n|---|---|---|---|---|~n", []),
-             mode_pairs(Ps),
-             forall(member(A-B, Ps),
-                    ( member(Sp-A-RA, All), member(Sp-B-RB, All), mcnemar(RA, RB, OA, OB, P),
-                      mode_name(A, NA), mode_name(B, NB),
-                      p_text(md, P, PT),
-                      format(S, "| ~w | ~w | ~d | ~d | ~w |~n", [NA, NB, OA, OB, PT]) )) )).
+             format(S, "~n| Mode A | Mode B | Only A right | Only B right | p | p (Holm) |~n|---|---|---|---|---|---|~n", []),
+             pair_tests(Sp, All, Rows),
+             forall(member(row(NA, NB, OA, OB, P, PH), Rows),
+                    ( p_text(md, P, PT), p_text(md, PH, PHT),
+                      format(S, "| ~w | ~w | ~d | ~d | ~w | ~w |~n", [NA, NB, OA, OB, PT, PHT]) )) )).
 
 %   p_text(+Format, +P, -Text): three decimals, or "< 0.001" when the value
 %   would print as 0.000.

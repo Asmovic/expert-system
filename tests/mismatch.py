@@ -105,6 +105,17 @@ def mcnemar(a, b):
     return b01, b10, min(1.0, 2 * sum(math.comb(n, i) for i in range(k + 1)) / 2 ** n)
 
 
+def holm(ps):
+    """Holm step-down adjusted p-values, in input order."""
+    m = len(ps)
+    adj = [0.0] * m
+    prev = 0.0
+    for k, i in enumerate(sorted(range(m), key=lambda j: ps[j])):
+        prev = min(1.0, max(prev, (m - k) * ps[i]))
+        adj[i] = prev
+    return adj
+
+
 def p_text(p, tex=False):
     """Three decimals, or '< 0.001' when the value would print as 0.000."""
     if p < 0.0005:
