@@ -24,3 +24,5 @@ data/baseline/
 # EndNote working library; the compressed report/dc-expert-system.enlx is kept
 *.enl
 *.Data/
+*.fdb_latexmk
+*.fls
